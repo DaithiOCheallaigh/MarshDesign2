@@ -1,0 +1,39 @@
+/* DataList — Marsh Design System */
+
+.list {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+}
+
+.vertical {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.horizontal {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-4);
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.value {
+  font-size: var(--font-size-base);
+  color: var(--color-black);
+  margin: 0;
+}

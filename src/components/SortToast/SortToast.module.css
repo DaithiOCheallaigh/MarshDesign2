@@ -1,0 +1,45 @@
+.sortToast {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-s);
+  padding: var(--space-xs) var(--space-m);
+  background: var(--color-dark-blue);
+  color: var(--color-white);
+  border-radius: var(--radius-full);
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  box-shadow: var(--shadow-md);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  opacity: 0.8;
+}
+
+.text strong {
+  font-weight: var(--font-weight-medium);
+}
+
+.toggle,
+.clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: var(--color-white);
+  cursor: pointer;
+  border-radius: var(--radius-full);
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1;
+  transition: background var(--transition-fast);
+}
+
+.toggle:hover,
+.clear:hover {
+  background: rgba(255, 255, 255, 0.25);
+}

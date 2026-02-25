@@ -1,0 +1,69 @@
+/* Radio — Marsh Design System */
+
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.wrapper:has(.nativeInput:disabled) {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.nativeInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--color-dark-blue);
+  border-radius: var(--radius-full);
+  background-color: var(--color-white);
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.radio::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-dark-blue);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.nativeInput:checked + .radio {
+  background-color: var(--color-blue-tint);
+}
+
+.nativeInput:checked + .radio::after {
+  opacity: 1;
+}
+
+.nativeInput:focus-visible + .radio {
+  box-shadow: 0 0 0 2px var(--color-blue-tint);
+}
+
+.wrapper:hover .radio {
+  border-color: var(--color-blue);
+}
+
+.label {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--color-black);
+}

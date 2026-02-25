@@ -1,0 +1,22 @@
+.scrollArea {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gray-500) transparent;
+}
+
+.scrollArea::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollArea::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollArea::-webkit-scrollbar-thumb {
+  background: var(--color-gray-500);
+  border-radius: var(--radius-full);
+}
+
+.scrollArea::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gray-900);
+}

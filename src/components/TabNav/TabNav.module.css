@@ -1,0 +1,57 @@
+/* TabNav — Marsh Design System */
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  border-bottom: 1px solid var(--color-gray-100);
+  padding-bottom: 0;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  background: none;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-gray-500);
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.item:hover {
+  color: var(--color-dark-blue);
+}
+
+.item.active {
+  color: var(--color-dark-blue);
+  border-bottom-color: var(--color-dark-blue);
+  font-weight: var(--font-weight-medium);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 var(--space-1);
+  background-color: var(--color-gray-100);
+  color: var(--color-gray-500);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+}
+
+.item.active .badge {
+  background-color: var(--color-blue-tint);
+  color: var(--color-dark-blue);
+}

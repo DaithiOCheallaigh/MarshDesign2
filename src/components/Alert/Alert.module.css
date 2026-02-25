@@ -1,0 +1,79 @@
+/* Alert — Marsh Design System */
+
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-medium);
+  border-left: 4px solid transparent;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  position: relative;
+}
+
+.icon {
+  display: flex;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  flex: 1;
+}
+
+.title {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-base);
+}
+
+.message {
+  font-size: var(--font-size-sm);
+  opacity: 0.9;
+}
+
+.dismiss {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-1);
+  color: inherit;
+  opacity: 0.6;
+  transition: opacity var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.dismiss:hover {
+  opacity: 1;
+}
+
+/* Variants */
+.info {
+  background-color: var(--color-blue-tint);
+  color: var(--color-teal);
+  border-left-color: var(--color-blue);
+}
+
+.success {
+  background-color: var(--color-green-tint);
+  color: var(--color-success);
+  border-left-color: var(--color-success-alt);
+}
+
+.warning {
+  background-color: var(--color-orange-tint);
+  color: var(--color-orange);
+  border-left-color: var(--color-warning);
+}
+
+.danger {
+  background-color: var(--color-red-tint);
+  color: var(--color-danger-dark);
+  border-left-color: var(--color-danger);
+}

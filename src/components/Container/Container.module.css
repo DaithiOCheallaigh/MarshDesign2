@@ -1,0 +1,17 @@
+.container {
+  box-sizing: border-box;
+  width: 100%;
+  padding-left: var(--space-l);
+  padding-right: var(--space-l);
+}
+
+.centered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sm   { max-width: var(--breakpoint-tablet-md); }
+.md   { max-width: var(--breakpoint-desktop-sm); }
+.lg   { max-width: var(--breakpoint-desktop-md); }
+.xl   { max-width: var(--breakpoint-desktop-xl); }
+.full { max-width: 100%; }

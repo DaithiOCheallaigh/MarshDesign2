@@ -1,0 +1,59 @@
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-small);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.iconButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Sizes */
+.small  { width: 28px; height: 28px; }
+.medium { width: 36px; height: 36px; }
+.large  { width: 44px; height: 44px; }
+
+/* Variants */
+.primary {
+  background: var(--color-dark-blue);
+  color: var(--color-white);
+  border-color: var(--color-dark-blue);
+}
+.primary:hover:not(:disabled) {
+  background: var(--color-teal);
+  border-color: var(--color-teal);
+}
+
+.outline {
+  background: var(--color-white);
+  color: var(--color-gray-900);
+  border-color: var(--color-gray-500);
+}
+.outline:hover:not(:disabled) {
+  background: var(--color-gray-100);
+  border-color: var(--color-gray-900);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--color-gray-900);
+  border-color: transparent;
+}
+.ghost:hover:not(:disabled) {
+  background: var(--color-gray-100);
+}
+
+.danger {
+  background: var(--color-white);
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+.danger:hover:not(:disabled) {
+  background: var(--color-red-tint);
+}

@@ -1,0 +1,43 @@
+/* Tabs — Marsh Design System */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.tabList {
+  display: flex;
+  border-bottom: 2px solid var(--color-gray-100);
+  gap: 0;
+}
+
+.tab {
+  padding: var(--space-3) var(--space-4);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-500);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.tab:hover {
+  color: var(--color-dark-blue);
+}
+
+.tab.active {
+  color: var(--color-dark-blue);
+  border-bottom-color: var(--color-dark-blue);
+}
+
+.panel {
+  padding: var(--space-4) 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--color-black);
+}

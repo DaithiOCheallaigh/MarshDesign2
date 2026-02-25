@@ -1,0 +1,27 @@
+.section {
+  width: 100%;
+}
+
+.sm  { padding: var(--space-xl) 0; }
+.md  { padding: var(--space-2xl) 0; }
+.lg  { padding: var(--space-4xl) 0; }
+
+.header {
+  margin-bottom: var(--space-xl);
+}
+
+.title {
+  font-family: var(--font-family);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-dark-blue);
+  margin: 0 0 var(--space-s);
+}
+
+.description {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--color-gray-500);
+  margin: 0;
+  line-height: 1.6;
+}

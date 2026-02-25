@@ -1,0 +1,43 @@
+/* Badge — Marsh Design System */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-family: var(--font-family);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.default {
+  background-color: var(--color-gray-100);
+  color: var(--color-gray-900);
+}
+
+.success {
+  background-color: var(--color-green-tint);
+  color: var(--color-success);
+}
+
+.danger {
+  background-color: var(--color-red-tint);
+  color: var(--color-danger-dark);
+}
+
+.warning {
+  background-color: var(--color-orange-tint);
+  color: var(--color-orange);
+}
+
+.info {
+  background-color: var(--color-blue-tint);
+  color: var(--color-teal);
+}
+
+.draft {
+  background-color: var(--color-gray-100);
+  color: var(--color-blue-gray);
+}

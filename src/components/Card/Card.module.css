@@ -1,0 +1,48 @@
+/* Card — Marsh Design System */
+
+.card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-100);
+  border-radius: var(--radius-medium);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: var(--space-4) var(--space-4) 0;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-black);
+}
+
+.body {
+  flex: 1;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--color-black);
+}
+
+.footer {
+  border-top: 1px solid var(--color-gray-100);
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+}
+
+/* Padding variants */
+.padding-none .body,
+.padding-none .footer { padding: 0; }
+
+.padding-small .body  { padding: var(--space-3); }
+.padding-small .footer { padding: var(--space-2) var(--space-3); }
+
+.padding-medium .body  { padding: var(--space-4); }
+.padding-medium .footer { padding: var(--space-3) var(--space-4); }
+
+.padding-large .body  { padding: var(--space-6); }
+.padding-large .footer { padding: var(--space-4) var(--space-6); }

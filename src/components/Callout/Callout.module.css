@@ -1,0 +1,44 @@
+/* Callout — Marsh Design System */
+
+.callout {
+  padding: var(--space-4) var(--space-4) var(--space-4) var(--space-5);
+  border-radius: var(--radius-medium);
+  border-left: 4px solid transparent;
+  font-family: var(--font-family);
+}
+
+.title {
+  display: block;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-1);
+}
+
+.body {
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-2);
+}
+
+.info {
+  background-color: var(--color-blue-tint);
+  border-left-color: var(--color-blue);
+  color: var(--color-teal);
+}
+
+.success {
+  background-color: var(--color-green-tint);
+  border-left-color: var(--color-success-alt);
+  color: var(--color-success);
+}
+
+.warning {
+  background-color: var(--color-orange-tint);
+  border-left-color: var(--color-warning);
+  color: var(--color-orange);
+}
+
+.danger {
+  background-color: var(--color-red-tint);
+  border-left-color: var(--color-danger);
+  color: var(--color-danger-dark);
+}

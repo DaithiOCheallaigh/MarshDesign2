@@ -1,0 +1,62 @@
+/* Toast — Marsh Design System */
+
+.toast {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-medium);
+  box-shadow: var(--shadow-md);
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  max-width: 360px;
+  pointer-events: all;
+}
+
+.icon {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.message {
+  flex: 1;
+}
+
+.dismiss {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-1);
+  color: inherit;
+  opacity: 0.6;
+  flex-shrink: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.dismiss:hover {
+  opacity: 1;
+}
+
+.default {
+  background-color: var(--color-gray-900);
+  color: var(--color-white);
+}
+
+.success {
+  background-color: var(--color-green-tint);
+  color: var(--color-success);
+}
+
+.danger {
+  background-color: var(--color-red-tint);
+  color: var(--color-danger-dark);
+}
+
+.warning {
+  background-color: var(--color-orange-tint);
+  color: var(--color-orange);
+}

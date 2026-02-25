@@ -1,0 +1,33 @@
+/* Avatar — Marsh Design System */
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  background-color: var(--color-dark-blue);
+  color: var(--color-white);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.small {
+  width: 24px;
+  height: 24px;
+  font-size: var(--font-size-xs);
+}
+
+.medium {
+  width: 36px;
+  height: 36px;
+  font-size: var(--font-size-sm);
+}
+
+.large {
+  width: 48px;
+  height: 48px;
+  font-size: var(--font-size-base);
+}

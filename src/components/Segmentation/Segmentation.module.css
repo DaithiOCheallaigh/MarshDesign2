@@ -1,0 +1,37 @@
+/* Segmentation — Marsh Design System */
+
+.group {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--color-gray-100);
+  border-radius: var(--radius-medium);
+  padding: var(--space-1);
+  gap: var(--space-1);
+}
+
+.segment {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2) var(--space-4);
+  border: none;
+  border-radius: var(--radius-small);
+  background: transparent;
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-500);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.segment:hover {
+  color: var(--color-black);
+}
+
+.segment.active {
+  background-color: var(--color-white);
+  color: var(--color-dark-blue);
+  box-shadow: var(--shadow-sm);
+}

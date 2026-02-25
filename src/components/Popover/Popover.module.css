@@ -1,0 +1,41 @@
+/* Popover — Marsh Design System */
+
+.wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.trigger {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.panel {
+  position: absolute;
+  z-index: 200;
+  min-width: 200px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-100);
+  border-radius: var(--radius-medium);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-4);
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  color: var(--color-black);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px);
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.panel.open {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+.bottom { top: calc(100% + 6px); left: 0; }
+.top    { bottom: calc(100% + 6px); left: 0; }
+.right  { left: calc(100% + 6px); top: 0; }
+.left   { right: calc(100% + 6px); top: 0; }
