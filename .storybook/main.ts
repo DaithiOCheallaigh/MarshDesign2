@@ -12,7 +12,7 @@ const config: StorybookConfig = {
     options: {},
   },
   viteFinal: (config) => {
-    config.base = '/MarshDesign/'
+    config.base = '/MarshDesign2/'
     return config
   },
 }
