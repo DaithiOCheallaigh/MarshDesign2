@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import marshLogoNavy from '../../public/marsh-logo-navy.png'
+import marshLogoWhite from '../../public/marsh-logo-white.png'
 import {
   NavigationMenu, NavigationMenuContent, NavigationMenuItem,
   NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger,
@@ -59,7 +61,7 @@ export const WithHeader: Story = {
     <div className="w-full rounded-lg border overflow-hidden">
       {/* Navbar */}
       <header className="flex items-center justify-between px-6 py-3 border-b bg-background">
-        <img src="/marsh-logo-navy.png" alt="Marsh" width={466} height={102} className="h-7 w-auto object-contain" />
+        <img src={marshLogoNavy} alt="Marsh" width={466} height={102} className="h-7 w-auto object-contain" />
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
@@ -106,7 +108,7 @@ export const DarkHeader: Story = {
   render: () => (
     <div className="w-full rounded-lg border overflow-hidden">
       <header className="flex items-center justify-between px-6 py-3 bg-[#0C103D]">
-        <img src="/marsh-logo-white.png" alt="Marsh" width={434} height={95} className="h-7 w-auto object-contain" />
+        <img src={marshLogoWhite} alt="Marsh" width={434} height={95} className="h-7 w-auto object-contain" />
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>

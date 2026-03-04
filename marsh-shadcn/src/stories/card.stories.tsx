@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, CardAction } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import marshLogoWhite from '../../public/marsh-logo-white.png'
 
 const meta: Meta<typeof Card> = {
   title: 'Components/Card',
@@ -48,7 +49,7 @@ export const Branded: Story = {
   render: () => (
     <Card className="w-80 overflow-hidden">
       <div className="bg-[#0C103D] px-6 py-5">
-        <img src="/marsh-logo-white.png" alt="Marsh" width={434} height={95} className="h-6 w-auto object-contain mb-4" />
+        <img src={marshLogoWhite} alt="Marsh" width={434} height={95} className="h-6 w-auto object-contain mb-4" />
         <p className="text-white/80 text-xs uppercase tracking-wider font-medium">Commercial Insurance</p>
         <p className="text-white text-xl font-semibold mt-1">Property Policy</p>
       </div>

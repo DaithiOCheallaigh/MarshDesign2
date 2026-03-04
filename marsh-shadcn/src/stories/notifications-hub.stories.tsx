@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import marshLogoWhite from '../../public/marsh-logo-white.png'
 import {
   Bell, LayoutDashboard, AppWindow, CalendarDays, ClipboardList,
   MoreVertical, Plus,
@@ -206,7 +207,7 @@ function AppSidebar({ page, setPage }: { page: Page; setPage: (p: Page) => void 
 
       <SidebarFooter className="border-t px-4 py-4">
         <img
-          src="/marsh-logo-white.png"
+          src={marshLogoWhite}
           alt="Marsh"
           width={434} height={95}
           className="h-6 w-auto object-contain object-left"

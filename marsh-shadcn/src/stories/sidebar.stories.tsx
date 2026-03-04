@@ -1,6 +1,8 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Home, FileText, Shield, BarChart2, Settings } from 'lucide-react'
+import marshLogoNavy from '../../public/marsh-logo-navy.png'
+import marshLogoWhite from '../../public/marsh-logo-white.png'
 import {
   Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent,
   SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton,
@@ -18,7 +20,7 @@ function MarshSidebar() {
   return (
     <Sidebar>
       <SidebarHeader className="border-b px-4 py-3">
-        <img src="/marsh-logo-navy.png" alt="Marsh" width={466} height={102} className="h-7 w-auto max-w-full object-contain object-left" />
+        <img src={marshLogoNavy} alt="Marsh" width={466} height={102} className="h-7 w-auto max-w-full object-contain object-left" />
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
@@ -64,7 +66,7 @@ function MarshSidebarDark() {
   return (
     <Sidebar style={navyStyle}>
       <SidebarHeader className="border-b border-white/10 px-4 py-3">
-        <img src="/marsh-logo-white.png" alt="Marsh" width={434} height={95} className="h-7 w-auto max-w-full object-contain object-left" />
+        <img src={marshLogoWhite} alt="Marsh" width={434} height={95} className="h-7 w-auto max-w-full object-contain object-left" />
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
