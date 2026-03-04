@@ -24,13 +24,17 @@ jobs:
         with:
           node-version: 20
           cache: npm
+          cache-dependency-path: marsh-shadcn/package-lock.json
 
       - run: npm ci
+        working-directory: marsh-shadcn
+
       - run: npm run build-storybook
+        working-directory: marsh-shadcn
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: storybook-static
+          path: marsh-shadcn/storybook-static
 
   deploy:
     needs: build
