@@ -5,6 +5,14 @@ const meta: Meta<typeof DropdownInput> = {
   title: 'Components/DropdownInput',
   component: DropdownInput,
   tags: ['autodocs'],
+  // Extra bottom padding so the dropdown is never clipped by the canvas
+  decorators: [
+    (Story) => (
+      <div style={{ paddingBottom: 280, minHeight: 320 }}>
+        <Story />
+      </div>
+    ),
+  ],
 }
 export default meta
 type Story = StoryObj<typeof DropdownInput>
