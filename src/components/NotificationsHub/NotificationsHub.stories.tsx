@@ -11,7 +11,7 @@ import { Tabs } from '../Tabs'
 import { Select } from '../Select'
 import { LineChart, PieChart, MetricContainer } from '../Charts'
 
-const marshLogoWhite = '/assets/marsh-logo-white.png'
+const marshLogoWhite = '/assets/marsh-logo-new-white.png'
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -184,7 +184,10 @@ function DashboardPage() {
             Notifications by delivery channel
           </p>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-lg)' }}>
-            <PieChart data={channelData} height={180} showLegend={false} />
+            {/* flex: '0 0 200px' gives ResponsiveContainer a measured parent width */}
+            <div style={{ flex: '0 0 200px' }}>
+              <PieChart data={channelData} height={200} showLegend={false} donut />
+            </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-sm)' }}>
               {channelData.map(d => (
                 <div key={d.label} style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)' }}>

@@ -22,10 +22,11 @@ export interface PieChartProps {
   showLegend?: boolean
 }
 
-const DEFAULT_COLORS = ['#002C77', '#0077A0', '#009DE0', '#00968F', '#76D3FF', '#8096B2', '#FF7A00']
+// Marsh brand data-viz palette — blue scale (brand.marsh.com §data-visualization)
+const DEFAULT_COLORS = ['#000f47', '#0b4bff', '#82baff', '#ceecff', '#ffbf00', '#14853d', '#c53532']
 
-export function PieChart({ data, title, height = 300, donut = false, showLegend = true }: PieChartProps) {
-  const innerRadius = donut ? '55%' : 0
+export function PieChart({ data, title, height = 300, donut = true, showLegend = true }: PieChartProps) {
+  const innerRadius = donut ? '52%' : 0
 
   return (
     <div className={styles.chartWrapper}>
@@ -39,8 +40,9 @@ export function PieChart({ data, title, height = 300, donut = false, showLegend 
             cx="50%"
             cy="50%"
             innerRadius={innerRadius}
-            outerRadius="70%"
+            outerRadius="75%"
             paddingAngle={donut ? 3 : 0}
+            strokeWidth={0}
           >
             {data.map((entry, i) => (
               <Cell key={entry.label} fill={entry.color ?? DEFAULT_COLORS[i % DEFAULT_COLORS.length]} />
@@ -48,7 +50,13 @@ export function PieChart({ data, title, height = 300, donut = false, showLegend 
           </Pie>
           <Tooltip
             formatter={(value: number | undefined) => [(value ?? 0).toLocaleString(), '']}
-            contentStyle={{ fontFamily: 'Noto Sans', fontSize: 12, borderRadius: 8, border: '1px solid #F0F0F0', boxShadow: '0 4px 16px rgba(0,0,0,0.12)' }}
+            contentStyle={{
+              fontFamily: 'Noto Sans',
+              fontSize: 12,
+              borderRadius: 4,
+              border: '1px solid #b9b6b1',
+              boxShadow: '0 4px 16px rgba(0,15,71,0.10)',
+            }}
           />
           {showLegend && <Legend wrapperStyle={{ fontFamily: 'Noto Sans', fontSize: 12 }} />}
         </RePieChart>
