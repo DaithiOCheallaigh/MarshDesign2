@@ -115,11 +115,11 @@ export const CommonIcons: Story = {
     const groups = [
       {
         label: 'Navigation',
-        icons: ['home', 'arrow-back', 'arrow-forward', 'menu', 'close', 'expand-more', 'expand-less', 'chevron-right', 'chevron-left', 'more-vert', 'more-horiz'],
+        icons: ['home', 'undo', 'redo', 'reorder', 'close', 'keyboard-arrow-down', 'keyboard-arrow-up', 'keyboard-arrow-right', 'keyboard-arrow-left', 'more-vert', 'more-horiz'],
       },
       {
         label: 'Actions',
-        icons: ['add', 'remove', 'edit', 'delete', 'save', 'cancel', 'check', 'search', 'filter-list', 'sort', 'refresh', 'download', 'upload', 'share'],
+        icons: ['add', 'backspace', 'edit', 'delete', 'save', 'cancel', 'check', 'search', 'filter-list', 'sort', 'refresh', 'cloud-download', 'publish', 'share'],
       },
       {
         label: 'Status',
