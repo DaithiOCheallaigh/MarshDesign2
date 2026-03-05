@@ -1,14 +1,17 @@
+/* Input — Marsh Design System */
+/* Source: Marsh Brand Design Guide §7.3 Form Elements */
+
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
+  gap: var(--spacing-xs);
 }
 
 .label {
   font-family: var(--font-family);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
-  color: var(--color-gray-900);
+  color: var(--color-brand-midnight);
 }
 
 .inputWrapper {
@@ -19,24 +22,39 @@
 
 .input {
   width: 100%;
-  padding: var(--space-s) var(--space-m);
+  padding: 10px var(--spacing-md);     /* 10–12px vertical, 14–16px horizontal */
   font-family: var(--font-family);
   font-size: var(--font-size-base);
-  color: var(--color-black);
+  color: var(--color-brand-midnight);
   background: var(--color-white);
-  border: 1px solid var(--color-gray-500);
-  border-radius: var(--radius-small);
+  border: 1px solid var(--color-neutral-500);     /* Neutral 500 #b9b6b1 */
+  border-radius: var(--radius-default);            /* 4px */
   outline: none;
   box-sizing: border-box;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.input::placeholder { color: var(--color-gray-500); }
-.input:focus { border-color: var(--color-dark-blue); box-shadow: 0 0 0 2px rgba(0,44,119,0.12); }
-.input:disabled { background: var(--color-gray-100); color: var(--color-gray-500); cursor: not-allowed; }
+.input::placeholder {
+  color: var(--color-neutral-750);
+}
 
-.hasError { border-color: var(--color-danger); }
-.hasError:focus { box-shadow: 0 0 0 2px rgba(197,53,50,0.12); }
+.input:focus {
+  border-color: var(--color-blue-active);          /* 2px solid Blue 750 #0b4bff */
+  border-width: 2px;
+  padding: 9px calc(var(--spacing-md) - 1px);     /* compensate for border growth */
+}
+
+.input:disabled {
+  background: var(--color-neutral-250);
+  color: var(--color-neutral-500);
+  cursor: not-allowed;
+}
+
+.hasError {
+  border-color: var(--color-status-danger);        /* 2px solid Danger Crimson */
+  border-width: 2px;
+  padding: 9px calc(var(--spacing-md) - 1px);
+}
 
 .hasPrefix { padding-left: 36px; }
 .hasSuffix { padding-right: 36px; }
@@ -46,20 +64,20 @@
   position: absolute;
   display: flex;
   align-items: center;
-  color: var(--color-gray-500);
+  color: var(--color-neutral-750);
   font-size: var(--font-size-sm);
   pointer-events: none;
 }
 
-.prefix { left: var(--space-m); }
-.suffix { right: var(--space-m); }
+.prefix { left: var(--spacing-md); }
+.suffix { right: var(--spacing-md); }
 
 .hint {
   font-size: var(--font-size-sm);
-  color: var(--color-gray-500);
+  color: var(--color-neutral-750);
 }
 
 .error {
   font-size: var(--font-size-sm);
-  color: var(--color-danger);
+  color: var(--color-status-danger);
 }

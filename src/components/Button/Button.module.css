@@ -1,93 +1,130 @@
 /* ==========================================================================
    Button — Marsh Design System
-   Variants: primary (dark blue pill), danger (red tint), outline
-   Sizes: small, medium, large
+   Source: Marsh Brand Design Guide March 2026 (§7.2 Button System)
+
+   Variants:
+     primary     — Gold CTA: #ffbf00 bg, Midnight Blue text (main call-to-action)
+     secondary   — Midnight Blue bg, White text (supporting actions)
+     ghost       — Transparent with Midnight Blue border (ghost / outline)
+     destructive — Danger Crimson bg, White text
    ========================================================================== */
 
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-2);
+  gap: var(--spacing-xs);
   border: 1px solid transparent;
+  border-radius: var(--radius-default);
   cursor: pointer;
   font-family: var(--font-family);
   font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-base);
   text-align: center;
   white-space: nowrap;
+  letter-spacing: 0.01em;
   transition:
     background-color var(--transition-fast),
     border-color var(--transition-fast),
-    opacity var(--transition-fast);
+    color var(--transition-fast);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--color-blue-active);
+  outline-offset: 2px;
 }
 
 .button:disabled {
-  opacity: 0.4;
+  background-color: var(--color-neutral-500) !important;
+  color: var(--color-neutral-250) !important;
+  border-color: transparent !important;
   cursor: not-allowed;
+  pointer-events: none;
 }
 
 /* ---- Variants ---- */
 
+/* Primary — Gold CTA */
 .primary {
-  background-color: var(--color-dark-blue);
-  color: var(--color-white);
-  border-radius: var(--radius-large);
+  background-color: var(--color-action-gold);
+  color: var(--color-brand-midnight);
+  border-color: var(--color-action-gold);
 }
 
 .primary:hover:not(:disabled) {
-  background-color: #001e54;
+  background-color: var(--color-action-gold-hover);
+  border-color: var(--color-action-gold-hover);
 }
 
 .primary:active:not(:disabled) {
-  background-color: #001640;
+  background-color: #a06000;
+  border-color: #a06000;
 }
 
-.danger {
-  background-color: var(--color-red-tint);
-  color: var(--color-danger-dark);
-  border-color: var(--color-red-tint);
-  border-radius: var(--radius-medium);
+/* Secondary — Midnight Blue */
+.secondary {
+  background-color: var(--color-brand-midnight);
+  color: var(--color-white);
+  border-color: var(--color-brand-midnight);
 }
 
-.danger:hover:not(:disabled) {
-  background-color: var(--color-red-tint-hover);
-  border-color: var(--color-red-tint-hover);
+.secondary:hover:not(:disabled) {
+  background-color: #0b1a60;
+  border-color: #0b1a60;
 }
 
-.danger:active:not(:disabled) {
-  background-color: #ffb8b6;
-  border-color: #ffb8b6;
+.secondary:active:not(:disabled) {
+  background-color: #000830;
+  border-color: #000830;
 }
 
-.outline {
+/* Ghost / Outline */
+.ghost {
   background-color: transparent;
-  color: var(--color-dark-blue);
-  border-color: var(--color-dark-blue);
-  border-radius: var(--radius-medium);
+  color: var(--color-brand-midnight);
+  border-color: var(--color-brand-midnight);
 }
 
-.outline:hover:not(:disabled) {
-  background-color: var(--color-gray-50);
+.ghost:hover:not(:disabled) {
+  background-color: var(--color-brand-sky);
 }
 
-.outline:active:not(:disabled) {
-  background-color: var(--color-blue-tint);
+.ghost:active:not(:disabled) {
+  background-color: #b8dfff;
+}
+
+/* Destructive */
+.destructive {
+  background-color: var(--color-status-danger);
+  color: var(--color-white);
+  border-color: var(--color-status-danger);
+}
+
+.destructive:hover:not(:disabled) {
+  background-color: #a82b28;
+  border-color: #a82b28;
+}
+
+.destructive:active:not(:disabled) {
+  background-color: #8c2220;
+  border-color: #8c2220;
 }
 
 /* ---- Sizes ---- */
 
 .small {
-  padding: var(--space-2) var(--space-4);
+  padding: 8px 16px;
   font-size: var(--font-size-sm);
+  gap: 6px;
 }
 
 .medium {
-  padding: var(--space-3) var(--space-6);
+  padding: 12px 24px;
   font-size: var(--font-size-base);
 }
 
 .large {
-  padding: var(--space-4) var(--space-10);
+  padding: 14px 32px;
   font-size: var(--font-size-lg);
 }
 
@@ -106,16 +143,16 @@
 }
 
 .small .icon {
-  width: 14px;
-  height: 14px;
-}
-
-.medium .icon {
   width: 16px;
   height: 16px;
 }
 
-.large .icon {
+.medium .icon {
   width: 20px;
   height: 20px;
+}
+
+.large .icon {
+  width: 24px;
+  height: 24px;
 }

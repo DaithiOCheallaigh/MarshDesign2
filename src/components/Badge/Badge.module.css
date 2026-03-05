@@ -1,43 +1,46 @@
 /* Badge — Marsh Design System */
+/* Source: Marsh Brand Design Guide — status colour tokens */
 
 .badge {
   display: inline-flex;
   align-items: center;
   padding: var(--space-1) var(--space-3);
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-subtle);   /* 2px — subtle, per brand guide */
   font-family: var(--font-family);
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   white-space: nowrap;
   line-height: 1.4;
+  letter-spacing: 0.01em;
 }
 
 .default {
-  background-color: var(--color-gray-100);
-  color: var(--color-gray-900);
+  background-color: var(--color-neutral-250);
+  color: var(--color-neutral-1000);
 }
 
 .success {
-  background-color: var(--color-green-tint);
-  color: var(--color-success);
+  background-color: var(--color-status-success-bg);  /* #dfecd7 */
+  color: var(--color-status-success-text);            /* #2f7500 */
 }
 
 .danger {
-  background-color: var(--color-red-tint);
-  color: var(--color-danger-dark);
+  background-color: var(--color-status-danger-bg);   /* #feecec */
+  color: var(--color-status-danger);                  /* #c53532 */
 }
 
 .warning {
-  background-color: var(--color-orange-tint);
-  color: var(--color-orange);
+  background-color: var(--color-status-warning-bg);  /* #fff3da */
+  color: var(--color-status-warning-text);            /* #cb7e03 */
 }
 
 .info {
-  background-color: var(--color-blue-tint);
-  color: var(--color-teal);
+  background-color: var(--color-status-info-bg);     /* #ceecff */
+  color: var(--color-brand-midnight);
 }
 
 .draft {
-  background-color: var(--color-gray-100);
-  color: var(--color-blue-gray);
+  background-color: var(--color-neutral-250);
+  color: var(--color-neutral-750);
+  border: 1px solid var(--color-neutral-500);
 }

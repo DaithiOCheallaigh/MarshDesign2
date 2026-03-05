@@ -1,43 +1,71 @@
 /* ==========================================================================
    Marsh Design System — Design Tokens
-   Extracted from Figma: MarshDesign
+   Source: Marsh Brand Design Guide — Component Library Reference (March 2026)
+   brand.marsh.com
    ========================================================================== */
 
 :root {
-  /* ---- Colors: Primary ---- */
-  --color-dark-blue: #002C77;
-  --color-teal: #0077A0;
-  --color-blue: #009DE0;
-  --color-turquoise: #00968F;
-  --color-light-blue: #76D3FF;
+  /* ---- Brand Core ---- */
+  --color-brand-midnight: #000f47;   /* Midnight Blue — primary brand / text / dark bg */
+  --color-brand-sky: #ceecff;        /* Sky Blue — primary brand / light bg / tints */
+  --color-action-gold: #ffbf00;      /* Gold 750 — CTA / interactive elements */
+  --color-action-gold-hover: #cb7e03;/* Gold 1000 — Gold hover state */
+  --color-action-gold-light: #fff3da;/* Gold 250 — warning/highlight bg */
+  --color-blue-active: #0b4bff;      /* Blue 750 — focus rings / active links */
 
-  /* ---- Colors: Semantic ---- */
-  --color-success: #14853D;
-  --color-success-alt: #00AC41;
-  --color-danger: #C53532;
-  --color-danger-dark: #B30000;
-  --color-warning: #FFBE00;
-  --color-hyperlink: #2C6EF2;
+  /* ---- Blue Scale ---- */
+  --color-blue-1000: #000f47;        /* Midnight Blue — deepest / headers */
+  --color-blue-750: #0b4bff;         /* Active — interactive / links */
+  --color-blue-500: #82baff;         /* Mid tone — charts */
+  --color-blue-250: #ceecff;         /* Sky Blue — lightest / backgrounds */
 
-  /* ---- Colors: Neutrals ---- */
+  /* ---- Neutral Scale (warm) ---- */
+  --color-neutral-1000: #3d3c37;     /* Dark text / borders */
+  --color-neutral-750: #7b7974;      /* Secondary text / icons */
+  --color-neutral-500: #b9b6b1;      /* Disabled / muted */
+  --color-neutral-250: #f7f3ee;      /* Page background / cards */
+
+  /* ---- Traffic / Status ---- */
+  --color-status-success: #14853d;   /* Success Green */
+  --color-status-success-bg: #dfecd7;/* Green 250 — success bg */
+  --color-status-success-text: #2f7500;
+  --color-status-warning: #ffbe00;   /* Warning Yellow */
+  --color-status-warning-bg: #fff3da;/* Gold 250 — warning bg */
+  --color-status-warning-text: #cb7e03;
+  --color-status-danger: #c53532;    /* Danger Crimson */
+  --color-status-danger-bg: #feecec; /* Danger bg */
+  --color-status-info: #0b4bff;      /* Blue 750 — info */
+  --color-status-info-bg: #ceecff;   /* Sky Blue — info bg */
+
+  /* ---- Backwards-compatible aliases ---- */
+  --color-dark-blue: var(--color-brand-midnight);
+  --color-white: #ffffff;
   --color-black: #202020;
-  --color-gray-900: #404040;
-  --color-gray-500: #949494;
-  --color-blue-gray: #8096B2;
-  --color-gray-100: #F0F0F0;
-  --color-gray-50: #F4F8FF;
-  --color-white: #FFFFFF;
-
-  /* ---- Colors: Tints ---- */
-  --color-orange-tint: #FFEDDD;
-  --color-red-tint: #FFE4E3;
-  --color-red-tint-hover: #FFCDCC;
-  --color-green-tint: #E3FFE4;
-  --color-blue-tint: #E7EFFE;
-  --color-orange: #FF7A00;
+  --color-success: var(--color-status-success);
+  --color-danger: var(--color-status-danger);
+  --color-danger-dark: #b30000;
+  --color-warning: var(--color-status-warning);
+  --color-hyperlink: var(--color-blue-active);
+  --color-gray-900: var(--color-neutral-1000);
+  --color-gray-500: var(--color-neutral-750);
+  --color-blue-gray: #8096b2;
+  --color-gray-100: var(--color-neutral-250);
+  --color-gray-50: var(--color-brand-sky);
+  --color-blue-tint: var(--color-brand-sky);
+  --color-red-tint: var(--color-status-danger-bg);
+  --color-red-tint-hover: #ffd5d4;
+  --color-green-tint: var(--color-status-success-bg);
+  --color-orange-tint: #ffeddd;
+  --color-teal: #0077a0;
+  --color-blue: #009de0;
+  --color-turquoise: #00968f;
+  --color-light-blue: #76d3ff;
+  --color-orange: #ff7a00;
 
   /* ---- Typography ---- */
-  --font-family: 'Noto Sans', sans-serif;
+  --font-display: 'Marsh Serif', Georgia, serif;
+  --font-family: 'Noto Sans', Arial, sans-serif;
+  --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-bold: 700;
@@ -45,10 +73,10 @@
   --font-size-caption: 10px;
   --font-size-baseline: 12px;
   --font-size-body: 14px;
-  --font-size-header-sm: 14px;
-  --font-size-header-lg: 16px;
+  --font-size-header-sm: 16px;
+  --font-size-header-lg: 18px;
 
-  /* Aliases for component use */
+  /* Semantic aliases */
   --font-size-xs: 10px;
   --font-size-sm: 12px;
   --font-size-base: 14px;
@@ -57,26 +85,33 @@
   --font-size-2xl: 24px;
   --font-size-3xl: 30px;
 
-  /* ---- Spacing (base: 8px) ---- */
-  --space-2xs: 2px;     /* 0.25× */
-  --space-xs: 4px;      /* 0.5×  */
-  --space-s: 8px;       /* 1×    */
-  --space-m: 12px;      /* 1.5×  */
-  --space-l: 16px;      /* 2×    */
-  --space-xl: 24px;     /* 3×    */
-  --space-2xl: 32px;    /* 4×    */
-  --space-3xl: 40px;    /* 5×    */
-  --space-4xl: 48px;    /* 6×    */
-  --space-5xl: 56px;    /* 7×    */
-  --space-6xl: 64px;    /* 8×    */
-  --space-7xl: 72px;    /* 9×    */
-  --space-8xl: 80px;    /* 10×   */
-  --space-9xl: 88px;    /* 11×   */
-  --space-10xl: 96px;   /* 12×   */
-  --space-11xl: 104px;  /* 13×   */
-  --space-12xl: 112px;  /* 14×   */
+  /* ---- Spacing (8px base scale) ---- */
+  /* Semantic names from brand guide */
+  --spacing-xs: 4px;    /* xs — icon inner padding, tight label spacing */
+  --spacing-sm: 8px;    /* sm — chip/badge padding, inline spacing */
+  --spacing-md: 16px;   /* md — button padding (horizontal), card inner padding */
+  --spacing-lg: 24px;   /* lg — section spacing, card gap, form group spacing */
+  --spacing-xl: 32px;   /* xl — panel padding, header height, modal padding */
+  --spacing-2xl: 48px;  /* 2xl — page section margin, hero content padding */
+  --spacing-3xl: 64px;  /* 3xl — large section separators, hero padding */
+  --spacing-4xl: 80px;  /* 4xl — full-bleed section margins */
 
-  /* Numeric aliases (for backward compat) */
+  /* Numeric aliases (backward compat) */
+  --space-2xs: 2px;
+  --space-xs: 4px;
+  --space-s: 8px;
+  --space-m: 12px;
+  --space-l: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+  --space-3xl: 40px;
+  --space-4xl: 48px;
+  --space-5xl: 56px;
+  --space-6xl: 64px;
+  --space-7xl: 72px;
+  --space-8xl: 80px;
+  --space-9xl: 88px;
+  --space-10xl: 96px;
   --space-0: 0px;
   --space-1: 4px;
   --space-2: 8px;
@@ -102,15 +137,31 @@
   --breakpoint-desktop-xl: 1440px;
 
   /* ---- Border Radius ---- */
-  --radius-small: 4px;
-  --radius-medium: 8px;
-  --radius-large: 20px;
-  --radius-full: 999px;
+  --radius-subtle: 2px;    /* Badges, chips, status tags */
+  --radius-default: 4px;   /* Buttons, inputs, tooltips, small cards */
+  --radius-soft: 8px;      /* Standard cards, panels, modals */
+  --radius-large: 12px;    /* Featured cards, prominent containers */
+  --radius-pill: 9999px;   /* Toggle buttons, search inputs */
+  --radius-sharp: 0px;     /* Sidebar panels, full-bleed sections, data tables */
 
-  /* ---- Shadows ---- */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
+  /* Backward-compat aliases */
+  --radius-small: var(--radius-default);
+  --radius-medium: var(--radius-soft);
+  --radius-full: var(--radius-pill);
+
+  /* ---- Elevation / Shadow ---- */
+  /* Prefer borders (1px Neutral 500) over shadows. Use sparingly. */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 4px rgba(0, 15, 71, 0.08);    /* Level 1 — raised */
+  --shadow-md: 0 4px 16px rgba(0, 15, 71, 0.14);   /* Level 2 — overlay / dropdown */
+  --shadow-lg: 0 8px 24px rgba(0, 15, 71, 0.18);   /* Level 3 — floating / tooltip */
+
+  /* ---- Icon defaults (Material Symbols Outlined) ---- */
+  --icon-size-sm: 20px;
+  --icon-size-md: 24px;
+  --icon-size-lg: 32px;
+  --icon-size-xl: 48px;
+  --icon-font-variation: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
 
   /* ---- Transitions ---- */
   --transition-fast: 150ms ease;

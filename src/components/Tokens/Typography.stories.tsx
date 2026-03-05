@@ -1,88 +1,119 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import styles from './Tokens.module.css'
 
+// Source: Marsh Brand Design Guide §2 Typography (March 2026)
+
 const HIERARCHY = [
   {
-    name: 'Large Header',
-    size: '16px',
-    weight: 'Bold (700)',
+    name: 'H1 / Page title',
+    size: '32–40px',
+    weight: 'Marsh Serif Regular (400)',
+    token: '--font-display',
+    usage: 'Headlines, section titles, large quotes, key statistics',
+    style: { fontSize: 36, fontWeight: 400, fontFamily: 'Georgia, serif' },
+  },
+  {
+    name: 'H2 / Section header',
+    size: '24–28px',
+    weight: 'Marsh Serif / Noto Sans Bold (700)',
+    token: '--font-display / --font-family',
+    usage: 'Section headers',
+    style: { fontSize: 26, fontWeight: 700 },
+  },
+  {
+    name: 'H3 / Sub-section',
+    size: '18–22px',
+    weight: 'Noto Sans Bold / Medium',
+    token: '--font-family',
+    usage: 'Sub-sections, card titles',
+    style: { fontSize: 20, fontWeight: 700 },
+  },
+  {
+    name: 'H4 / Component title',
+    size: '16–18px',
+    weight: 'Noto Sans Medium (500)',
     token: '--font-size-header-lg',
-    style: { fontSize: 16, fontWeight: 700 },
+    usage: 'Component titles, widget headings',
+    style: { fontSize: 17, fontWeight: 500 },
   },
   {
-    name: 'Small Header',
-    size: '14px',
-    weight: 'Bold (700)',
-    token: '--font-size-header-sm',
-    style: { fontSize: 14, fontWeight: 700 },
+    name: 'Body / Paragraph',
+    size: '14–16px',
+    weight: 'Noto Sans Regular (400)',
+    token: '--font-size-base',
+    usage: 'Body text. Line-height 1.5–1.6',
+    style: { fontSize: 14, fontWeight: 400, lineHeight: 1.6 },
   },
   {
-    name: 'Text (Medium)',
+    name: 'Button text',
     size: '14px',
-    weight: 'Medium (500)',
-    token: '--font-size-body',
+    weight: 'Noto Sans Medium (500) or Bold (700)',
+    token: '--font-size-base',
+    usage: 'Button labels — sentence case only',
     style: { fontSize: 14, fontWeight: 500 },
   },
   {
-    name: 'Body',
-    size: '14px',
-    weight: 'Regular (400)',
-    token: '--font-size-body',
-    style: { fontSize: 14, fontWeight: 400 },
-  },
-  {
-    name: 'Baseline Bold',
-    size: '12px',
-    weight: 'Bold (700)',
-    token: '--font-size-baseline',
-    style: { fontSize: 12, fontWeight: 700 },
-  },
-  {
-    name: 'Baseline Medium',
-    size: '12px',
-    weight: 'Medium (500)',
-    token: '--font-size-baseline',
-    style: { fontSize: 12, fontWeight: 500 },
-  },
-  {
-    name: 'Baseline',
-    size: '12px',
-    weight: 'Regular (400)',
-    token: '--font-size-baseline',
+    name: 'Caption / Label',
+    size: '12–13px',
+    weight: 'Noto Sans Regular (400) / Light (300)',
+    token: '--font-size-sm',
+    usage: 'Helper text, form labels, legends',
     style: { fontSize: 12, fontWeight: 400 },
   },
   {
-    name: 'Caption',
-    size: '10px',
-    weight: 'Medium (500)',
-    token: '--font-size-caption',
-    style: { fontSize: 10, fontWeight: 500 },
+    name: 'Navigation',
+    size: '14px',
+    weight: 'Noto Sans Regular (400)',
+    token: '--font-size-base',
+    usage: 'Navigation items',
+    style: { fontSize: 14, fontWeight: 400 },
   },
 ] as const
 
 function Typography() {
   return (
     <div className={styles.page}>
-      <h1 className={styles.title}>Fonts &amp; Hierarchy</h1>
+      <h1 className={styles.title}>Typography</h1>
       <p className={styles.subtitle}>
-        Noto Sans is the sole typeface. Three weights — Regular (400), Medium
-        (500), and Bold (700) — cover the full hierarchy from large headers down
-        to captions.
+        Marsh's type system pairs <strong>Marsh Serif</strong> (custom brand typeface) for headlines
+        with <strong>Noto Sans</strong> for all body and supporting text.
+        Always use <em>sentence case</em> — never all-caps (except the Marsh logomark).
       </p>
 
-      <h2 className={styles.sectionTitle}>Font Family</h2>
-      <p style={{ fontFamily: 'var(--font-family)', fontSize: 14, color: '#404040' }}>
-        <strong>Noto Sans</strong> &mdash; <code style={{ fontSize: 12, color: '#949494' }}>--font-family: 'Noto Sans', sans-serif</code>
-      </p>
-
-      <h2 className={styles.sectionTitle}>Type Scale</h2>
+      <h2 className={styles.sectionTitle}>Font Families</h2>
       <table className={styles.typeTable}>
         <thead>
           <tr>
-            <th style={{ width: 140 }}>Name</th>
-            <th style={{ width: 100 }}>Size / Weight</th>
+            <th>Role</th>
+            <th>Family</th>
+            <th>Token</th>
+            <th>Use cases</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Display / Headline</strong></td>
+            <td style={{ fontFamily: 'Georgia, serif', fontSize: 18 }}>Marsh Serif (Georgia fallback)</td>
+            <td className={styles.typeMeta}>--font-display</td>
+            <td className={styles.typeMeta}>Headlines, section titles, large quotes, key statistics, intro statements</td>
+          </tr>
+          <tr>
+            <td><strong>Body / UI</strong></td>
+            <td style={{ fontFamily: 'Noto Sans, sans-serif', fontSize: 14 }}>Noto Sans</td>
+            <td className={styles.typeMeta}>--font-family</td>
+            <td className={styles.typeMeta}>All body text, labels, buttons, navigation, data</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 className={styles.sectionTitle}>Typographic Hierarchy</h2>
+      <table className={styles.typeTable}>
+        <thead>
+          <tr>
+            <th style={{ width: 160 }}>Name</th>
+            <th style={{ width: 140 }}>Size / Weight</th>
             <th>Sample</th>
-            <th style={{ width: 180 }}>Token</th>
+            <th style={{ width: 140 }}>Token</th>
           </tr>
         </thead>
         <tbody>
@@ -90,6 +121,7 @@ function Typography() {
             <tr key={h.name}>
               <td>
                 <strong>{h.name}</strong>
+                <div className={styles.typeMeta} style={{ marginTop: 2 }}>{h.usage}</div>
               </td>
               <td className={styles.typeMeta}>
                 {h.size}
@@ -98,9 +130,9 @@ function Typography() {
               </td>
               <td
                 style={{
-                  fontFamily: 'var(--font-family)',
+                  fontFamily: ('fontFamily' in h.style ? h.style.fontFamily : undefined) ?? 'var(--font-family)',
                   ...h.style,
-                  color: '#202020',
+                  color: '#000f47',
                 }}
               >
                 The quick brown fox jumps over the lazy dog
@@ -123,21 +155,32 @@ function Typography() {
         </thead>
         <tbody>
           {[
-            { name: 'Regular', value: 400, token: '--font-weight-regular' },
-            { name: 'Medium', value: 500, token: '--font-weight-medium' },
-            { name: 'Bold', value: 700, token: '--font-weight-bold' },
+            { name: 'Light', value: 300, token: '--font-weight-light', note: 'Use at 14px+ only' },
+            { name: 'Regular', value: 400, token: '--font-weight-regular', note: '' },
+            { name: 'Medium', value: 500, token: '--font-weight-medium', note: 'Default for UI' },
+            { name: 'Bold', value: 700, token: '--font-weight-bold', note: '' },
           ].map((w) => (
             <tr key={w.name}>
-              <td><strong>{w.name}</strong></td>
+              <td>
+                <strong>{w.name}</strong>
+                {w.note && <div className={styles.typeMeta}>{w.note}</div>}
+              </td>
               <td className={styles.typeMeta}>{w.value}</td>
               <td className={styles.typeMeta}>{w.token}</td>
-              <td style={{ fontFamily: 'var(--font-family)', fontSize: 14, fontWeight: w.value }}>
+              <td style={{ fontFamily: 'var(--font-family)', fontSize: 14, fontWeight: w.value, color: '#000f47' }}>
                 The quick brown fox jumps over the lazy dog
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      <div className={styles.note}>
+        <strong>Typography rules:</strong> Use sentence case across ALL communications.
+        Text colours: Midnight Blue on light backgrounds, White or Sky Blue on dark.
+        Noto Sans Light (300) should only be used at 14px+ for readability.
+        Maintain consistent line spacing (1.5–1.6), letter-spacing, and alignment.
+      </div>
     </div>
   )
 }

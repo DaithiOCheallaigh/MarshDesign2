@@ -1,11 +1,12 @@
 /* Alert — Marsh Design System */
+/* Source: Marsh Brand Design Guide §7.6 Status / Alert Components */
 
 .alert {
   display: flex;
   align-items: flex-start;
   gap: var(--space-3);
   padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-medium);
+  border-radius: var(--radius-default);
   border-left: 4px solid transparent;
   font-family: var(--font-family);
   font-size: var(--font-size-base);
@@ -53,27 +54,28 @@
   opacity: 1;
 }
 
-/* Variants */
+/* ---- Variants ---- */
+
 .info {
-  background-color: var(--color-blue-tint);
-  color: var(--color-teal);
-  border-left-color: var(--color-blue);
+  background-color: var(--color-status-info-bg);     /* Sky Blue #ceecff */
+  color: var(--color-brand-midnight);
+  border-left-color: var(--color-status-info);        /* Blue 750 #0b4bff */
 }
 
 .success {
-  background-color: var(--color-green-tint);
-  color: var(--color-success);
-  border-left-color: var(--color-success-alt);
+  background-color: var(--color-status-success-bg);  /* Green 250 #dfecd7 */
+  color: var(--color-status-success-text);            /* #2f7500 */
+  border-left-color: var(--color-status-success);     /* #14853d */
 }
 
 .warning {
-  background-color: var(--color-orange-tint);
-  color: var(--color-orange);
-  border-left-color: var(--color-warning);
+  background-color: var(--color-status-warning-bg);  /* Gold 250 #fff3da */
+  color: var(--color-status-warning-text);            /* #cb7e03 */
+  border-left-color: var(--color-status-warning);     /* #ffbe00 */
 }
 
 .danger {
-  background-color: var(--color-red-tint);
-  color: var(--color-danger-dark);
-  border-left-color: var(--color-danger);
+  background-color: var(--color-status-danger-bg);   /* #feecec */
+  color: var(--color-status-danger);                  /* #c53532 */
+  border-left-color: var(--color-status-danger);
 }

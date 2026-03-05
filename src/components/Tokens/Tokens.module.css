@@ -78,6 +78,24 @@
   margin: 2px 0 0;
 }
 
+.swatchUsage {
+  font-size: 10px;
+  color: var(--color-neutral-750);
+  margin: 4px 0 0;
+  line-height: 1.4;
+}
+
+.ruleBox {
+  background: var(--color-neutral-250);
+  border-left: 3px solid var(--color-brand-midnight);
+  padding: 12px 16px;
+  border-radius: var(--radius-default);
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-1000);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
 /* ---- Typography samples ---- */
 
 .typeTable {
