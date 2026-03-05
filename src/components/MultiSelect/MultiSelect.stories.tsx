@@ -6,6 +6,14 @@ const meta: Meta<typeof MultiSelect> = {
   title: 'Components/MultiSelect',
   component: MultiSelect,
   tags: ['autodocs'],
+  // Extra bottom padding so the dropdown is never clipped by the canvas
+  decorators: [
+    (Story) => (
+      <div style={{ paddingBottom: 280, minHeight: 320 }}>
+        <Story />
+      </div>
+    ),
+  ],
 }
 export default meta
 type Story = StoryObj<typeof MultiSelect>
@@ -22,13 +30,39 @@ const options = [
 export const Default: Story = {
   render: () => {
     const [val, setVal] = useState<string[]>([])
-    return <MultiSelect options={options} value={val} onChange={setVal} label="Lines of Business" placeholder="Select lines..." />
+    return (
+      <MultiSelect
+        options={options}
+        value={val}
+        onChange={setVal}
+        label="Lines of Business"
+        placeholder="Select lines..."
+      />
+    )
   },
 }
 
 export const WithSelection: Story = {
   render: () => {
     const [val, setVal] = useState(['property', 'marine'])
-    return <MultiSelect options={options} value={val} onChange={setVal} label="Lines of Business" />
+    return (
+      <MultiSelect
+        options={options}
+        value={val}
+        onChange={setVal}
+        label="Lines of Business"
+      />
+    )
   },
+}
+
+export const Disabled: Story = {
+  render: () => (
+    <MultiSelect
+      options={options}
+      value={['property']}
+      label="Lines of Business"
+      disabled
+    />
+  ),
 }
