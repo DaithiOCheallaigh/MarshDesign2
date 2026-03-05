@@ -4,10 +4,13 @@ import styles from './Tokens.module.css'
 // Source: Marsh Brand Design Guide §4 Logo (March 2026)
 // https://brand.marsh.com/document/1154#/core-guidelines/logo-1
 
+// BASE ends with '/' in both dev ('/') and prod ('/MarshDesign2/')
+const BASE = import.meta.env.BASE_URL
+
 const LOGO_VARIANTS = [
   {
     name: 'Midnight (Primary)',
-    file: '/assets/marsh-logo-rgb-midnight.svg',
+    file: `${BASE}assets/marsh-logo-rgb-midnight.svg`,
     bg: '#ffffff',
     border: '1px solid #e8e8e8',
     label: 'For use on white or very light backgrounds.',
@@ -15,7 +18,7 @@ const LOGO_VARIANTS = [
   },
   {
     name: 'Sky Blue',
-    file: '/assets/marsh-logo-rgb-sky.svg',
+    file: `${BASE}assets/marsh-logo-rgb-sky.svg`,
     bg: '#000f47',
     border: 'none',
     label: 'For use on Midnight Blue backgrounds.',
@@ -23,7 +26,7 @@ const LOGO_VARIANTS = [
   },
   {
     name: 'White (Reversed)',
-    file: '/assets/marsh-logo-rgb-white.svg',
+    file: `${BASE}assets/marsh-logo-rgb-white.svg`,
     bg: '#000f47',
     border: 'none',
     label: 'For use on dark or photographic backgrounds.',
@@ -199,7 +202,7 @@ function Logo() {
           }}
         >
           <img
-            src="/assets/marsh-logo-rgb-midnight.svg"
+            src={`${BASE}assets/marsh-logo-rgb-midnight.svg`}
             alt="Marsh logo clear space demonstration"
             style={{ width: 200, display: 'block' }}
           />
@@ -247,7 +250,7 @@ function Logo() {
               }}
             >
               <img
-                src="/assets/marsh-logo-rgb-midnight.svg"
+                src={`${BASE}assets/marsh-logo-rgb-midnight.svg`}
                 alt={s.label}
                 style={{ width: s.width, display: 'block' }}
               />

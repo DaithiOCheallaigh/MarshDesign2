@@ -11,7 +11,8 @@ import { Tabs } from '../Tabs'
 import { Select } from '../Select'
 import { LineChart, PieChart, MetricContainer } from '../Charts'
 
-const marshLogoWhite = '/assets/marsh-logo-new-white.png'
+const BASE = import.meta.env.BASE_URL
+const marshLogoWhite = `${BASE}assets/marsh-logo-new-white.png`
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
