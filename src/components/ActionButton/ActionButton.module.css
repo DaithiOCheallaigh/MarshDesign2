@@ -28,7 +28,7 @@
   box-shadow: var(--shadow-sm);
 }
 .primary:hover:not(:disabled) {
-  background: var(--color-teal);
+  background: #0b1a60;
   box-shadow: var(--shadow-md);
 }
 
@@ -37,8 +37,8 @@
   color: var(--color-gray-900);
 }
 .secondary:hover:not(:disabled) {
-  background: var(--color-gray-500);
-  color: var(--color-white);
+  background: var(--color-brand-sky);
+  color: var(--color-brand-midnight);
 }
 
 .danger {
