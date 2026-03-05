@@ -123,11 +123,11 @@ export const CommonIcons: Story = {
       },
       {
         label: 'Status',
-        icons: ['check-circle', 'error', 'warning', 'info', 'help-outline', 'visibility', 'visibility-off', 'lock', 'lock-open', 'verified'],
+        icons: ['check-circle-outline', 'error-outline', 'warning-amber', 'info', 'help-outline', 'visibility', 'visibility-off', 'lock', 'lock-open', 'verified'],
       },
       {
         label: 'Communication',
-        icons: ['mail', 'phone', 'chat-bubble-outline', 'notifications-none', 'notifications-off', 'campaign', 'contact-support'],
+        icons: ['mail-lock', 'call', 'chat-bubble-outline', 'notifications-none', 'notifications-off', 'campaign', 'contact-support'],
       },
       {
         label: 'Data',
@@ -135,7 +135,7 @@ export const CommonIcons: Story = {
       },
       {
         label: 'Files & Media',
-        icons: ['folder', 'description', 'attach-file', 'image', 'picture-as-pdf', 'cloud-upload', 'cloud-download', 'print'],
+        icons: ['folder', 'description', 'attach-file', 'image', 'picture-in-picture', 'cloud-download', 'print'],
       },
     ]
 
