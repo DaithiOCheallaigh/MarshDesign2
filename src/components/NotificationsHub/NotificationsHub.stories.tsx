@@ -718,10 +718,8 @@ const NAV: { id: Page; label: string; icon: string }[] = [
 ]
 
 function NotificationsHubApp() {
-  const [page, setPage]           = useState<Page>('dashboard')
-  const [showData, setShowData]   = useState(true)
-  const [role, setRole]           = useState('admin')
-  const [wizardOpen, setWizardOpen] = useState(false)
+  const [page, setPage]         = useState<Page>('dashboard')
+  const [showData, setShowData] = useState(true)
 
   return (
     <div style={{ display: 'flex', height: '100vh', overflow: 'hidden', fontFamily: 'var(--font-family)' }}>
@@ -780,29 +778,10 @@ function NotificationsHubApp() {
           <Switch label="Display Data" checked={showData} onChange={e => setShowData(e.target.checked)} />
 
           <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)' }}>
-            {/* Quick Setup */}
-            <Button
-              variant="secondary"
-              iconLeading={<Icon name="rocket-launch" size="sm" color="var(--color-white)" />}
-              onClick={() => setWizardOpen(true)}
-            >
-              Quick Setup
-            </Button>
-
-            {/* Role selector */}
-            <Select
-              options={[
-                { label: 'Admin',     value: 'admin' },
-                { label: 'App Owner', value: 'app_owner' },
-              ]}
-              value={role}
-              onChange={setRole}
-            />
-
             <span style={{ fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-sm)', color: 'var(--color-neutral-750)' }}>
-              Good morning, {role === 'admin' ? 'Admin' : 'App Owner'}
+              Good morning, Admin
             </span>
-            <Avatar initials={role === 'admin' ? 'A' : 'O'} size="small" />
+            <Avatar initials="A" size="small" />
           </div>
         </header>
 
@@ -815,7 +794,93 @@ function NotificationsHubApp() {
         </main>
       </div>
 
-      {/* Quick Setup Wizard dialog */}
+    </div>
+  )
+}
+
+// ─── First Time User Shell ────────────────────────────────────────────────────
+
+function NotificationsHubFirstTimeUser() {
+  const [page, setPage]           = useState<Page>('dashboard')
+  const [wizardOpen, setWizardOpen] = useState(false)
+
+  // Auto-open Quick Setup after 5 seconds to demonstrate first-time user flow
+  useEffect(() => {
+    const t = setTimeout(() => setWizardOpen(true), 5000)
+    return () => clearTimeout(t)
+  }, [])
+
+  return (
+    <div style={{ display: 'flex', height: '100vh', overflow: 'hidden', fontFamily: 'var(--font-family)' }}>
+
+      {/* ── Sidebar (same as main) ── */}
+      <aside style={{ width: 240, background: 'var(--color-brand-midnight)', display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
+        <div style={{ padding: 'var(--spacing-md)', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)' }}>
+            <div style={{ width: 32, height: 32, borderRadius: 'var(--radius-default)', background: 'var(--color-brand-sky)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <Icon name="notifications" size="sm" color="var(--color-brand-midnight)" />
+            </div>
+            <span style={{ fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-base)', fontWeight: 'var(--font-weight-medium)', color: 'var(--color-white)', lineHeight: 1.4 }}>
+              Notifications Hub
+            </span>
+          </div>
+        </div>
+
+        <nav style={{ flex: 1, padding: 'var(--spacing-sm)' }}>
+          {NAV.map(item => {
+            const active = page === item.id
+            return (
+              <button
+                key={item.id}
+                onClick={() => setPage(item.id)}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)',
+                  width: '100%', padding: 'var(--spacing-sm)',
+                  borderRadius: 'var(--radius-default)',
+                  border: 'none', cursor: 'pointer',
+                  background: active ? 'rgba(206,236,255,0.15)' : 'transparent',
+                  color: active ? 'var(--color-brand-sky)' : 'rgba(255,255,255,0.7)',
+                  fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-base)',
+                  fontWeight: active ? 'var(--font-weight-medium)' : 'var(--font-weight-regular)',
+                  marginBottom: 'var(--spacing-xs)', textAlign: 'left',
+                  transition: 'background var(--transition-fast)',
+                }}
+              >
+                <Icon name={item.icon} size="sm" color={active ? 'var(--color-brand-sky)' : 'rgba(255,255,255,0.7)'} />
+                {item.label}
+              </button>
+            )
+          })}
+        </nav>
+
+        <div style={{ padding: 'var(--spacing-md)', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+          <img src={marshLogoWhite} alt="Marsh" style={{ height: 24, width: 'auto', objectFit: 'contain', objectPosition: 'left' }} />
+        </div>
+      </aside>
+
+      {/* ── Main content ── */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+
+        {/* Clean header — no controls for first-time user */}
+        <header style={{ height: 56, borderBottom: '1px solid var(--color-neutral-250)', background: 'var(--color-white)', display: 'flex', alignItems: 'center', padding: '0 var(--spacing-lg)', flexShrink: 0 }}>
+          <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)' }}>
+            <span style={{ fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-sm)', color: 'var(--color-neutral-750)' }}>
+              Good morning, Admin
+            </span>
+            <Avatar initials="A" size="small" />
+          </div>
+        </header>
+
+        {/* Dashboard locked to skeleton state — no data yet */}
+        <main style={{ flex: 1, overflowY: 'auto', padding: 'var(--spacing-lg)', background: 'var(--color-neutral-250)' }}>
+          {page === 'dashboard'    && <DashboardPage showData={false} />}
+          {page === 'applications' && <ApplicationsPage />}
+          {page === 'events'       && <EventsPage />}
+          {page === 'logs'         && <LogsPage />}
+        </main>
+      </div>
+
+      {/* Quick Setup auto-launches after 5 s */}
       <QuickSetupWizard open={wizardOpen} onClose={() => setWizardOpen(false)} />
     </div>
   )
@@ -833,4 +898,9 @@ type Story = StoryObj
 
 export const Default: Story = {
   render: () => <NotificationsHubApp />,
+}
+
+export const FirstTimeUser: Story = {
+  name: 'First Time User',
+  render: () => <NotificationsHubFirstTimeUser />,
 }
