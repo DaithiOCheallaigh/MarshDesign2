@@ -9,7 +9,6 @@ import { Card } from '../Card'
 import { Table } from '../Table'
 import { Tabs } from '../Tabs'
 import { Select } from '../Select'
-import { Switch } from '../Switch'
 import { Dialog } from '../Dialog'
 import { IconButton } from '../IconButton'
 import { LineChart, PieChart, MetricContainer } from '../Charts'
@@ -718,8 +717,7 @@ const NAV: { id: Page; label: string; icon: string }[] = [
 ]
 
 function NotificationsHubApp() {
-  const [page, setPage]         = useState<Page>('dashboard')
-  const [showData, setShowData] = useState(true)
+  const [page, setPage] = useState<Page>('dashboard')
 
   return (
     <div style={{ display: 'flex', height: '100vh', overflow: 'hidden', fontFamily: 'var(--font-family)' }}>
@@ -773,10 +771,7 @@ function NotificationsHubApp() {
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
 
         {/* Header */}
-        <header style={{ height: 56, borderBottom: '1px solid var(--color-neutral-250)', background: 'var(--color-white)', display: 'flex', alignItems: 'center', padding: '0 var(--spacing-lg)', flexShrink: 0, gap: 'var(--spacing-sm)' }}>
-          {/* Display Data toggle */}
-          <Switch label="Display Data" checked={showData} onChange={e => setShowData(e.target.checked)} />
-
+        <header style={{ height: 56, borderBottom: '1px solid var(--color-neutral-250)', background: 'var(--color-white)', display: 'flex', alignItems: 'center', padding: '0 var(--spacing-lg)', flexShrink: 0 }}>
           <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)' }}>
             <span style={{ fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-sm)', color: 'var(--color-neutral-750)' }}>
               Good morning, Admin
@@ -787,7 +782,7 @@ function NotificationsHubApp() {
 
         {/* Page content */}
         <main style={{ flex: 1, overflowY: 'auto', padding: 'var(--spacing-lg)', background: 'var(--color-neutral-250)' }}>
-          {page === 'dashboard'    && <DashboardPage showData={showData} />}
+          {page === 'dashboard'    && <DashboardPage showData={true} />}
           {page === 'applications' && <ApplicationsPage />}
           {page === 'events'       && <EventsPage />}
           {page === 'logs'         && <LogsPage />}
