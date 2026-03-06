@@ -682,10 +682,14 @@ function LogsPage({ empty = false }: { empty?: boolean }) {
 
                 <Card title="Filter Logs" padding="medium">
                   <div style={{ display: 'flex', gap: 'var(--spacing-sm)', alignItems: 'center' }}>
-                    <div style={{ flex: 1 }}>
+                    {/* Search: manual icon overlay so padding is precise */}
+                    <div style={{ flex: 1, position: 'relative' }}>
+                      <span style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', pointerEvents: 'none', zIndex: 1 }}>
+                        <Icon name="search" size="sm" color="var(--color-neutral-750)" />
+                      </span>
                       <Input
                         placeholder="Search by recipient, event, or template…"
-                        prefix={<Icon name="search" size="sm" color="var(--color-neutral-750)" />}
+                        style={{ paddingLeft: 42 }}
                       />
                     </div>
                     <div style={{ width: 148, flexShrink: 0 }}>
