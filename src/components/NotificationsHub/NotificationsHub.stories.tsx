@@ -683,18 +683,23 @@ function LogsPage({ empty = false }: { empty?: boolean }) {
                 <Card title="Filter Logs" padding="medium">
                   <div style={{ display: 'flex', gap: 'var(--spacing-sm)', alignItems: 'center' }}>
                     <div style={{ flex: 1 }}>
-                      <Input placeholder="Search by recipient, event, or template…" />
+                      <Input
+                        placeholder="Search by recipient, event, or template…"
+                        prefix={<Icon name="search" size="sm" color="var(--color-neutral-750)" />}
+                      />
                     </div>
-                    <Select
-                      options={[
-                        { label: 'All Status', value: 'all' },
-                        { label: 'Success',    value: 'success' },
-                        { label: 'Failed',     value: 'failed' },
-                        { label: 'Pending',    value: 'warning' },
-                      ]}
-                      value={statusFilter}
-                      onChange={setStatusFilter}
-                    />
+                    <div style={{ width: 148, flexShrink: 0 }}>
+                      <Select
+                        options={[
+                          { label: 'All Status', value: 'all' },
+                          { label: 'Success',    value: 'success' },
+                          { label: 'Failed',     value: 'failed' },
+                          { label: 'Pending',    value: 'warning' },
+                        ]}
+                        value={statusFilter}
+                        onChange={setStatusFilter}
+                      />
+                    </div>
                   </div>
                 </Card>
 
