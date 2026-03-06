@@ -284,8 +284,10 @@ function DashboardPage({ showData }: { showData: boolean }) {
 
 type AppRow = (typeof initialApps)[0] & { status: string }
 
-function ApplicationsPage() {
-  const [apps, setApps] = useState<AppRow[]>(initialApps)
+function ApplicationsPage({ empty = false }: { empty?: boolean }) {
+  const [apps, setApps] = useState<AppRow[]>(empty ? [] : initialApps)
+  const [registerOpen, setRegisterOpen] = useState(false)
+  const [regForm, setRegForm] = useState({ name: '', description: '', perms: [] as string[] })
 
   const toggleStatus = (name: string) =>
     setApps(prev => prev.map(a => a.name === name ? { ...a, status: a.status === 'active' ? 'inactive' : 'active' } : a))
@@ -342,7 +344,7 @@ function ApplicationsPage() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-lg)' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <PageHeading title="Application Registration" subtitle="Manage client applications, unique IDs, and access permissions" />
-        <Button variant="secondary" iconLeading={<Icon name="add" size="sm" color="var(--color-white)" />}>
+        <Button variant="secondary" iconLeading={<Icon name="add" size="sm" color="var(--color-white)" />} onClick={() => setRegisterOpen(true)}>
           Register Application
         </Button>
       </div>
@@ -360,11 +362,109 @@ function ApplicationsPage() {
         <MetricContainer label="Active Applications"   value={String(active)}      icon={<Icon name="check-circle-outline" size="sm" color="var(--color-neutral-750)" />} />
         <MetricContainer label="Inactive Applications" value={String(inactive)}    icon={<Icon name="error-outline"        size="sm" color="var(--color-neutral-750)" />} />
       </div>
+
+      {/* Register Application Dialog */}
+      <Dialog
+        open={registerOpen}
+        title="Register New Application"
+        onClose={() => { setRegisterOpen(false); setRegForm({ name: '', description: '', perms: [] }) }}
+        footer={
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
+            <Button variant="ghost" onClick={() => { setRegisterOpen(false); setRegForm({ name: '', description: '', perms: [] }) }}>Cancel</Button>
+            <Button
+              variant="secondary"
+              disabled={!regForm.name}
+              onClick={() => {
+                const newApp: AppRow = {
+                  name: regForm.name,
+                  desc: regForm.description || 'Newly registered application',
+                  id: `app_live_${Math.random().toString(36).slice(2, 6)}••••${Math.random().toString(36).slice(2, 6)}`,
+                  status: 'active',
+                  perms: regForm.perms,
+                  lastUsed: 'Just now',
+                }
+                setApps(prev => [...prev, newApp])
+                setRegisterOpen(false)
+                setRegForm({ name: '', description: '', perms: [] })
+              }}
+            >
+              Register Application
+            </Button>
+          </div>
+        }
+      >
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div>
+            <label style={{ display: 'block', fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-sm)', fontWeight: 'var(--font-weight-medium)', color: 'var(--color-brand-midnight)', marginBottom: 6 }}>
+              Application Name <span style={{ color: 'var(--color-status-danger)' }}>*</span>
+            </label>
+            <Input
+              placeholder="e.g. Certificates, Milestone Management"
+              value={regForm.name}
+              onChange={e => setRegForm(f => ({ ...f, name: e.target.value }))}
+            />
+          </div>
+          <div>
+            <label style={{ display: 'block', fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-sm)', fontWeight: 'var(--font-weight-medium)', color: 'var(--color-brand-midnight)', marginBottom: 6 }}>
+              Description
+            </label>
+            <TextArea
+              placeholder="Describe what this application does and how it will use notifications…"
+              value={regForm.description}
+              onChange={e => setRegForm(f => ({ ...f, description: e.target.value }))}
+            />
+          </div>
+          <div>
+            <label style={{ display: 'block', fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-sm)', fontWeight: 'var(--font-weight-medium)', color: 'var(--color-brand-midnight)', marginBottom: 8 }}>
+              Permissions
+            </label>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              {[
+                { key: 'send_email',       label: 'Send Email' },
+                { key: 'send_sms',         label: 'Send SMS' },
+                { key: 'send_push',        label: 'Send Push' },
+                { key: 'manage_templates', label: 'Manage Templates' },
+              ].map(perm => {
+                const selected = regForm.perms.includes(perm.key)
+                return (
+                  <button
+                    key={perm.key}
+                    type="button"
+                    onClick={() => setRegForm(f => ({
+                      ...f,
+                      perms: selected ? f.perms.filter(p => p !== perm.key) : [...f.perms, perm.key],
+                    }))}
+                    style={{
+                      padding: '6px 14px',
+                      borderRadius: 'var(--radius-full)',
+                      border: `1.5px solid ${selected ? 'var(--color-brand-midnight)' : 'var(--color-gray-100)'}`,
+                      background: selected ? 'var(--color-brand-midnight)' : 'var(--color-white)',
+                      color: selected ? 'var(--color-white)' : 'var(--color-brand-midnight)',
+                      fontFamily: 'var(--font-family)',
+                      fontSize: 'var(--font-size-sm)',
+                      fontWeight: 'var(--font-weight-medium)',
+                      cursor: 'pointer',
+                      transition: 'all 0.15s',
+                    }}
+                  >
+                    {perm.label}
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+      </Dialog>
     </div>
   )
 }
 
-function EventsPage() {
+function EventsPage({ empty = false }: { empty?: boolean }) {
+  const [eventsData, setEventsData] = useState(empty ? [] as typeof events : events)
+  const [templatesData] = useState(empty ? [] as typeof templates : templates)
+  const [createEventOpen, setCreateEventOpen] = useState(false)
+  const [createForm, setCreateForm] = useState({ name: '', application: '', description: '' })
+
   const eventCols = [
     { key: 'name', header: 'Event Name', render: (r: (typeof events)[0]) => <CodeChip>{r.name}</CodeChip> },
     {
@@ -417,7 +517,7 @@ function EventsPage() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-lg)' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <PageHeading title="Events & Templates" subtitle="Register notification events and create customisable templates" />
-        <Button variant="secondary" iconLeading={<Icon name="add" size="sm" color="var(--color-white)" />}>
+        <Button variant="secondary" iconLeading={<Icon name="add" size="sm" color="var(--color-white)" />} onClick={() => setCreateEventOpen(true)}>
           Create Event
         </Button>
       </div>
@@ -432,7 +532,7 @@ function EventsPage() {
                 <Card title="Registered Events" padding="none">
                   <Table
                     columns={eventCols as Parameters<typeof Table>[0]['columns']}
-                    rows={events as unknown as Parameters<typeof Table>[0]['rows']}
+                    rows={eventsData as unknown as Parameters<typeof Table>[0]['rows']}
                     keyField="name"
                   />
                 </Card>
@@ -447,7 +547,7 @@ function EventsPage() {
                 <Card title="Notification Templates" padding="none">
                   <Table
                     columns={templateCols as Parameters<typeof Table>[0]['columns']}
-                    rows={templates as unknown as Parameters<typeof Table>[0]['rows']}
+                    rows={templatesData as unknown as Parameters<typeof Table>[0]['rows']}
                     keyField="name"
                   />
                 </Card>
@@ -456,16 +556,86 @@ function EventsPage() {
           },
         ]}
       />
+
+      {/* Create Event Dialog */}
+      <Dialog
+        open={createEventOpen}
+        title="Create New Event"
+        onClose={() => { setCreateEventOpen(false); setCreateForm({ name: '', application: '', description: '' }) }}
+        footer={
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
+            <Button variant="ghost" onClick={() => { setCreateEventOpen(false); setCreateForm({ name: '', application: '', description: '' }) }}>Cancel</Button>
+            <Button
+              variant="secondary"
+              disabled={!createForm.name || !createForm.application}
+              onClick={() => {
+                const newEvent = {
+                  name: createForm.name,
+                  desc: createForm.description || 'No description provided',
+                  app: createForm.application,
+                  templates: 0,
+                  status: 'active',
+                }
+                setEventsData(prev => [...prev, newEvent])
+                setCreateEventOpen(false)
+                setCreateForm({ name: '', application: '', description: '' })
+              }}
+            >
+              Create Event
+            </Button>
+          </div>
+        }
+      >
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div>
+            <label style={{ display: 'block', fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-sm)', fontWeight: 'var(--font-weight-medium)', color: 'var(--color-brand-midnight)', marginBottom: 6 }}>
+              Event Name <span style={{ color: 'var(--color-status-danger)' }}>*</span>
+            </label>
+            <Input
+              placeholder="e.g. user.registration"
+              value={createForm.name}
+              onChange={e => setCreateForm(f => ({ ...f, name: e.target.value }))}
+            />
+            <p style={{ fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-xs)', color: 'var(--color-neutral-750)', margin: '4px 0 0' }}>
+              Use lowercase dot notation: e.g. order.confirmed
+            </p>
+          </div>
+          <div>
+            <label style={{ display: 'block', fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-sm)', fontWeight: 'var(--font-weight-medium)', color: 'var(--color-brand-midnight)', marginBottom: 6 }}>
+              Application <span style={{ color: 'var(--color-status-danger)' }}>*</span>
+            </label>
+            <Select
+              options={initialApps.map(a => ({ value: a.name, label: a.name }))}
+              value={createForm.application}
+              onChange={v => setCreateForm(f => ({ ...f, application: v }))}
+              placeholder="Select an application…"
+            />
+          </div>
+          <div>
+            <label style={{ display: 'block', fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-sm)', fontWeight: 'var(--font-weight-medium)', color: 'var(--color-brand-midnight)', marginBottom: 6 }}>
+              Description
+            </label>
+            <TextArea
+              placeholder="Describe when this event is triggered…"
+              value={createForm.description}
+              onChange={e => setCreateForm(f => ({ ...f, description: e.target.value }))}
+            />
+          </div>
+        </div>
+      </Dialog>
     </div>
   )
 }
 
-function LogsPage() {
+function LogsPage({ empty = false }: { empty?: boolean }) {
   const [statusFilter, setStatusFilter] = useState('all')
 
+  const logsSource = empty ? [] : deliveryLogs
+  const auditSource = empty ? [] : auditTrail
+
   const filtered = statusFilter === 'all'
-    ? deliveryLogs
-    : deliveryLogs.filter(l => l.status === statusFilter || (statusFilter === 'failed' && l.status === 'danger'))
+    ? logsSource
+    : logsSource.filter(l => l.status === statusFilter || (statusFilter === 'failed' && l.status === 'danger'))
 
   const logCols = [
     {
@@ -504,10 +674,10 @@ function LogsPage() {
             content: (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-md)', marginTop: 'var(--spacing-md)' }}>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'var(--spacing-md)' }}>
-                  <MetricContainer label="Total Deliveries" value="8" description="Last 24 hours"       icon={<Icon name="list-alt"             size="sm" color="var(--color-neutral-750)" />} />
-                  <MetricContainer label="Successful"       value="5" description="62.5% success rate"  trend="up"   trendValue="Success"           icon={<Icon name="check-circle-outline" size="sm" color="var(--color-neutral-750)" />} />
-                  <MetricContainer label="Failed"           value="2" trend="down" trendValue="Requires attention"                                    icon={<Icon name="error-outline"        size="sm" color="var(--color-neutral-750)" />} />
-                  <MetricContainer label="Pending"          value="1" description="In progress"         icon={<Icon name="warning-amber"         size="sm" color="var(--color-neutral-750)" />} />
+                  <MetricContainer label="Total Deliveries" value={String(logsSource.length)} description="Last 24 hours" icon={<Icon name="list-alt" size="sm" color="var(--color-neutral-750)" />} />
+                  <MetricContainer label="Successful" value={String(logsSource.filter(l => l.status === 'success').length)} description={logsSource.length ? `${Math.round(logsSource.filter(l => l.status === 'success').length / logsSource.length * 100)}% success rate` : 'No data yet'} trend="up" trendValue="Success" icon={<Icon name="check-circle-outline" size="sm" color="var(--color-neutral-750)" />} />
+                  <MetricContainer label="Failed" value={String(logsSource.filter(l => l.status === 'danger').length)} trend="down" trendValue="Requires attention" icon={<Icon name="error-outline" size="sm" color="var(--color-neutral-750)" />} />
+                  <MetricContainer label="Pending" value={String(logsSource.filter(l => l.status === 'warning').length)} description="In progress" icon={<Icon name="warning-amber" size="sm" color="var(--color-neutral-750)" />} />
                 </div>
 
                 <Card title="Filter Logs" padding="medium">
@@ -545,10 +715,13 @@ function LogsPage() {
               <div style={{ marginTop: 'var(--spacing-md)' }}>
                 <Card title="System Audit Trail" padding="medium">
                   <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    {auditTrail.map((entry, i) => (
-                      <div key={i} style={{ display: 'flex', gap: 16, paddingBottom: i < auditTrail.length - 1 ? 20 : 0, position: 'relative' }}>
+                    {auditSource.length === 0 && (
+                      <p style={{ fontFamily: 'var(--font-family)', fontSize: 'var(--font-size-sm)', color: 'var(--color-neutral-750)', margin: 0 }}>No audit entries yet.</p>
+                    )}
+                    {auditSource.map((entry, i) => (
+                      <div key={i} style={{ display: 'flex', gap: 16, paddingBottom: i < auditSource.length - 1 ? 20 : 0, position: 'relative' }}>
                         {/* Timeline connector */}
-                        {i < auditTrail.length - 1 && (
+                        {i < auditSource.length - 1 && (
                           <div style={{ position: 'absolute', left: 10, top: 22, bottom: 0, width: 2, background: 'var(--color-neutral-250)' }} />
                         )}
                         {/* Dot */}
@@ -869,9 +1042,9 @@ function NotificationsHubFirstTimeUser() {
         {/* Dashboard locked to skeleton state — no data yet */}
         <main style={{ flex: 1, overflowY: 'auto', padding: 'var(--spacing-lg)', background: 'var(--color-neutral-250)' }}>
           {page === 'dashboard'    && <DashboardPage showData={false} />}
-          {page === 'applications' && <ApplicationsPage />}
-          {page === 'events'       && <EventsPage />}
-          {page === 'logs'         && <LogsPage />}
+          {page === 'applications' && <ApplicationsPage empty />}
+          {page === 'events'       && <EventsPage empty />}
+          {page === 'logs'         && <LogsPage empty />}
         </main>
       </div>
 
