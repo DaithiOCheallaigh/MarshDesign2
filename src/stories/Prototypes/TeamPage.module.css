@@ -77,13 +77,13 @@
 }
 
 .badgeAdmin {
-  background: #ede9fe;
-  color: #7c3aed;
+  background: var(--color-brand-midnight);
+  color: var(--color-white);
 }
 
 .badgeUser {
-  background: #e0f2fe;
-  color: #0369a1;
+  background: var(--color-brand-sky);
+  color: var(--color-brand-midnight);
 }
 
 .roleSelect {

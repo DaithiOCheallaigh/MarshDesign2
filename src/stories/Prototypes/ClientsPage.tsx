@@ -72,12 +72,12 @@ interface TemplateCard {
 }
 
 const TEMPLATES: TemplateCard[] = [
-  { id: '1', name: 'Banking Compliance Framework', category: 'Banking', groups: 2, milestones: 4, accent: '#7c3aed' },
-  { id: '2', name: 'Business Intelligence Platform', category: 'Enterprise', groups: 2, milestones: 4, accent: '#dc2626' },
-  { id: '3', name: 'Document Processing Pipeline', category: 'Enterprise', groups: 1, milestones: 2, accent: '#16a34a' },
-  { id: '4', name: 'Healthcare Data Analytics', category: 'Healthcare', groups: 2, milestones: 4, accent: '#16a34a' },
-  { id: '5', name: 'Retail Inventory Automation', category: 'Retail', groups: 2, milestones: 4, accent: '#db2777' },
-  { id: '6', name: 'Risk Management & Trading', category: 'Finance', groups: 2, milestones: 5, accent: '#0891b2' },
+  { id: '1', name: 'Banking Compliance Framework', category: 'Banking', groups: 2, milestones: 4, accent: '#000f47' },
+  { id: '2', name: 'Business Intelligence Platform', category: 'Enterprise', groups: 2, milestones: 4, accent: '#0b4bff' },
+  { id: '3', name: 'Document Processing Pipeline', category: 'Enterprise', groups: 1, milestones: 2, accent: '#14853d' },
+  { id: '4', name: 'Healthcare Data Analytics', category: 'Healthcare', groups: 2, milestones: 4, accent: '#14853d' },
+  { id: '5', name: 'Retail Inventory Automation', category: 'Retail', groups: 2, milestones: 4, accent: '#c53532' },
+  { id: '6', name: 'Risk Management & Trading', category: 'Finance', groups: 2, milestones: 5, accent: '#cb7e03' },
 ]
 
 function SortHeader({ label }: { label: string }) {

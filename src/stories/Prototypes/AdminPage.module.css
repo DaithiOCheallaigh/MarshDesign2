@@ -132,7 +132,7 @@
 }
 
 .userTable tr:hover td {
-  background: #f8faff;
+  background: var(--color-brand-sky);
 }
 
 .userCell {
@@ -174,8 +174,8 @@
 }
 
 .badgeUser {
-  background: #e0f2fe;
-  color: #0369a1;
+  background: var(--color-brand-sky);
+  color: var(--color-brand-midnight);
 }
 
 .muted {

@@ -81,7 +81,7 @@
 .kpiIconBlue    { background: var(--color-status-info-bg);    color: var(--color-blue-750); }
 .kpiIconGreen   { background: var(--color-status-success-bg); color: var(--color-status-success-text); }
 .kpiIconAmber   { background: var(--color-status-warning-bg); color: var(--color-status-warning-text); }
-.kpiIconNavy    { background: #e8eaf6;                        color: var(--color-brand-midnight); }
+.kpiIconNavy    { background: var(--color-brand-sky);          color: var(--color-brand-midnight); }
 
 .kpiValue {
   font-size: 32px;
@@ -193,7 +193,7 @@
 }
 
 .recentTable tr:hover td {
-  background: #f8faff;
+  background: var(--color-brand-sky);
 }
 
 .eventLink {
@@ -208,7 +208,7 @@
 
 /* ---- Status / Priority mini badges ---- */
 
-.badgeHigh     { display: inline-flex; padding: 1px 8px; border-radius: 2px; font-size: 11px; font-weight: 500; background: #fff0ec; color: #e05c2a; }
+.badgeHigh     { display: inline-flex; padding: 1px 8px; border-radius: 2px; font-size: 11px; font-weight: 500; background: var(--color-status-danger-bg); color: var(--color-status-danger); }
 .badgeMedium   { display: inline-flex; padding: 1px 8px; border-radius: 2px; font-size: 11px; font-weight: 500; background: var(--color-status-warning-bg); color: var(--color-status-warning-text); }
 .badgeNS       { display: inline-flex; padding: 1px 8px; border-radius: 2px; font-size: 11px; border: 1px solid #d1d5db; color: var(--color-neutral-750); }
 .badgeIP       { display: inline-flex; padding: 1px 8px; border-radius: 2px; font-size: 11px; font-weight: 500; background: var(--color-status-warning-bg); color: var(--color-status-warning-text); }

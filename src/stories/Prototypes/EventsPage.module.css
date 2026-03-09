@@ -287,8 +287,8 @@ table.eventsTable td.checkboxCol {
   border-radius: var(--radius-subtle);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
-  background: #fff0ec;
-  color: #e05c2a;
+  background: var(--color-status-danger-bg);
+  color: var(--color-status-danger);
   white-space: nowrap;
 }
 
@@ -571,11 +571,11 @@ table.eventsTable td.checkboxCol {
 }
 
 .templateTile:hover {
-  border-color: #93c5fd;
+  border-color: var(--color-brand-sky);
 }
 
 .templateTileSelected {
-  border-color: #1565c0;
+  border-color: var(--color-blue-750);
   border-width: 2px;
 }
 
@@ -716,7 +716,7 @@ table.eventsTable td.checkboxCol {
   align-items: flex-start;
   gap: var(--spacing-sm);
   padding: var(--spacing-sm) var(--spacing-md);
-  background: #f8faff;
+  background: var(--color-brand-sky);
   border: 1px solid #e5e7eb;
   border-radius: var(--radius-default);
   margin-bottom: var(--spacing-md);

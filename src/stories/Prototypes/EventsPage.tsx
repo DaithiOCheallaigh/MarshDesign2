@@ -25,37 +25,37 @@ const TEMPLATE_OPTIONS: TemplateOption[] = [
     id: '1', name: 'Banking Compliance Framework',
     description: 'Digital banking regulatory compliance with automated audit trails, KYC/AML processes,…',
     category: 'Compliance & Regulatory', milestones: 4, duration: '5 months',
-    icon: 'shield', iconColor: '#16a34a',
+    icon: 'shield', iconColor: '#14853d',
   },
   {
     id: '2', name: 'Business Intelligence Platform',
     description: 'Comprehensive BI solution with data warehousing, visualization dashboards, and…',
     category: 'Data Warehousing', milestones: 4, duration: '4 months',
-    icon: 'addchart', iconColor: '#d97706',
+    icon: 'addchart', iconColor: '#cb7e03',
   },
   {
     id: '3', name: 'Document Processing Pipeline',
     description: 'Automated document intake, OCR processing, classification, and structured data extraction…',
     category: 'Document Management', milestones: 2, duration: '3 months',
-    icon: 'inventory', iconColor: '#d97706',
+    icon: 'inventory', iconColor: '#cb7e03',
   },
   {
     id: '4', name: 'Healthcare Data Analytics',
     description: 'Patient data analytics platform with FHIR compliance, reporting capabilities, and secur…',
     category: 'Healthcare Analytics', milestones: 4, duration: '4 months',
-    icon: 'trending-up', iconColor: '#0891b2',
+    icon: 'trending-up', iconColor: '#0b4bff',
   },
   {
     id: '5', name: 'Retail Inventory Automation',
     description: 'End-to-end retail inventory management with real-time tracking and demand forecasting…',
     category: 'Retail Operations', milestones: 4, duration: '3 months',
-    icon: 'inventory-2', iconColor: '#7c3aed',
+    icon: 'inventory-2', iconColor: '#000f47',
   },
   {
     id: '6', name: 'Risk Management & Trading',
     description: 'Quantitative risk analysis and trading platform with real-time market data integration…',
     category: 'Finance & Trading', milestones: 5, duration: '6 months',
-    icon: 'account-balance', iconColor: '#1565c0',
+    icon: 'account-balance', iconColor: '#0b4bff',
   },
 ]
 
@@ -162,7 +162,7 @@ function AddEventDialog({
                     {selectedTemplate === tpl.id && (
                       <span className={styles.templateCheck}>
                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                          <circle cx="7" cy="7" r="7" fill="#1565c0" />
+                          <circle cx="7" cy="7" r="7" fill="#0b4bff" />
                           <path d="M4 7l2 2 4-4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       </span>

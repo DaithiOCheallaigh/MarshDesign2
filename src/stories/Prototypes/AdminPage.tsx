@@ -3,11 +3,11 @@ import { Icon } from '../../components/Icon'
 import styles from './AdminPage.module.css'
 
 const USERS = [
-  { id: '1', username: 'davekellydesign', role: 'admin', joined: 'Jan 16, 2026', initials: 'D', color: '#1565c0' },
-  { id: '2', username: 'Dave', role: 'admin', joined: 'Jan 16, 2026', initials: 'D', color: '#334155' },
-  { id: '3', username: 'email', role: 'user', joined: 'Jan 20, 2026', initials: 'E', color: '#1565c0' },
-  { id: '4', username: 'example', role: 'admin', joined: 'Jan 20, 2026', initials: 'E', color: '#1565c0' },
-  { id: '5', username: 'nicola.ocallaghan', role: 'user', joined: 'Jan 20, 2026', initials: 'N', color: '#1565c0' },
+  { id: '1', username: 'davekellydesign', role: 'admin', joined: 'Jan 16, 2026', initials: 'D', color: '#0b4bff' },
+  { id: '2', username: 'Dave', role: 'admin', joined: 'Jan 16, 2026', initials: 'D', color: '#000f47' },
+  { id: '3', username: 'email', role: 'user', joined: 'Jan 20, 2026', initials: 'E', color: '#0b4bff' },
+  { id: '4', username: 'example', role: 'admin', joined: 'Jan 20, 2026', initials: 'E', color: '#0b4bff' },
+  { id: '5', username: 'nicola.ocallaghan', role: 'user', joined: 'Jan 20, 2026', initials: 'N', color: '#0b4bff' },
 ]
 
 function StatCard({
