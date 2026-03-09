@@ -101,7 +101,7 @@
 .sidebarNav {
   display: flex;
   flex-direction: column;
-  padding: var(--spacing-sm) 0;
+  padding: var(--spacing-sm);
   flex: 1;
 }
 
@@ -109,36 +109,36 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px var(--spacing-md);
+  padding: 10px var(--spacing-sm);
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-regular);
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
   border: none;
   background: none;
   width: 100%;
   text-align: left;
   transition: background 0.15s, color 0.15s;
-  border-radius: 0;
+  border-radius: var(--radius-default);
   text-decoration: none;
   font-family: var(--font-family);
   line-height: 1.4;
+  margin-bottom: var(--spacing-xs);
 }
 
 .navItem:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--color-white);
+  background: rgba(206, 236, 255, 0.08);
+  color: var(--color-brand-sky);
 }
 
 .navItemActive {
-  background: var(--color-blue-750);
-  color: var(--color-white);
+  background: rgba(206, 236, 255, 0.15);
+  color: var(--color-brand-sky);
   font-weight: var(--font-weight-medium);
 }
 
 .navItemActive:hover {
-  background: var(--color-blue-750);
-  opacity: 0.88;
+  background: rgba(206, 236, 255, 0.15);
 }
 
 .navBadge {
