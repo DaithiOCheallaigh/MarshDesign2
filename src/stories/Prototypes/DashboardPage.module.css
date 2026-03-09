@@ -1,0 +1,297 @@
+/* ==========================================================================
+   Dashboard Page — Marsh Client Profile Prototype
+   ========================================================================== */
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-lg);
+}
+
+.pageTitleGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.pageTitleGroup h1 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-brand-midnight);
+  margin: 0;
+}
+
+.subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-750);
+  margin-top: 2px;
+}
+
+.dateBadge {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-750);
+  background: var(--color-white);
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius-default);
+  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ---- KPI Row ---- */
+
+.kpiRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.kpiCard {
+  background: var(--color-white);
+  border-radius: var(--radius-soft);
+  border: 1px solid #e5e7eb;
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.kpiLabel {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-750);
+  font-weight: var(--font-weight-regular);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kpiIconWrap {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-default);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.kpiIconBlue    { background: var(--color-status-info-bg);    color: var(--color-blue-750); }
+.kpiIconGreen   { background: var(--color-status-success-bg); color: var(--color-status-success-text); }
+.kpiIconAmber   { background: var(--color-status-warning-bg); color: var(--color-status-warning-text); }
+.kpiIconNavy    { background: #e8eaf6;                        color: var(--color-brand-midnight); }
+
+.kpiValue {
+  font-size: 32px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-brand-midnight);
+  line-height: 1.1;
+}
+
+.kpiFooter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-size-sm);
+}
+
+.trendUp   { display: flex; align-items: center; gap: 3px; color: var(--color-status-success-text); font-weight: var(--font-weight-medium); }
+.trendDown { display: flex; align-items: center; gap: 3px; color: var(--color-status-danger);       font-weight: var(--font-weight-medium); }
+.trendNote { color: var(--color-neutral-750); }
+
+/* ---- Charts grid ---- */
+
+.chartsRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.chartsRowThree {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.chartCard {
+  background: var(--color-white);
+  border-radius: var(--radius-soft);
+  border: 1px solid #e5e7eb;
+  padding: var(--spacing-md);
+}
+
+.chartCardTitle {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-brand-midnight);
+  margin: 0 0 var(--spacing-md);
+}
+
+.chartCardSubtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-750);
+  margin: -10px 0 var(--spacing-md);
+  display: block;
+}
+
+/* ---- Gauge row ---- */
+
+.gaugeRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: var(--spacing-sm) 0;
+  gap: var(--spacing-md);
+}
+
+.gaugeSingle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.gaugeTitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-750);
+  text-align: center;
+}
+
+/* ---- Recent Events mini-table ---- */
+
+.recentTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family);
+}
+
+.recentTable th {
+  padding: 6px 8px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-750);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.recentTable td {
+  padding: 10px 8px;
+  vertical-align: middle;
+  border-bottom: 1px solid #f3f4f6;
+  color: var(--color-neutral-1000);
+}
+
+.recentTable tr:last-child td {
+  border-bottom: none;
+}
+
+.recentTable tr:hover td {
+  background: #f8faff;
+}
+
+.eventLink {
+  color: var(--color-blue-750);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+}
+
+.eventLink:hover {
+  text-decoration: underline;
+}
+
+/* ---- Status / Priority mini badges ---- */
+
+.badgeHigh     { display: inline-flex; padding: 1px 8px; border-radius: 2px; font-size: 11px; font-weight: 500; background: #fff0ec; color: #e05c2a; }
+.badgeMedium   { display: inline-flex; padding: 1px 8px; border-radius: 2px; font-size: 11px; font-weight: 500; background: var(--color-status-warning-bg); color: var(--color-status-warning-text); }
+.badgeNS       { display: inline-flex; padding: 1px 8px; border-radius: 2px; font-size: 11px; border: 1px solid #d1d5db; color: var(--color-neutral-750); }
+.badgeIP       { display: inline-flex; padding: 1px 8px; border-radius: 2px; font-size: 11px; font-weight: 500; background: var(--color-status-warning-bg); color: var(--color-status-warning-text); }
+.badgeDone     { display: inline-flex; padding: 1px 8px; border-radius: 2px; font-size: 11px; font-weight: 500; background: var(--color-status-success-bg); color: var(--color-status-success-text); }
+
+/* ---- Bottom row: clients + activity ---- */
+
+.bottomRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+}
+
+.clientList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.clientListItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 0;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: var(--font-size-sm);
+  gap: var(--spacing-sm);
+}
+
+.clientListItem:last-child {
+  border-bottom: none;
+}
+
+.clientName {
+  color: var(--color-blue-750);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.clientMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+.clientMetaItem {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-750);
+  white-space: nowrap;
+}
+
+.clientMetaItemBlue {
+  font-size: var(--font-size-sm);
+  color: var(--color-blue-750);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
+.sectionViewAll {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--font-size-sm);
+  color: var(--color-blue-750);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-family);
+  padding: 0;
+  margin-top: var(--spacing-sm);
+  transition: opacity 0.12s;
+}
+
+.sectionViewAll:hover { opacity: 0.75; }
+
+.cardFooter {
+  border-top: 1px solid #f3f4f6;
+  padding-top: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+}

@@ -1,0 +1,281 @@
+/* ==========================================================================
+   Clients Page — Marsh Client Profile Prototype
+   ========================================================================== */
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-lg);
+}
+
+.pageTitleGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.pageIcon {
+  color: var(--color-brand-midnight);
+}
+
+.pageTitleGroup h1 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-brand-midnight);
+  margin: 0;
+}
+
+/* ---- Tab + search row ---- */
+
+.tabRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-md);
+}
+
+/* ---- Filter row ---- */
+
+.filterRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.filterBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-brand-midnight);
+  background: var(--color-white);
+  border: 1px solid #d1d5db;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+
+.filterBtn:hover {
+  border-color: var(--color-blue-750);
+  background: var(--color-brand-sky);
+}
+
+/* ---- Table Card ---- */
+
+.tableCard {
+  background: var(--color-white);
+  border-radius: var(--radius-soft);
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+}
+
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table.clientsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+}
+
+table.clientsTable thead tr {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+table.clientsTable th {
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-750);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: var(--color-white);
+}
+
+table.clientsTable tbody tr {
+  border-bottom: 1px solid #f3f4f6;
+  transition: background 0.12s;
+}
+
+table.clientsTable tbody tr:last-child {
+  border-bottom: none;
+}
+
+table.clientsTable tbody tr:hover {
+  background: #f8faff;
+}
+
+table.clientsTable td {
+  padding: 14px 16px;
+  vertical-align: middle;
+  color: var(--color-neutral-1000);
+}
+
+.clientName {
+  color: var(--color-blue-750);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.clientName:hover {
+  text-decoration: underline;
+}
+
+.numberLink {
+  color: var(--color-blue-750);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.numberLink:hover {
+  text-decoration: underline;
+}
+
+.muted {
+  color: var(--color-neutral-750);
+}
+
+.sortIcon {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  cursor: pointer;
+}
+
+.sortIconArrows {
+  opacity: 0.4;
+}
+
+.actionDots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: var(--radius-default);
+  color: var(--color-neutral-750);
+  font-size: 18px;
+  transition: background 0.12s;
+  font-weight: bold;
+  line-height: 1;
+  letter-spacing: 1px;
+}
+
+.actionDots:hover {
+  background: var(--color-neutral-250);
+  color: var(--color-brand-midnight);
+}
+
+/* ---- Pagination ---- */
+
+.tableFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-top: 1px solid #e5e7eb;
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-750);
+}
+
+.paginationControls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.paginationBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius-default);
+  background: var(--color-white);
+  cursor: pointer;
+  color: var(--color-neutral-750);
+  transition: border-color 0.12s;
+}
+
+.paginationBtn:hover:not(:disabled) {
+  border-color: var(--color-blue-750);
+  color: var(--color-brand-midnight);
+}
+
+.paginationBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pageSelect {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-750);
+}
+
+.pageSelectInput {
+  width: 40px;
+  padding: 2px 4px;
+  border: 1px solid #d1d5db;
+  border-radius: var(--radius-default);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family);
+  text-align: center;
+  color: var(--color-brand-midnight);
+}
+
+.perPageGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-750);
+}
+
+.perPageSelect {
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family);
+  padding: 2px 6px;
+  border: 1px solid #d1d5db;
+  border-radius: var(--radius-default);
+  background: var(--color-white);
+  color: var(--color-brand-midnight);
+  cursor: pointer;
+}
+
+.searchClientBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-size-sm);
+  color: var(--color-blue-750);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-family);
+  padding: 6px 0;
+  transition: opacity 0.12s;
+}
+
+.searchClientBtn:hover {
+  opacity: 0.75;
+}
