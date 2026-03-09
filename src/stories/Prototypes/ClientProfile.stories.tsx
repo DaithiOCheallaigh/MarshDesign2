@@ -2,21 +2,31 @@ import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { AppShell, type ActivePage } from './AppShell'
 import { DashboardPage } from './DashboardPage'
-import { EventsPage } from './EventsPage'
+import { EventsPage, type EventRow } from './EventsPage'
 import { ClientsPage } from './ClientsPage'
 import { TeamPage } from './TeamPage'
 import { AdminPage } from './AdminPage'
+import { MilestonesPage } from './MilestonesPage'
 
 // Wrapper component to handle navigation state
 function ClientProfileApp({ defaultPage = 'dashboard' }: { defaultPage?: ActivePage }) {
   const [activePage, setActivePage] = useState<ActivePage>(defaultPage)
+  const [selectedEvent, setSelectedEvent] = useState<EventRow | null>(null)
+
+  function handleNavigate(page: ActivePage) {
+    setSelectedEvent(null)
+    setActivePage(page)
+  }
 
   function renderPage() {
+    if (activePage === 'events' && selectedEvent) {
+      return <MilestonesPage event={selectedEvent} onBack={() => setSelectedEvent(null)} />
+    }
     switch (activePage) {
       case 'dashboard':
         return <DashboardPage />
       case 'events':
-        return <EventsPage />
+        return <EventsPage onViewMilestones={setSelectedEvent} />
       case 'clients':
         return <ClientsPage defaultTab="my-clients" />
       case 'templates':
@@ -31,7 +41,7 @@ function ClientProfileApp({ defaultPage = 'dashboard' }: { defaultPage?: ActiveP
   }
 
   return (
-    <AppShell activePage={activePage} onNavigate={setActivePage}>
+    <AppShell activePage={activePage} onNavigate={handleNavigate}>
       {renderPage()}
     </AppShell>
   )

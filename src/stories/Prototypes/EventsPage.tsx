@@ -278,7 +278,7 @@ function AddEventDialog({
 type Priority = 'High' | 'Medium' | 'Low'
 type EventStatus = 'Not Started' | 'In Progress' | 'Complete - On Time' | 'Complete - Ahead'
 
-interface EventRow {
+export interface EventRow {
   id: string
   template: string
   name: string
@@ -398,7 +398,11 @@ function FilterButton({ label }: FilterButtonProps) {
   )
 }
 
-export function EventsPage() {
+interface EventsPageProps {
+  onViewMilestones?: (event: EventRow) => void
+}
+
+export function EventsPage({ onViewMilestones }: EventsPageProps = {}) {
   const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set())
   const [projectType, setProjectType] = useState<string>('')
   const [search, setSearch] = useState('')
@@ -567,7 +571,12 @@ export function EventsPage() {
                       <button type="button" className={[styles.actionIconBtn, styles.danger].join(' ')} aria-label="Delete">
                         <Icon name="delete" size={16} />
                       </button>
-                      <button type="button" className={[styles.actionIconBtn, styles.expandBtn].join(' ')} aria-label="Expand">
+                      <button
+                        type="button"
+                        className={[styles.actionIconBtn, styles.expandBtn].join(' ')}
+                        aria-label="View milestones"
+                        onClick={() => onViewMilestones?.(row)}
+                      >
                         <svg width="6" height="10" viewBox="0 0 6 10" fill="none">
                           <path d="M1 1L5 5L1 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
