@@ -4,6 +4,8 @@ import { AppShell, type ActivePage } from './AppShell'
 import { DashboardPage } from './DashboardPage'
 import { EventsPage } from './EventsPage'
 import { ClientsPage } from './ClientsPage'
+import { TeamPage } from './TeamPage'
+import { AdminPage } from './AdminPage'
 
 // Wrapper component to handle navigation state
 function ClientProfileApp({ defaultPage = 'dashboard' }: { defaultPage?: ActivePage }) {
@@ -13,10 +15,16 @@ function ClientProfileApp({ defaultPage = 'dashboard' }: { defaultPage?: ActiveP
     switch (activePage) {
       case 'dashboard':
         return <DashboardPage />
-      case 'clients':
-        return <ClientsPage />
       case 'events':
         return <EventsPage />
+      case 'clients':
+        return <ClientsPage defaultTab="my-clients" />
+      case 'templates':
+        return <ClientsPage defaultTab="templates" />
+      case 'team':
+        return <TeamPage />
+      case 'admin':
+        return <AdminPage />
       default:
         return <DashboardPage />
     }
@@ -38,7 +46,7 @@ const meta: Meta<typeof ClientProfileApp> = {
     docs: {
       description: {
         component:
-          'Full-page prototype of the Marsh Client Profile application. Use the sidebar to navigate between Events and Clients views.',
+          'Full-page prototype of the Marsh Client Profile application. Use the sidebar to navigate between all views.',
       },
     },
   },
@@ -67,7 +75,7 @@ export const Events: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'All Events view — sortable table with priority and status badges, filter controls, and pagination.',
+        story: 'All Events view — sortable table with priority and status badges, filter controls, pagination, and interactive "Add New Event" dialog with 2-step template selection flow.',
       },
     },
   },
@@ -81,6 +89,45 @@ export const Clients: Story = {
     docs: {
       description: {
         story: 'Clients view — tabbed table listing clients with project counts and last-updated dates.',
+      },
+    },
+  },
+}
+
+export const Templates: Story = {
+  args: {
+    defaultPage: 'templates',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Templates view — card grid of 6 industry templates with colored left borders, milestone counts, and "Use Template" CTA.',
+      },
+    },
+  },
+}
+
+export const Team: Story = {
+  args: {
+    defaultPage: 'team',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Team Members view — card grid showing 5 team members with role badges, role dropdowns, and joined dates.',
+      },
+    },
+  },
+}
+
+export const Admin: Story = {
+  args: {
+    defaultPage: 'admin',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Admin Dashboard — system stats (users, clients, events, active rate) plus user management table with role dropdowns.',
       },
     },
   },

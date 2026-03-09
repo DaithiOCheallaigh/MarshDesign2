@@ -416,3 +416,397 @@ table.eventsTable td.checkboxCol {
   color: var(--color-brand-midnight);
   cursor: pointer;
 }
+
+/* ---- Add New Event Dialog ---- */
+
+.dialogOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.dialog {
+  background: var(--color-white);
+  border-radius: var(--radius-soft);
+  width: 780px;
+  max-width: 96vw;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.dialogHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-bottom: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.dialogTitle {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-brand-midnight);
+  margin: 0 0 2px;
+}
+
+.dialogSub {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-750);
+  margin: 0;
+}
+
+.dialogHeaderRight {
+  flex-shrink: 0;
+  margin-left: var(--spacing-md);
+}
+
+.dialogCount {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-750);
+}
+
+.dialogCloseBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--color-neutral-750);
+  border-radius: var(--radius-default);
+  flex-shrink: 0;
+  transition: background 0.12s;
+}
+
+.dialogCloseBtn:hover {
+  background: var(--color-neutral-250);
+  color: var(--color-brand-midnight);
+}
+
+.dialogFilters {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-bottom: 1px solid #f3f4f6;
+  flex-shrink: 0;
+}
+
+.dialogSearchWrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #d1d5db;
+  border-radius: var(--radius-default);
+  padding: 6px 10px;
+  flex: 1;
+  background: var(--color-white);
+}
+
+.dialogSearchInput {
+  border: none;
+  outline: none;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family);
+  color: var(--color-brand-midnight);
+  background: transparent;
+  width: 100%;
+}
+
+.dialogSearchInput::placeholder {
+  color: var(--color-neutral-750);
+}
+
+.dialogFilterBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family);
+  color: var(--color-brand-midnight);
+  background: var(--color-white);
+  border: 1px solid #d1d5db;
+  border-radius: var(--radius-default);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.dialogBody {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-md) var(--spacing-lg);
+}
+
+.templateGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-sm);
+}
+
+.templateTile {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius-soft);
+  background: var(--color-white);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s;
+  font-family: var(--font-family);
+  width: 100%;
+}
+
+.templateTile:hover {
+  border-color: #93c5fd;
+}
+
+.templateTileSelected {
+  border-color: #1565c0;
+  border-width: 2px;
+}
+
+.templateCheck {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.templateTileIcon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.templateTileContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.templateTileName {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-brand-midnight);
+  margin-bottom: 4px;
+}
+
+.templateTileDesc {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-750);
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.4;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.templateTileMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  font-size: 12px;
+  color: var(--color-neutral-750);
+  margin-bottom: var(--spacing-xs);
+}
+
+.templateTileMeta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.templateTileCategory {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.categoryTag {
+  font-size: 11px;
+  color: var(--color-neutral-750);
+}
+
+.previewLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
+  color: var(--color-neutral-750);
+  cursor: pointer;
+}
+
+.dialogFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-sm) var(--spacing-lg) var(--spacing-md);
+  border-top: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.dialogFooterNote {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-750);
+  margin: 0;
+  font-style: italic;
+}
+
+.dialogFooterBtns {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.dialogCancelBtn {
+  padding: 8px 20px;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-brand-midnight);
+  background: var(--color-white);
+  border: 1px solid #d1d5db;
+  border-radius: var(--radius-default);
+  cursor: pointer;
+  transition: border-color 0.12s;
+}
+
+.dialogCancelBtn:hover {
+  border-color: var(--color-brand-midnight);
+}
+
+.dialogPrimaryBtn {
+  padding: 8px 20px;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-white);
+  background: var(--color-brand-midnight);
+  border: none;
+  border-radius: var(--radius-default);
+  cursor: pointer;
+  transition: opacity 0.12s;
+}
+
+.dialogPrimaryBtn:hover:not(:disabled) {
+  opacity: 0.88;
+}
+
+.dialogPrimaryBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ---- Step 2: Milestone review ---- */
+
+.milestoneTemplateLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: #f8faff;
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius-default);
+  margin-bottom: var(--spacing-md);
+}
+
+.milestoneTemplateName {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-brand-midnight);
+}
+
+.milestoneTemplateCategory {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-750);
+}
+
+.milestoneGroup {
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius-soft);
+  overflow: hidden;
+  margin-bottom: var(--spacing-sm);
+}
+
+.milestoneGroupHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 10px var(--spacing-md);
+  background: var(--color-white);
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.groupName {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-brand-midnight);
+  flex: 1;
+}
+
+.groupCount {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-750);
+  flex-shrink: 0;
+}
+
+.groupExpandBtn {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-neutral-750);
+  padding: 0;
+}
+
+.milestoneItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 10px var(--spacing-md);
+  border-bottom: 1px solid #f9fafb;
+  background: var(--color-white);
+}
+
+.milestoneItem:last-child {
+  border-bottom: none;
+}
+
+.dragHandle {
+  color: var(--color-neutral-500);
+  font-size: 14px;
+  cursor: grab;
+  flex-shrink: 0;
+}
+
+.milestoneName {
+  flex: 1;
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-1000);
+}
+
+.milestoneDays {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-brand-midnight);
+  min-width: 24px;
+  text-align: right;
+}
+
+.milestoneDaysLabel {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-750);
+}

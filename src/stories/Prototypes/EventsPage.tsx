@@ -7,6 +7,274 @@ import { Checkbox } from '../../components/Checkbox'
 import { Icon } from '../../components/Icon'
 import styles from './EventsPage.module.css'
 
+// ---- Add New Event dialog data ----
+
+interface TemplateOption {
+  id: string
+  name: string
+  description: string
+  category: string
+  milestones: number
+  duration: string
+  icon: string
+  iconColor: string
+}
+
+const TEMPLATE_OPTIONS: TemplateOption[] = [
+  {
+    id: '1', name: 'Banking Compliance Framework',
+    description: 'Digital banking regulatory compliance with automated audit trails, KYC/AML processes,…',
+    category: 'Compliance & Regulatory', milestones: 4, duration: '5 months',
+    icon: 'shield', iconColor: '#16a34a',
+  },
+  {
+    id: '2', name: 'Business Intelligence Platform',
+    description: 'Comprehensive BI solution with data warehousing, visualization dashboards, and…',
+    category: 'Data Warehousing', milestones: 4, duration: '4 months',
+    icon: 'addchart', iconColor: '#d97706',
+  },
+  {
+    id: '3', name: 'Document Processing Pipeline',
+    description: 'Automated document intake, OCR processing, classification, and structured data extraction…',
+    category: 'Document Management', milestones: 2, duration: '3 months',
+    icon: 'inventory', iconColor: '#d97706',
+  },
+  {
+    id: '4', name: 'Healthcare Data Analytics',
+    description: 'Patient data analytics platform with FHIR compliance, reporting capabilities, and secur…',
+    category: 'Healthcare Analytics', milestones: 4, duration: '4 months',
+    icon: 'trending-up', iconColor: '#0891b2',
+  },
+  {
+    id: '5', name: 'Retail Inventory Automation',
+    description: 'End-to-end retail inventory management with real-time tracking and demand forecasting…',
+    category: 'Retail Operations', milestones: 4, duration: '3 months',
+    icon: 'inventory-2', iconColor: '#7c3aed',
+  },
+  {
+    id: '6', name: 'Risk Management & Trading',
+    description: 'Quantitative risk analysis and trading platform with real-time market data integration…',
+    category: 'Finance & Trading', milestones: 5, duration: '6 months',
+    icon: 'account-balance', iconColor: '#1565c0',
+  },
+]
+
+interface MilestoneGroup {
+  id: string
+  name: string
+  items: { id: string; name: string; days: number }[]
+}
+
+const MILESTONE_GROUPS: MilestoneGroup[] = [
+  {
+    id: 'g1', name: 'Compliance Foundation',
+    items: [
+      { id: 'm1', name: 'Define Regulatory Requirements', days: 7 },
+      { id: 'm2', name: 'Set Up Audit Logging', days: 8 },
+    ],
+  },
+  {
+    id: 'g2', name: 'Process Automation',
+    items: [
+      { id: 'm3', name: 'KYC Workflow Implementation', days: 15 },
+      { id: 'm4', name: 'AML Screening Integration', days: 12 },
+    ],
+  },
+]
+
+// ---- Dialog sub-components ----
+
+function AddEventDialog({
+  onClose,
+}: {
+  onClose: () => void
+}) {
+  const [step, setStep] = useState<1 | 2>(1)
+  const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null)
+  const [templateSearch, setTemplateSearch] = useState('')
+  const [checkedMilestones, setCheckedMilestones] = useState<Set<string>>(
+    new Set(MILESTONE_GROUPS.flatMap((g) => g.items.map((i) => i.id)))
+  )
+
+  const filteredTemplates = TEMPLATE_OPTIONS.filter((t) =>
+    t.name.toLowerCase().includes(templateSearch.toLowerCase()) ||
+    t.category.toLowerCase().includes(templateSearch.toLowerCase())
+  )
+
+  const totalDays = MILESTONE_GROUPS.flatMap((g) => g.items)
+    .filter((i) => checkedMilestones.has(i.id))
+    .reduce((sum, i) => sum + i.days, 0)
+  const totalMilestones = MILESTONE_GROUPS.flatMap((g) => g.items).filter((i) => checkedMilestones.has(i.id)).length
+
+  function toggleMilestone(id: string) {
+    setCheckedMilestones((prev) => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
+  }
+
+  return (
+    <div className={styles.dialogOverlay} onClick={(e) => e.target === e.currentTarget && onClose()}>
+      <div className={styles.dialog}>
+        {step === 1 ? (
+          <>
+            {/* Step 1: Template selection */}
+            <div className={styles.dialogHeader}>
+              <div>
+                <h2 className={styles.dialogTitle}>Select Project Template</h2>
+                <p className={styles.dialogSub}>Choose an industry template to get started quickly with pre-configured milestones and best practices.</p>
+              </div>
+              <div className={styles.dialogHeaderRight}>
+                <span className={styles.dialogCount}>{filteredTemplates.length} templates found</span>
+              </div>
+            </div>
+            <div className={styles.dialogFilters}>
+              <div className={styles.dialogSearchWrap}>
+                <Icon name="search" size={14} color="var(--color-neutral-750)" />
+                <input
+                  type="text"
+                  className={styles.dialogSearchInput}
+                  placeholder="Search templates..."
+                  value={templateSearch}
+                  onChange={(e) => setTemplateSearch(e.target.value)}
+                />
+              </div>
+              <button type="button" className={styles.dialogFilterBtn}>
+                All Industries
+                <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              </button>
+              <button type="button" className={styles.dialogFilterBtn}>
+                All Categories
+                <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              </button>
+            </div>
+            <div className={styles.dialogBody}>
+              <div className={styles.templateGrid}>
+                {filteredTemplates.map((tpl) => (
+                  <button
+                    key={tpl.id}
+                    type="button"
+                    className={[styles.templateTile, selectedTemplate === tpl.id ? styles.templateTileSelected : ''].filter(Boolean).join(' ')}
+                    onClick={() => setSelectedTemplate(tpl.id)}
+                  >
+                    {selectedTemplate === tpl.id && (
+                      <span className={styles.templateCheck}>
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                          <circle cx="7" cy="7" r="7" fill="#1565c0" />
+                          <path d="M4 7l2 2 4-4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </span>
+                    )}
+                    <div className={styles.templateTileIcon} style={{ color: tpl.iconColor }}>
+                      <Icon name={tpl.icon} size={20} color={tpl.iconColor} />
+                    </div>
+                    <div className={styles.templateTileContent}>
+                      <div className={styles.templateTileName}>{tpl.name}</div>
+                      <div className={styles.templateTileDesc}>{tpl.description}</div>
+                      <div className={styles.templateTileMeta}>
+                        <span>
+                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 3h10M3 1v2M9 1v2M1 5h10v5a1 1 0 01-1 1H2a1 1 0 01-1-1V5z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/></svg>
+                          {tpl.milestones} milestones
+                        </span>
+                        <span>
+                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" strokeWidth="1.2"/><path d="M6 3v3l2 2" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/></svg>
+                          {tpl.duration}
+                        </span>
+                      </div>
+                      <div className={styles.templateTileCategory}>
+                        <span className={styles.categoryTag}>{tpl.category}</span>
+                        <span className={styles.previewLink}>
+                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 2.5C3.5 2.5 1.5 6 1.5 6S3.5 9.5 6 9.5 10.5 6 10.5 6 8.5 2.5 6 2.5z" stroke="currentColor" strokeWidth="1.2"/><circle cx="6" cy="6" r="1.5" stroke="currentColor" strokeWidth="1.2"/></svg>
+                          Preview
+                        </span>
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className={styles.dialogFooter}>
+              <p className={styles.dialogFooterNote}>* Select a template to continue</p>
+              <div className={styles.dialogFooterBtns}>
+                <button type="button" className={styles.dialogCancelBtn} onClick={onClose}>Cancel</button>
+                <button
+                  type="button"
+                  className={styles.dialogPrimaryBtn}
+                  disabled={!selectedTemplate}
+                  onClick={() => setStep(2)}
+                >
+                  + Create Project
+                </button>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            {/* Step 2: Milestone review */}
+            <div className={styles.dialogHeader}>
+              <div>
+                <h2 className={styles.dialogTitle}>Configure Milestones</h2>
+                <p className={styles.dialogSub}>Adjust milestone names, durations, and order before creating the project</p>
+              </div>
+              <button type="button" className={styles.dialogCloseBtn} onClick={onClose} aria-label="Close">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+              </button>
+            </div>
+            <div className={styles.dialogBody}>
+              <div className={styles.milestoneTemplateLabel}>
+                <Icon name="shield" size={16} color="#16a34a" />
+                <div>
+                  <div className={styles.milestoneTemplateName}>Banking Compliance Framework</div>
+                  <div className={styles.milestoneTemplateCategory}>Banking</div>
+                </div>
+              </div>
+              {MILESTONE_GROUPS.map((group) => (
+                <div key={group.id} className={styles.milestoneGroup}>
+                  <div className={styles.milestoneGroupHeader}>
+                    <span className={styles.dragHandle}>⠿</span>
+                    <button type="button" className={styles.groupExpandBtn}>
+                      <svg width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                    </button>
+                    <span className={styles.groupName}>{group.name}</span>
+                    <span className={styles.groupCount}>
+                      {group.items.filter((i) => checkedMilestones.has(i.id)).length} of {group.items.length} milestones
+                    </span>
+                  </div>
+                  {group.items.map((item) => (
+                    <div key={item.id} className={styles.milestoneItem}>
+                      <span className={styles.dragHandle}>⠿</span>
+                      <Checkbox
+                        checked={checkedMilestones.has(item.id)}
+                        onChange={() => toggleMilestone(item.id)}
+                        aria-label={item.name}
+                      />
+                      <span className={styles.milestoneName}>{item.name}</span>
+                      <Icon name="access-time" size={14} color="var(--color-neutral-750)" />
+                      <span className={styles.milestoneDays}>{item.days}</span>
+                      <span className={styles.milestoneDaysLabel}>days</span>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+            <div className={styles.dialogFooter}>
+              <p className={styles.dialogFooterNote}>{totalMilestones} milestones · {totalDays} days total</p>
+              <div className={styles.dialogFooterBtns}>
+                <button type="button" className={styles.dialogCancelBtn} onClick={() => setStep(1)}>Cancel</button>
+                <button type="button" className={styles.dialogPrimaryBtn} onClick={onClose}>
+                  Continue
+                </button>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  )
+}
+
 type Priority = 'High' | 'Medium' | 'Low'
 type EventStatus = 'Not Started' | 'In Progress' | 'Complete - On Time' | 'Complete - Ahead'
 
@@ -134,6 +402,7 @@ export function EventsPage() {
   const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set())
   const [projectType, setProjectType] = useState<string>('')
   const [search, setSearch] = useState('')
+  const [showAddEvent, setShowAddEvent] = useState(false)
 
   const filteredEvents = EVENTS.filter((e) => {
     const matchesType = !projectType || projectType === 'all' ||
@@ -165,6 +434,7 @@ export function EventsPage() {
 
   return (
     <div>
+      {showAddEvent && <AddEventDialog onClose={() => setShowAddEvent(false)} />}
       {/* Breadcrumbs */}
       <div className={styles.breadcrumbRow}>
         <Breadcrumbs
@@ -190,6 +460,7 @@ export function EventsPage() {
           </div>
         </div>
         <ActionButton
+          onClick={() => setShowAddEvent(true)}
           icon={
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M8 3v10M3 8h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
