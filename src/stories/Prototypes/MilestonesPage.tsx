@@ -284,8 +284,6 @@ export function MilestonesPage({ event, onBack }: MilestonesPageProps) {
   const [expandedSections, setExpandedSections] = useState<Set<string>>(
     new Set(MILESTONE_SECTIONS.map((s) => s.id))
   )
-  const [showProjectDropdown, setShowProjectDropdown] = useState(false)
-
   function toggleSection(id: string) {
     setExpandedSections((prev) => {
       const next = new Set(prev)
@@ -307,7 +305,7 @@ export function MilestonesPage({ event, onBack }: MilestonesPageProps) {
           items={[
             { label: 'Apps', href: '#' },
             { label: 'AchieveA', href: '#' },
-            { label: 'Company Home — Events', href: '#', onClick: onBack },
+            { label: 'Company Home — Events', href: '#' },
             { label: event.name },
           ]}
         />
@@ -324,7 +322,7 @@ export function MilestonesPage({ event, onBack }: MilestonesPageProps) {
           <button
             type="button"
             className={styles.projectSelector}
-            onClick={() => setShowProjectDropdown((v) => !v)}
+            onClick={() => {}}
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className={styles.projectSelectorIcon}>
               <path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
