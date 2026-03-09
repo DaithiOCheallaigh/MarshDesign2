@@ -460,7 +460,7 @@ export function EventsPage({ onViewMilestones }: EventsPageProps = {}) {
           </button>
           <div className={styles.pageTitleText}>
             <h1>All Events</h1>
-            <p>{filteredEvents.length} Milestones</p>
+            <p>{EVENTS.length} Events</p>
           </div>
         </div>
         <ActionButton
@@ -547,7 +547,13 @@ export function EventsPage({ onViewMilestones }: EventsPageProps = {}) {
                   </td>
                   <td>{row.template}</td>
                   <td>
-                    <a href="#" className={styles.eventName}>{row.name}</a>
+                    <a
+                      href="#"
+                      className={styles.eventName}
+                      onClick={(e) => { e.preventDefault(); onViewMilestones?.(row) }}
+                    >
+                      {row.name}
+                    </a>
                   </td>
                   <td>
                     <span className={styles.description}>{row.description}</span>
