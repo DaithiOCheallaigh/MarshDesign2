@@ -114,7 +114,6 @@ export function DashboardPage() {
       <div className={styles.pageHeader}>
         <div>
           <div className={styles.pageTitleGroup}>
-            <Icon name="dashboard" size={22} color="var(--color-brand-midnight)" />
             <h1>Dashboard</h1>
           </div>
           <p className={styles.subtitle}>Admin overview — AchieveA workspace</p>

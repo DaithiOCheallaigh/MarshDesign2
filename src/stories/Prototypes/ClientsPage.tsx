@@ -111,7 +111,6 @@ export function ClientsPage({ defaultTab = 'my-clients' }: { defaultTab?: string
       {/* Page header */}
       <div className={styles.pageHeader}>
         <div className={styles.pageTitleGroup}>
-          <Icon name="contacts" size={24} className={styles.pageIcon} />
           <h1>Clients</h1>
         </div>
         {activeTab === 'my-clients' ? (

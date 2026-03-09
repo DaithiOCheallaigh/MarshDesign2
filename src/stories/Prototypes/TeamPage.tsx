@@ -28,7 +28,6 @@ export function TeamPage() {
     <div>
       <div className={styles.pageHeader}>
         <div className={styles.pageTitleGroup}>
-          <Icon name="group" size={22} color="var(--color-brand-midnight)" />
           <div>
             <h1>Team Members</h1>
             <p className={styles.subtitle}>

@@ -31,73 +31,73 @@ export function AppShell({ activePage, onNavigate, children }: AppShellProps) {
 
   return (
     <div className={styles.app}>
-      {/* Top Header */}
-      <header className={styles.header}>
-        <a href="#" className={styles.headerLogo}>
-          {/* Inline Client Profile logo — matching the prototype's circular-arrow icon + wordmark */}
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="14" cy="14" r="13" stroke="#000f47" strokeWidth="2" fill="none"/>
-            <path d="M9 14a5 5 0 0 1 9.33-2.5" stroke="#000f47" strokeWidth="2" strokeLinecap="round"/>
-            <path d="M19 14a5 5 0 0 1-9.33 2.5" stroke="#000f47" strokeWidth="2" strokeLinecap="round"/>
-            <path d="M18 10.5l1.5 1-1.5 1" stroke="#000f47" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M10 17.5l-1.5-1 1.5-1" stroke="#000f47" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          <span className={styles.headerLogoText}>Client Profile</span>
-        </a>
-        <div className={styles.headerSearch}>
-          <SearchBar
-            placeholder="Search by Client or CN Number..."
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-          />
-        </div>
-        <div className={styles.headerRight}>
-          <span className={styles.headerGreeting}>Good Morning, example</span>
-          <span className={styles.headerAvatar}>
-            <Icon name="account-circle" size={28} />
-          </span>
-        </div>
-      </header>
-
-      {/* Body */}
-      <div className={styles.body}>
-        {/* Sidebar */}
-        <aside className={styles.sidebar}>
-          <nav className={styles.sidebarNav}>
-            {NAV_ITEMS.map((item) => {
-              const isActive = item.id === activePage
-              return (
-                <button
-                  key={item.id}
-                  className={[styles.navItem, isActive ? styles.navItemActive : ''].filter(Boolean).join(' ')}
-                  onClick={() => onNavigate?.(item.id)}
-                  type="button"
-                >
-                  <Icon name={item.icon} size={20} color="currentColor" />
-                  <span>{item.label}</span>
-                  {item.id === 'admin' && <span className={styles.navBadge}>Admin</span>}
-                </button>
-              )
-            })}
-          </nav>
-
-          <div className={styles.sidebarBottom}>
-            <div className={styles.sidebarDivider} />
-            <a href="#" className={styles.sidebarBottomLink}>
-              <Icon name="home" size={18} color="currentColor" />
-              Back to Home
-            </a>
-            <a href="#" className={styles.sidebarBottomLink}>
-              <Icon name="keyboard-double-arrow-up" size={18} color="currentColor" />
-              Back to Top
-            </a>
-            <div className={styles.sidebarLogo}>
-              <img src="assets/marsh-logo-rgb-white.svg" alt="Marsh" className={styles.sidebarLogoImg} />
-            </div>
+      {/* Sidebar — full height */}
+      <aside className={styles.sidebar}>
+        <div className={styles.sidebarAppHeader}>
+          <div className={styles.sidebarAppIcon}>
+            <svg width="18" height="18" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="14" cy="14" r="13" stroke="var(--color-brand-midnight)" strokeWidth="2" fill="none"/>
+              <path d="M9 14a5 5 0 0 1 9.33-2.5" stroke="var(--color-brand-midnight)" strokeWidth="2" strokeLinecap="round"/>
+              <path d="M19 14a5 5 0 0 1-9.33 2.5" stroke="var(--color-brand-midnight)" strokeWidth="2" strokeLinecap="round"/>
+              <path d="M18 10.5l1.5 1-1.5 1" stroke="var(--color-brand-midnight)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M10 17.5l-1.5-1 1.5-1" stroke="var(--color-brand-midnight)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </div>
-        </aside>
+          <span className={styles.sidebarAppTitle}>Client Profile</span>
+        </div>
+        <nav className={styles.sidebarNav}>
+          {NAV_ITEMS.map((item) => {
+            const isActive = item.id === activePage
+            return (
+              <button
+                key={item.id}
+                className={[styles.navItem, isActive ? styles.navItemActive : ''].filter(Boolean).join(' ')}
+                onClick={() => onNavigate?.(item.id)}
+                type="button"
+              >
+                <Icon name={item.icon} size={20} color="currentColor" />
+                <span>{item.label}</span>
+                {item.id === 'admin' && <span className={styles.navBadge}>Admin</span>}
+              </button>
+            )
+          })}
+        </nav>
 
-        {/* Main content */}
+        <div className={styles.sidebarBottom}>
+          <div className={styles.sidebarDivider} />
+          <a href="#" className={styles.sidebarBottomLink}>
+            <Icon name="home" size={18} color="currentColor" />
+            Back to Home
+          </a>
+          <a href="#" className={styles.sidebarBottomLink}>
+            <Icon name="keyboard-double-arrow-up" size={18} color="currentColor" />
+            Back to Top
+          </a>
+          <div className={styles.sidebarLogo}>
+            <img src="assets/marsh-logo-new-white.png" alt="Marsh" className={styles.sidebarLogoImg} />
+          </div>
+        </div>
+      </aside>
+
+      {/* Right panel: header + main */}
+      <div className={styles.rightPanel}>
+        <header className={styles.header}>
+          <div className={styles.headerStart} />
+          <div className={styles.headerSearch}>
+            <SearchBar
+              placeholder="Search by Client or CN Number..."
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+            />
+          </div>
+          <div className={styles.headerRight}>
+            <span className={styles.headerGreeting}>Good Morning, example</span>
+            <span className={styles.headerAvatar}>
+              <Icon name="account-circle" size={28} />
+            </span>
+          </div>
+        </header>
+
         <main className={styles.main}>
           <div className={styles.mainInner}>
             {children}

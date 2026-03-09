@@ -37,7 +37,6 @@ export function AdminPage() {
       {/* Header */}
       <div className={styles.pageHeader}>
         <div className={styles.pageTitleGroup}>
-          <Icon name="shield" size={24} color="var(--color-brand-midnight)" />
           <div>
             <h1>Admin Dashboard</h1>
             <p className={styles.subtitle}>Manage users and view system activity</p>
