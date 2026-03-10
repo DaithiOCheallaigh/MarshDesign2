@@ -293,6 +293,17 @@ export function MilestonesPage({ event, onBack }: MilestonesPageProps) {
 
   return (
     <div>
+      {/* Breadcrumb */}
+      <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+        <button type="button" className={styles.breadcrumbLink} onClick={onBack}>
+          Events
+        </button>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" className={styles.breadcrumbSep}>
+          <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+        <span className={styles.breadcrumbCurrent}>{event.name}</span>
+      </nav>
+
       {/* Compact project toolbar */}
       <div className={styles.projectToolbar}>
         <div className={styles.projectToolbarLeft}>
@@ -321,8 +332,19 @@ export function MilestonesPage({ event, onBack }: MilestonesPageProps) {
           <span className={styles.toolbarProgress}>{overallProgress}% Complete</span>
         </div>
         <div className={styles.projectToolbarRight}>
-          <button type="button" className={styles.toolbarBtn}>
-            <Icon name="smart-toy" size={16} color="currentColor" />
+          <button type="button" className={styles.toolbarBtn} aria-label="LenAI assistant">
+            {/* LenAI sprite */}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="11" y="0" width="2" height="4" rx="1" fill="currentColor" fillOpacity="0.7"/>
+              <circle cx="12" cy="0.75" r="1.5" fill="currentColor" fillOpacity="0.7"/>
+              <rect x="2" y="4" width="20" height="18" rx="5" fill="currentColor" fillOpacity="0.12"/>
+              <rect x="2" y="4" width="20" height="18" rx="5" stroke="currentColor" strokeWidth="1.5"/>
+              <circle cx="8.5" cy="12" r="2.5" fill="currentColor"/>
+              <circle cx="9.4" cy="10.9" r="0.85" fill="white"/>
+              <circle cx="15.5" cy="12" r="2.5" fill="currentColor"/>
+              <circle cx="16.4" cy="10.9" r="0.85" fill="white"/>
+              <path d="M8 17.5 Q12 20.5 16 17.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+            </svg>
           </button>
           <button type="button" className={styles.toolbarBtn}>
             <Icon name="help-outline" size={16} color="currentColor" />

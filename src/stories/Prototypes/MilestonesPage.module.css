@@ -2,6 +2,47 @@
    Milestones Page — Marsh Client Profile prototype
    ========================================================================== */
 
+/* ---- Breadcrumb ---- */
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.breadcrumbLink {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-brand-midnight);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.breadcrumbLink:hover {
+  color: var(--color-brand-blue);
+  text-decoration: underline;
+}
+
+.breadcrumbSep {
+  color: var(--color-neutral-500);
+  flex-shrink: 0;
+}
+
+.breadcrumbCurrent {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-750);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 320px;
+}
+
 /* ---- Compact project toolbar ---- */
 
 .projectToolbar {
