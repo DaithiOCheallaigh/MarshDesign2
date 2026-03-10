@@ -169,7 +169,8 @@ table.eventsTable th:nth-child(7) { width: 14%; } /* Status */
 
 /* Clip overflowing text in plain-text cells */
 table.eventsTable td:nth-child(2),
-table.eventsTable td:nth-child(3) {
+table.eventsTable td:nth-child(3),
+table.eventsTable td:nth-child(4) {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -223,8 +224,8 @@ table.eventsTable td.checkboxCol {
 }
 
 .description {
+  display: block;
   color: var(--color-neutral-750);
-  max-width: 240px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
