@@ -170,6 +170,18 @@
   border-collapse: collapse;
   font-size: var(--font-size-sm);
   font-family: var(--font-family);
+  table-layout: fixed;
+}
+
+.recentTable th:nth-child(1) { width: 40%; } /* Event Name */
+.recentTable th:nth-child(2) { width: 15%; } /* Priority */
+.recentTable th:nth-child(3) { width: 27%; } /* Status */
+.recentTable th:nth-child(4) { width: 18%; } /* Date */
+
+.recentTable td:nth-child(1) {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .recentTable th {

@@ -24,7 +24,7 @@ function ClientProfileApp({ defaultPage = 'dashboard' }: { defaultPage?: ActiveP
     }
     switch (activePage) {
       case 'dashboard':
-        return <DashboardPage />
+        return <DashboardPage onNavigate={handleNavigate} />
       case 'events':
         return <EventsPage onViewMilestones={setSelectedEvent} />
       case 'clients':

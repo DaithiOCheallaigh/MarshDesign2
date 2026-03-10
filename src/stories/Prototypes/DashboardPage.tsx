@@ -105,7 +105,11 @@ function PriorityBadge({ priority }: { priority: string }) {
 
 // ---- Main Dashboard ----
 
-export function DashboardPage() {
+interface DashboardPageProps {
+  onNavigate?: (page: 'events' | 'clients') => void
+}
+
+export function DashboardPage({ onNavigate }: DashboardPageProps = {}) {
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
 
   return (
@@ -254,7 +258,15 @@ export function DashboardPage() {
             <tbody>
               {RECENT_EVENTS.map((ev) => (
                 <tr key={ev.name}>
-                  <td><a href="#" className={styles.eventLink}>{ev.name}</a></td>
+                  <td>
+                    <a
+                      href="#"
+                      className={styles.eventLink}
+                      onClick={(e) => { e.preventDefault(); onNavigate?.('events') }}
+                    >
+                      {ev.name}
+                    </a>
+                  </td>
                   <td><PriorityBadge priority={ev.priority} /></td>
                   <td><StatusBadge status={ev.status} /></td>
                   <td style={{ color: 'var(--color-neutral-750)', fontSize: 12 }}>{ev.date}</td>
@@ -263,7 +275,11 @@ export function DashboardPage() {
             </tbody>
           </table>
           <div className={styles.cardFooter}>
-            <button type="button" className={styles.sectionViewAll}>
+            <button
+              type="button"
+              className={styles.sectionViewAll}
+              onClick={() => onNavigate?.('events')}
+            >
               View all events
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </button>
@@ -276,7 +292,13 @@ export function DashboardPage() {
             {TOP_CLIENTS.map((client, i) => (
               <li key={client.name} className={styles.clientListItem}>
                 <span style={{ color: 'var(--color-neutral-500)', fontSize: 12, width: 16, flexShrink: 0 }}>{i + 1}</span>
-                <a href="#" className={styles.clientName}>{client.name}</a>
+                <a
+                  href="#"
+                  className={styles.clientName}
+                  onClick={(e) => { e.preventDefault(); onNavigate?.('clients') }}
+                >
+                  {client.name}
+                </a>
                 <div className={styles.clientMeta}>
                   <span className={styles.clientMetaItem}>{client.location.split(',')[1]?.trim()}</span>
                   <span className={styles.clientMetaItemBlue}>{client.projects} projects</span>
@@ -286,7 +308,11 @@ export function DashboardPage() {
             ))}
           </ul>
           <div className={styles.cardFooter}>
-            <button type="button" className={styles.sectionViewAll}>
+            <button
+              type="button"
+              className={styles.sectionViewAll}
+              onClick={() => onNavigate?.('clients')}
+            >
               View all clients
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </button>

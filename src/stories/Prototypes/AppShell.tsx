@@ -1,4 +1,4 @@
-import { type ReactNode, useState } from 'react'
+import { type ReactNode, useState, useRef } from 'react'
 import { SearchBar } from '../../components/SearchBar'
 import { Icon } from '../../components/Icon'
 import styles from './AppShell.module.css'
@@ -28,6 +28,7 @@ export interface AppShellProps {
 
 export function AppShell({ activePage, onNavigate, children }: AppShellProps) {
   const [searchValue, setSearchValue] = useState('')
+  const mainRef = useRef<HTMLElement>(null)
 
   return (
     <div className={styles.app}>
@@ -65,11 +66,19 @@ export function AppShell({ activePage, onNavigate, children }: AppShellProps) {
 
         <div className={styles.sidebarBottom}>
           <div className={styles.sidebarDivider} />
-          <a href="#" className={styles.sidebarBottomLink}>
+          <a
+            href="#"
+            className={styles.sidebarBottomLink}
+            onClick={(e) => { e.preventDefault(); onNavigate?.('dashboard') }}
+          >
             <Icon name="home" size={18} color="currentColor" />
             Back to Home
           </a>
-          <a href="#" className={styles.sidebarBottomLink}>
+          <a
+            href="#"
+            className={styles.sidebarBottomLink}
+            onClick={(e) => { e.preventDefault(); mainRef.current?.scrollTo({ top: 0, behavior: 'smooth' }) }}
+          >
             <Icon name="keyboard-double-arrow-up" size={18} color="currentColor" />
             Back to Top
           </a>
@@ -98,7 +107,7 @@ export function AppShell({ activePage, onNavigate, children }: AppShellProps) {
           </div>
         </header>
 
-        <main className={styles.main}>
+        <main ref={mainRef} className={styles.main}>
           <div className={styles.mainInner}>
             {children}
           </div>

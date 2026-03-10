@@ -1165,11 +1165,11 @@ export function ClientsPage({ defaultTab = 'my-clients' }: { defaultTab?: string
                 <tbody>
                   {CLIENTS.map((row) => (
                     <tr key={row.id}>
-                      <td><a href="#" className={styles.clientName}>{row.name}</a></td>
+                      <td><a href="#" className={styles.clientName} onClick={(e) => e.preventDefault()}>{row.name}</a></td>
                       <td className={styles.muted}>{row.country}</td>
                       <td>{row.teamSize}</td>
-                      <td><a href="#" className={styles.numberLink}>{row.projects}</a></td>
-                      <td><a href="#" className={styles.numberLink}>{row.activeProjects}</a></td>
+                      <td><a href="#" className={styles.numberLink} onClick={(e) => e.preventDefault()}>{row.projects}</a></td>
+                      <td><a href="#" className={styles.numberLink} onClick={(e) => e.preventDefault()}>{row.activeProjects}</a></td>
                       <td className={styles.muted}>{row.lastUpdated}</td>
                       <td>
                         <button type="button" className={styles.actionDots} aria-label="More actions">

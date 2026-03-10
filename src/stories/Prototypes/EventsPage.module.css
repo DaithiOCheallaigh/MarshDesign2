@@ -132,6 +132,8 @@ table.eventsTable {
   border-collapse: collapse;
   font-family: var(--font-family);
   font-size: var(--font-size-sm);
+  table-layout: fixed;
+  min-width: 680px;
 }
 
 table.eventsTable thead tr {
@@ -155,6 +157,22 @@ table.eventsTable th.checkboxCol {
 
 table.eventsTable th.actionsCol {
   width: 80px;
+}
+
+/* Fixed column widths for no-scroll layout */
+table.eventsTable th:nth-child(2) { width: 13%; } /* Event Template */
+table.eventsTable th:nth-child(3) { width: 15%; } /* Event Name */
+table.eventsTable th:nth-child(4) { width: 22%; } /* Description */
+table.eventsTable th:nth-child(5) { width: 10%; } /* Priority */
+table.eventsTable th:nth-child(6) { width: 15%; } /* Start/End Date */
+table.eventsTable th:nth-child(7) { width: 14%; } /* Status */
+
+/* Clip overflowing text in plain-text cells */
+table.eventsTable td:nth-child(2),
+table.eventsTable td:nth-child(3) {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 table.eventsTable tbody tr {

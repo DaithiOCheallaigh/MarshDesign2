@@ -84,6 +84,8 @@ table.clientsTable {
   border-collapse: collapse;
   font-family: var(--font-family);
   font-size: var(--font-size-sm);
+  table-layout: fixed;
+  min-width: 560px;
 }
 
 table.clientsTable thead tr {
@@ -98,6 +100,27 @@ table.clientsTable th {
   color: var(--color-neutral-750);
   white-space: nowrap;
   background: var(--color-white);
+}
+
+/* Fixed column widths for no-scroll layout */
+table.clientsTable th:nth-child(1) { width: 30%; } /* Client */
+table.clientsTable th:nth-child(2) { width: 18%; } /* Country */
+table.clientsTable th:nth-child(3) { width: 9%;  } /* Team Size */
+table.clientsTable th:nth-child(4) { width: 9%;  } /* Projects */
+table.clientsTable th:nth-child(5) { width: 13%; } /* Active Projects */
+table.clientsTable th:nth-child(6) { width: 13%; } /* Last Updated */
+table.clientsTable th:nth-child(7) { width: 8%;  } /* Action */
+
+/* Clip overflowing text */
+table.clientsTable td:nth-child(1) {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+table.clientsTable td:nth-child(2) {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 table.clientsTable tbody tr {

@@ -112,7 +112,13 @@
   border-collapse: collapse;
   font-size: var(--font-size-sm);
   font-family: var(--font-family);
+  table-layout: fixed;
 }
+
+.userTable th:nth-child(1) { width: 40%; }
+.userTable th:nth-child(2) { width: 20%; }
+.userTable th:nth-child(3) { width: 25%; }
+.userTable th:nth-child(4) { width: 15%; }
 
 .userTable th {
   padding: 10px var(--spacing-md);
