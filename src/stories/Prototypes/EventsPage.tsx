@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { ActionButton } from '../../components/ActionButton'
 import { Select } from '../../components/Select'
 import { SearchBar } from '../../components/SearchBar'
@@ -83,11 +83,7 @@ const MILESTONE_GROUPS: MilestoneGroup[] = [
 
 // ---- Dialog sub-components ----
 
-function AddEventDialog({
-  onClose,
-}: {
-  onClose: () => void
-}) {
+function AddEventDialog({ onClose }: { onClose: () => void }) {
   const [step, setStep] = useState<1 | 2>(1)
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null)
   const [templateSearch, setTemplateSearch] = useState('')
@@ -286,18 +282,20 @@ export interface EventRow {
   startDate: string
   endDate: string
   status: EventStatus
+  client: string
 }
 
 const EVENTS: EventRow[] = [
   {
     id: '1',
-    template: 'data-analysis',
+    template: 'Data Analysis',
     name: 'Q1 Data Analysis',
     description: 'Test',
     priority: 'High',
     startDate: '01/01/2026',
     endDate: '01/06/2026',
     status: 'Not Started',
+    client: 'Acme Financial',
   },
   {
     id: '2',
@@ -308,6 +306,7 @@ const EVENTS: EventRow[] = [
     startDate: '02/01/2025',
     endDate: '02/28/2025',
     status: 'In Progress',
+    client: 'Metro Healthcare',
   },
   {
     id: '3',
@@ -318,6 +317,7 @@ const EVENTS: EventRow[] = [
     startDate: '03/01/2025',
     endDate: '03/31/2025',
     status: 'Not Started',
+    client: 'Acme Financial',
   },
   {
     id: '4',
@@ -328,6 +328,7 @@ const EVENTS: EventRow[] = [
     startDate: '01/15/2025',
     endDate: '02/15/2025',
     status: 'Complete - On Time',
+    client: 'Metro Healthcare',
   },
   {
     id: '5',
@@ -338,6 +339,7 @@ const EVENTS: EventRow[] = [
     startDate: '02/10/2025',
     endDate: '03/10/2025',
     status: 'In Progress',
+    client: 'Retail Corp',
   },
   {
     id: '6',
@@ -348,8 +350,15 @@ const EVENTS: EventRow[] = [
     startDate: '01/20/2025',
     endDate: '02/20/2025',
     status: 'Complete - Ahead',
+    client: 'Acme Financial',
   },
 ]
+
+// Unique filter option lists derived from data
+const TEMPLATE_FILTER_OPTIONS = [...new Set(EVENTS.map((e) => e.template))].sort()
+const PRIORITY_FILTER_OPTIONS: Priority[] = ['High', 'Medium', 'Low']
+const STATUS_FILTER_OPTIONS: EventStatus[] = ['Not Started', 'In Progress', 'Complete - On Time', 'Complete - Ahead']
+const CLIENT_FILTER_OPTIONS = [...new Set(EVENTS.map((e) => e.client))].sort()
 
 const PROJECT_TYPE_OPTIONS = [
   { value: 'all', label: 'All Types' },
@@ -359,10 +368,18 @@ const PROJECT_TYPE_OPTIONS = [
   { value: 'system-update', label: 'System Update' },
 ]
 
+/** Parse MM/DD/YYYY → Date, returns null on failure */
+function parseMMDDYYYY(s: string): Date | null {
+  const [m, d, y] = s.split('/')
+  if (!m || !d || !y) return null
+  const dt = new Date(parseInt(y), parseInt(m) - 1, parseInt(d))
+  return isNaN(dt.getTime()) ? null : dt
+}
+
 function PriorityBadge({ priority }: { priority: Priority }) {
   if (priority === 'High') return <span className={styles.priorityHigh}>High</span>
   if (priority === 'Medium') return <span className={styles.priorityMedium}>Medium</span>
-  return <span className={styles.priorityMedium}>Low</span>
+  return <span className={styles.priorityLow}>Low</span>
 }
 
 function StatusBadge({ status }: { status: EventStatus }) {
@@ -382,18 +399,142 @@ function SortHeader({ label }: { label: string }) {
   )
 }
 
+// ---- FilterButton: dropdown with checkboxes ----
+
 interface FilterButtonProps {
   label: string
+  options: string[]
+  selected: Set<string>
+  onChange: (next: Set<string>) => void
 }
 
-function FilterButton({ label }: FilterButtonProps) {
+function FilterButton({ label, options, selected, onChange }: FilterButtonProps) {
+  const [open, setOpen] = useState(false)
+  const wrapRef = useRef<HTMLDivElement>(null)
+  const isActive = selected.size > 0
+
+  useEffect(() => {
+    if (!open) return
+    function handleOutside(e: MouseEvent) {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleOutside)
+    return () => document.removeEventListener('mousedown', handleOutside)
+  }, [open])
+
+  function toggle(option: string) {
+    const next = new Set(selected)
+    if (next.has(option)) next.delete(option)
+    else next.add(option)
+    onChange(next)
+  }
+
   return (
-    <button type="button" className={styles.filterBtn}>
-      {label}
-      <svg width="10" height="6" viewBox="0 0 10 6" fill="none" className={styles.filterBtnChevron}>
-        <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    </button>
+    <div ref={wrapRef} className={styles.filterDropdownWrap}>
+      <button
+        type="button"
+        className={[styles.filterBtn, isActive ? styles.filterBtnActive : ''].filter(Boolean).join(' ')}
+        onClick={() => setOpen((o) => !o)}
+      >
+        {label}
+        {isActive && <span className={styles.filterBadge}>{selected.size}</span>}
+        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" className={styles.filterBtnChevron}>
+          <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+      {open && (
+        <div className={styles.filterDropdown}>
+          {options.map((opt) => (
+            <label key={opt} className={styles.filterDropdownItem}>
+              <input
+                type="checkbox"
+                checked={selected.has(opt)}
+                onChange={() => toggle(opt)}
+              />
+              {opt}
+            </label>
+          ))}
+          {isActive && (
+            <button type="button" className={styles.filterClear} onClick={() => onChange(new Set())}>
+              Clear selection
+            </button>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ---- DateFilterButton: dropdown with a native date input ----
+
+interface DateFilterButtonProps {
+  label: string
+  value: string  // YYYY-MM-DD or ''
+  onChange: (v: string) => void
+}
+
+function DateFilterButton({ label, value, onChange }: DateFilterButtonProps) {
+  const [open, setOpen] = useState(false)
+  const wrapRef = useRef<HTMLDivElement>(null)
+  const isActive = value !== ''
+
+  useEffect(() => {
+    if (!open) return
+    function handleOutside(e: MouseEvent) {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleOutside)
+    return () => document.removeEventListener('mousedown', handleOutside)
+  }, [open])
+
+  const display = isActive
+    ? new Date(value + 'T00:00:00').toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+    : label
+
+  return (
+    <div ref={wrapRef} className={styles.filterDropdownWrap}>
+      <button
+        type="button"
+        className={[styles.dateBtn, isActive ? styles.dateBtnActive : ''].filter(Boolean).join(' ')}
+        onClick={() => setOpen((o) => !o)}
+      >
+        {!isActive && <Icon name="calendar-today" size={14} />}
+        {display}
+        {isActive && (
+          <span
+            role="button"
+            className={styles.dateClearX}
+            onClick={(e) => { e.stopPropagation(); onChange(''); setOpen(false) }}
+          >
+            ×
+          </span>
+        )}
+      </button>
+      {open && (
+        <div className={styles.filterDropdown}>
+          <div className={styles.filterDropdownDateWrap}>
+            <span className={styles.filterDropdownDateLabel}>{label}</span>
+            <input
+              type="date"
+              className={styles.filterDateInput}
+              value={value}
+              onChange={(e) => { onChange(e.target.value); setOpen(false) }}
+              // eslint-disable-next-line jsx-a11y/no-autofocus
+              autoFocus
+            />
+          </div>
+          {isActive && (
+            <button type="button" className={styles.filterClear} onClick={() => { onChange(''); setOpen(false) }}>
+              Clear date
+            </button>
+          )}
+        </div>
+      )}
+    </div>
   )
 }
 
@@ -407,13 +548,41 @@ export function EventsPage({ onViewMilestones }: EventsPageProps = {}) {
   const [search, setSearch] = useState('')
   const [showAddEvent, setShowAddEvent] = useState(false)
 
+  // Filter row 2 state
+  const [filterTemplates, setFilterTemplates] = useState<Set<string>>(new Set())
+  const [filterPriorities, setFilterPriorities] = useState<Set<string>>(new Set())
+  const [filterStatuses, setFilterStatuses] = useState<Set<string>>(new Set())
+  const [filterClients, setFilterClients] = useState<Set<string>>(new Set())
+  const [filterFrom, setFilterFrom] = useState('')
+  const [filterTo, setFilterTo] = useState('')
+
   const filteredEvents = EVENTS.filter((e) => {
+    // Project Type dropdown (row 1)
     const matchesType = !projectType || projectType === 'all' ||
       e.template.toLowerCase().replace(/\s+/g, '-') === projectType
+    // Search bar (row 1)
     const matchesSearch = !search ||
       e.name.toLowerCase().includes(search.toLowerCase()) ||
       e.template.toLowerCase().includes(search.toLowerCase())
-    return matchesType && matchesSearch
+    // Filter chips (row 2)
+    const matchesTemplate = filterTemplates.size === 0 || filterTemplates.has(e.template)
+    const matchesPriority = filterPriorities.size === 0 || filterPriorities.has(e.priority)
+    const matchesStatus = filterStatuses.size === 0 || filterStatuses.has(e.status)
+    const matchesClient = filterClients.size === 0 || filterClients.has(e.client)
+    // Date range (row 2) — filterFrom filters by event startDate, filterTo by event endDate
+    let matchesFrom = true
+    if (filterFrom) {
+      const fromDate = new Date(filterFrom)
+      const eStart = parseMMDDYYYY(e.startDate)
+      matchesFrom = eStart !== null && eStart >= fromDate
+    }
+    let matchesTo = true
+    if (filterTo) {
+      const toDate = new Date(filterTo)
+      const eEnd = parseMMDDYYYY(e.endDate)
+      matchesTo = eEnd !== null && eEnd <= toDate
+    }
+    return matchesType && matchesSearch && matchesTemplate && matchesPriority && matchesStatus && matchesClient && matchesFrom && matchesTo
   })
 
   const allSelected = filteredEvents.length > 0 && filteredEvents.every((e) => selectedRows.has(e.id))
@@ -438,6 +607,7 @@ export function EventsPage({ onViewMilestones }: EventsPageProps = {}) {
   return (
     <div>
       {showAddEvent && <AddEventDialog onClose={() => setShowAddEvent(false)} />}
+
       {/* Page header */}
       <div className={styles.pageHeader}>
         <div className={styles.pageTitleGroup}>
@@ -458,7 +628,7 @@ export function EventsPage({ onViewMilestones }: EventsPageProps = {}) {
         </ActionButton>
       </div>
 
-      {/* Filter row 1 */}
+      {/* Filter row 1 — Project Type + Search */}
       <div className={styles.filterRow1}>
         <div className={styles.filterProjectType}>
           <Select
@@ -477,22 +647,36 @@ export function EventsPage({ onViewMilestones }: EventsPageProps = {}) {
         </div>
       </div>
 
-      {/* Filter row 2 */}
+      {/* Filter row 2 — chips */}
       <div className={styles.filterRow2}>
-        <FilterButton label="Template" />
-        <FilterButton label="Priority" />
-        <FilterButton label="Status" />
-        <FilterButton label="Client" />
-        <div className={styles.dateRange}>
-          <button type="button" className={styles.dateBtn}>
-            <Icon name="calendar-today" size={14} />
-            From date
-          </button>
+        <FilterButton
+          label="Template"
+          options={TEMPLATE_FILTER_OPTIONS}
+          selected={filterTemplates}
+          onChange={setFilterTemplates}
+        />
+        <FilterButton
+          label="Priority"
+          options={PRIORITY_FILTER_OPTIONS}
+          selected={filterPriorities}
+          onChange={setFilterPriorities}
+        />
+        <FilterButton
+          label="Status"
+          options={STATUS_FILTER_OPTIONS}
+          selected={filterStatuses}
+          onChange={setFilterStatuses}
+        />
+        <FilterButton
+          label="Client"
+          options={CLIENT_FILTER_OPTIONS}
+          selected={filterClients}
+          onChange={setFilterClients}
+        />
+        <div className={styles.dateRangeGroup}>
+          <DateFilterButton label="From date" value={filterFrom} onChange={setFilterFrom} />
           <span className={styles.dateArrow}>→</span>
-          <button type="button" className={styles.dateBtn}>
-            <Icon name="calendar-today" size={14} />
-            To date
-          </button>
+          <DateFilterButton label="To date" value={filterTo} onChange={setFilterTo} />
         </div>
       </div>
 
@@ -519,7 +703,13 @@ export function EventsPage({ onViewMilestones }: EventsPageProps = {}) {
               </tr>
             </thead>
             <tbody>
-              {filteredEvents.map((row) => (
+              {filteredEvents.length === 0 ? (
+                <tr>
+                  <td colSpan={8} className={styles.emptyRow}>
+                    No events match the selected filters.
+                  </td>
+                </tr>
+              ) : filteredEvents.map((row) => (
                 <tr key={row.id}>
                   <td className={styles.checkboxCol}>
                     <Checkbox
@@ -545,7 +735,7 @@ export function EventsPage({ onViewMilestones }: EventsPageProps = {}) {
                     <PriorityBadge priority={row.priority} />
                   </td>
                   <td>
-                    <span className={styles.dateRange}>
+                    <span className={styles.dateCellRange}>
                       {row.startDate} – {row.endDate}
                     </span>
                   </td>

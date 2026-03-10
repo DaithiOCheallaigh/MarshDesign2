@@ -302,6 +302,7 @@ table.clientsTable td {
   border-radius: var(--radius-soft);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .templateCardHeader {
@@ -328,15 +329,10 @@ table.clientsTable td {
 .templateName {
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-bold);
-  color: var(--color-blue-750);
-  text-decoration: none;
+  color: var(--color-brand-midnight);
   display: block;
   margin-bottom: 2px;
   word-break: break-word;
-}
-
-.templateName:hover {
-  text-decoration: underline;
 }
 
 .templateCategory {

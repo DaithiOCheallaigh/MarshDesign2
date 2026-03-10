@@ -460,15 +460,15 @@ function EditTemplateDialog({
                 value={form.icon}
                 onChange={(e) => field('icon', e.target.value)}
               >
-                <option value="🏦">🏦 Banking</option>
-                <option value="🏥">🏥 Healthcare</option>
-                <option value="📊">📊 Finance</option>
-                <option value="🛒">🛒 Retail</option>
-                <option value="🏢">🏢 Enterprise</option>
-                <option value="🏠">🏠 Real Estate</option>
-                <option value="📄">📄 Document</option>
-                <option value="📈">📈 Trading</option>
-                <option value="📋">📋 General</option>
+                <option value="account-balance">Banking</option>
+                <option value="hospital">Healthcare</option>
+                <option value="trending-up">Finance</option>
+                <option value="shopping-cart">Retail</option>
+                <option value="corporate-fare">Enterprise</option>
+                <option value="home">Real Estate</option>
+                <option value="description">Document</option>
+                <option value="addchart">Trading</option>
+                <option value="article">General</option>
               </select>
             </div>
             <div className={styles.formField}>
@@ -602,7 +602,7 @@ function PreviewTemplateDialog({
         </div>
 
         <div className={styles.previewBreakdown}>
-          <div className={styles.previewBreakdownTitle}>MILESTONE BREAKDOWN</div>
+          <div className={styles.previewBreakdownTitle}>Milestone Breakdown</div>
           {template.milestoneGroups.map((group, gi) => (
             <div key={group.id} className={styles.previewGroup}>
               <div className={styles.previewGroupName}>
@@ -948,14 +948,14 @@ function CreateTemplatePage({ onBack }: { onBack: () => void }) {
                   value={form.icon}
                   onChange={(e) => setForm((f) => ({ ...f, icon: e.target.value }))}
                 >
-                  <option value="📋">📋 General</option>
-                  <option value="🏦">🏦 Banking</option>
-                  <option value="🏥">🏥 Healthcare</option>
-                  <option value="📊">📊 Finance</option>
-                  <option value="🛒">🛒 Retail</option>
-                  <option value="🏢">🏢 Enterprise</option>
-                  <option value="🏠">🏠 Real Estate</option>
-                  <option value="📈">📈 Trading</option>
+                  <option value="article">General</option>
+                  <option value="account-balance">Banking</option>
+                  <option value="hospital">Healthcare</option>
+                  <option value="trending-up">Finance</option>
+                  <option value="shopping-cart">Retail</option>
+                  <option value="corporate-fare">Enterprise</option>
+                  <option value="home">Real Estate</option>
+                  <option value="addchart">Trading</option>
                 </select>
               </div>
             </div>
