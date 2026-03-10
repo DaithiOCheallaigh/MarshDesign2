@@ -1,6 +1,6 @@
 /* ==========================================================================
    Checkbox — Marsh Design System
-   Custom checkbox: 20×20, Midnight Blue border, Sky Blue checked bg
+   Custom checkbox: 20×20, Midnight Blue border, Midnight Blue checked bg
    ========================================================================== */
 
 .wrapper {
@@ -44,8 +44,9 @@
     border-color var(--transition-fast);
 }
 
+/* Checked: Midnight Blue bg — authoritative brand color per brand guide */
 .nativeInput:checked + .checkmark {
-  background-color: var(--color-brand-sky);
+  background-color: var(--color-brand-midnight);
   border-color: var(--color-brand-midnight);
 }
 
@@ -63,7 +64,7 @@
 .checkIcon {
   width: 12px;
   height: 12px;
-  color: var(--color-brand-midnight);
+  color: var(--color-white);   /* White icon on Midnight Blue bg */
   opacity: 0;
   transition: opacity var(--transition-fast);
 }

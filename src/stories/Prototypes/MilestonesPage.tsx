@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Breadcrumbs } from '../../components/Breadcrumbs'
 import { Icon } from '../../components/Icon'
+import { Avatar } from '../../components/Avatar'
 import { type EventRow } from './EventsPage'
 import styles from './MilestonesPage.module.css'
 
@@ -162,15 +162,6 @@ function MilestoneStatusDot({ status }: { status: MilestoneStatus }) {
   )
 }
 
-function AssigneeAvatar({ name }: { name: string }) {
-  const initials = name
-    .split(' ')
-    .map((p) => p[0])
-    .join('')
-    .slice(0, 2)
-    .toUpperCase()
-  return <span className={styles.assigneeAvatar}>{initials}</span>
-}
 
 // ---- Milestone Row ----
 
@@ -213,7 +204,10 @@ function MilestoneRow({ milestone }: { milestone: MilestoneItem }) {
         {/* Assignee */}
         <div className={styles.colAssignee}>
           <div className={styles.assignee}>
-            <AssigneeAvatar name={milestone.assignee} />
+            <Avatar
+                initials={milestone.assignee.split(' ').map((p) => p[0]).join('').slice(0, 2)}
+                size="small"
+              />
             <div className={styles.assigneeInfo}>
               <span className={styles.assigneeName}>{milestone.assignee}</span>
               <span className={styles.assigneeDept}>{milestone.assigneeDept}</span>
@@ -299,18 +293,6 @@ export function MilestonesPage({ event, onBack }: MilestonesPageProps) {
 
   return (
     <div>
-      {/* Breadcrumb */}
-      <div className={styles.breadcrumbRow}>
-        <Breadcrumbs
-          items={[
-            { label: 'Apps', href: '#' },
-            { label: 'AchieveA', href: '#' },
-            { label: 'Company Home — Events', href: '#' },
-            { label: event.name },
-          ]}
-        />
-      </div>
-
       {/* Compact project toolbar */}
       <div className={styles.projectToolbar}>
         <div className={styles.projectToolbarLeft}>

@@ -40,7 +40,7 @@
 
 .statCard {
   background: var(--color-white);
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--color-neutral-500);
   border-radius: var(--radius-soft);
   padding: var(--spacing-md);
   display: flex;
@@ -75,7 +75,7 @@
 
 .section {
   background: var(--color-white);
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--color-neutral-500);
   border-radius: var(--radius-soft);
   overflow: hidden;
 }
@@ -85,7 +85,7 @@
   align-items: flex-start;
   gap: var(--spacing-sm);
   padding: var(--spacing-md);
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--color-neutral-500);
 }
 
 .sectionTitle {
@@ -120,13 +120,13 @@
   font-size: 12px;
   font-weight: var(--font-weight-medium);
   color: var(--color-neutral-750);
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--color-neutral-500);
 }
 
 .userTable td {
   padding: 12px var(--spacing-md);
   vertical-align: middle;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid var(--color-neutral-250);
 }
 
 .userTable tr:last-child td {
@@ -134,7 +134,7 @@
 }
 
 .userTable tr:hover td {
-  background: var(--color-brand-sky);
+  background: var(--color-neutral-250);
 }
 
 .userCell {
@@ -186,7 +186,7 @@
 
 .actionSelect {
   padding: 4px 8px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--color-neutral-500);
   border-radius: var(--radius-default);
   font-size: var(--font-size-sm);
   font-family: var(--font-family);

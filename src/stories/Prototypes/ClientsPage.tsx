@@ -62,7 +62,7 @@ const INITIAL_TEMPLATES: TemplateCardData[] = [
     industry: 'Banking',
     category: 'Banking',
     description: 'A comprehensive framework for banking compliance covering regulatory requirements, risk assessment, and audit processes.',
-    icon: '🏦',
+    icon: 'account-balance',
     estimatedDuration: 6,
     accent: '#000f47',
     milestoneGroups: [
@@ -90,7 +90,7 @@ const INITIAL_TEMPLATES: TemplateCardData[] = [
     industry: 'Enterprise',
     category: 'Enterprise',
     description: 'End-to-end BI platform deployment covering data architecture, reporting, and analytics infrastructure.',
-    icon: '📊',
+    icon: 'addchart',
     estimatedDuration: 8,
     accent: '#0b4bff',
     milestoneGroups: [
@@ -118,7 +118,7 @@ const INITIAL_TEMPLATES: TemplateCardData[] = [
     industry: 'Enterprise',
     category: 'Enterprise',
     description: 'Automated document processing and management pipeline for enterprise-scale operations.',
-    icon: '📄',
+    icon: 'description',
     estimatedDuration: 4,
     accent: '#14853d',
     milestoneGroups: [
@@ -138,7 +138,7 @@ const INITIAL_TEMPLATES: TemplateCardData[] = [
     industry: 'Healthcare',
     category: 'Healthcare',
     description: 'Patient data analytics platform ensuring HIPAA compliance and clinical decision support.',
-    icon: '🏥',
+    icon: 'hospital',
     estimatedDuration: 9,
     accent: '#14853d',
     milestoneGroups: [
@@ -166,7 +166,7 @@ const INITIAL_TEMPLATES: TemplateCardData[] = [
     industry: 'Retail',
     category: 'Retail',
     description: 'Smart inventory management with real-time tracking, demand forecasting, and auto-reorder.',
-    icon: '🛒',
+    icon: 'shopping-cart',
     estimatedDuration: 5,
     accent: '#c53532',
     milestoneGroups: [
@@ -194,7 +194,7 @@ const INITIAL_TEMPLATES: TemplateCardData[] = [
     industry: 'Finance',
     category: 'Finance',
     description: 'Comprehensive risk management framework for trading operations with real-time monitoring.',
-    icon: '📈',
+    icon: 'trending-up',
     estimatedDuration: 7,
     accent: '#cb7e03',
     milestoneGroups: [
@@ -581,7 +581,7 @@ function PreviewTemplateDialog({
     <div className={styles.modalBackdrop} onClick={onClose}>
       <div className={styles.previewDialog} onClick={(e) => e.stopPropagation()}>
         <div className={styles.previewTop}>
-          <div className={styles.previewIconEmoji}>{template.icon}</div>
+          <div className={styles.previewIconEmoji}><Icon name={template.icon} size={40} color={template.accent} /></div>
           <h2 className={styles.previewName}>{template.name}</h2>
           <p className={styles.previewDesc}>{template.description}</p>
           <div className={styles.previewMeta}>
@@ -787,7 +787,7 @@ function CreateTemplatePage({ onBack }: { onBack: () => void }) {
     businessFunction: '',
     description: '',
     version: '',
-    icon: '📋',
+    icon: 'article',
   })
 
   function addGroup() {
@@ -1234,7 +1234,7 @@ export function ClientsPage({ defaultTab = 'my-clients' }: { defaultTab?: string
               >
                 <div className={styles.templateCardHeader}>
                   <div className={styles.templateCardInfo}>
-                    <span className={styles.templateCardIcon}>{tpl.icon}</span>
+                    <span className={styles.templateCardIcon}><Icon name={tpl.icon} size={22} color={tpl.accent} /></span>
                     <div>
                       <span className={styles.templateName}>{tpl.name}</span>
                       <div className={styles.templateCategory}>{tpl.category}</div>

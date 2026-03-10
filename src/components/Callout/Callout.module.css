@@ -1,4 +1,7 @@
-/* Callout — Marsh Design System */
+/* ==========================================================================
+   Callout — Marsh Design System
+   Status tokens: info/success/warning/danger aligned to brand palette.
+   ========================================================================== */
 
 .callout {
   padding: var(--space-4) var(--space-4) var(--space-4) var(--space-5);
@@ -19,26 +22,30 @@
   margin-top: var(--space-2);
 }
 
+/* Info — Sky Blue bg, Blue 750 accent, Midnight Blue text */
 .info {
-  background-color: var(--color-blue-tint);
-  border-left-color: var(--color-blue);
-  color: var(--color-teal);
+  background-color: var(--color-status-info-bg);    /* Sky Blue #ceecff */
+  border-left-color: var(--color-status-info);      /* Blue 750 #0b4bff */
+  color: var(--color-brand-midnight);               /* Midnight Blue — readable on sky */
 }
 
+/* Success — Green 250 bg, Success Green accent + text */
 .success {
-  background-color: var(--color-green-tint);
-  border-left-color: var(--color-success-alt);
-  color: var(--color-success);
+  background-color: var(--color-status-success-bg);   /* Green 250 #dfecd7 */
+  border-left-color: var(--color-status-success);     /* #14853d */
+  color: var(--color-status-success-text);            /* #2f7500 — accessible on green bg */
 }
 
+/* Warning — Gold 250 bg, Warning Yellow accent, Gold 1000 text */
 .warning {
-  background-color: var(--color-orange-tint);
-  border-left-color: var(--color-warning);
-  color: var(--color-orange);
+  background-color: var(--color-status-warning-bg);   /* Gold 250 #fff3da */
+  border-left-color: var(--color-status-warning);     /* #ffbe00 */
+  color: var(--color-status-warning-text);            /* #cb7e03 — accessible on gold bg */
 }
 
+/* Danger — Danger bg, Crimson accent + text */
 .danger {
-  background-color: var(--color-red-tint);
-  border-left-color: var(--color-danger);
-  color: var(--color-danger-dark);
+  background-color: var(--color-status-danger-bg);    /* #feecec */
+  border-left-color: var(--color-status-danger);      /* Crimson #c53532 */
+  color: var(--color-status-danger);                  /* Crimson — accessible on danger bg */
 }

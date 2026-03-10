@@ -2,12 +2,6 @@
    Milestones Page — Marsh Client Profile prototype
    ========================================================================== */
 
-/* ---- Top section ---- */
-
-.breadcrumbRow {
-  margin-bottom: var(--spacing-sm);
-}
-
 /* ---- Compact project toolbar ---- */
 
 .projectToolbar {
@@ -17,7 +11,7 @@
   gap: var(--spacing-sm);
   padding: 8px 12px;
   background: var(--color-white);
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--color-neutral-500);
   border-radius: var(--radius-default);
   margin-bottom: var(--spacing-sm);
 }
@@ -43,7 +37,7 @@
   justify-content: center;
   width: 28px;
   height: 28px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--color-neutral-500);
   border-radius: var(--radius-default);
   background: var(--color-white);
   color: var(--color-neutral-750);
@@ -53,7 +47,7 @@
 }
 
 .backBtn:hover {
-  background: var(--color-neutral-100);
+  background: var(--color-neutral-250);
   color: var(--color-brand-midnight);
 }
 
@@ -63,7 +57,7 @@
   gap: 6px;
   padding: 4px 8px;
   background: none;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--color-neutral-500);
   border-radius: var(--radius-default);
   cursor: pointer;
   font-family: var(--font-family);
@@ -74,7 +68,7 @@
 }
 
 .projectSelector:hover {
-  background: var(--color-neutral-50, #f9fafb);
+  background: var(--color-neutral-250);
 }
 
 .projectSelectorIcon {
@@ -107,19 +101,19 @@
 }
 
 .toolbarStatusPill[data-status="not-started"] {
-  background: #f3f4f6;
-  color: #6b7280;
+  background: var(--color-neutral-250);
+  color: var(--color-neutral-750);
 }
 
 .toolbarStatusPill[data-status="in-progress"] {
-  background: #eff6ff;
-  color: #1d4ed8;
+  background: var(--color-status-info-bg);
+  color: var(--color-blue-750);
 }
 
 .toolbarStatusPill[data-status="complete-on-time"],
 .toolbarStatusPill[data-status="complete-ahead"] {
-  background: #f0fdf4;
-  color: #15803d;
+  background: var(--color-status-success-bg);
+  color: var(--color-status-success-text);
 }
 
 .toolbarProgress {
@@ -138,7 +132,7 @@
   font-weight: var(--font-weight-regular);
   color: var(--color-neutral-750);
   background: var(--color-white);
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--color-neutral-500);
   border-radius: var(--radius-default);
   cursor: pointer;
   transition: background 0.15s;
@@ -146,7 +140,7 @@
 }
 
 .toolbarBtn:hover {
-  background: var(--color-neutral-100);
+  background: var(--color-neutral-250);
 }
 
 .toolbarBtnPrimary {
@@ -157,8 +151,8 @@
   font-size: var(--font-size-sm);
   font-family: var(--font-family);
   font-weight: var(--font-weight-medium);
-  color: var(--color-white);
-  background: var(--color-blue-750);
+  color: var(--color-brand-midnight);
+  background: var(--color-action-gold);
   border: none;
   border-radius: var(--radius-default);
   cursor: pointer;
@@ -177,7 +171,7 @@
   align-items: center;
   gap: 0;
   background: var(--color-white);
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--color-neutral-500);
   border-radius: var(--radius-default);
   padding: 0;
   margin-bottom: var(--spacing-sm);
@@ -194,8 +188,6 @@
 
 .statLabel {
   font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
   color: var(--color-neutral-500);
   font-weight: var(--font-weight-medium);
 }
@@ -245,14 +237,14 @@
   font-weight: var(--font-weight-regular);
   color: var(--color-neutral-750);
   background: var(--color-white);
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--color-neutral-500);
   border-radius: var(--radius-default);
   cursor: pointer;
   transition: background 0.15s;
 }
 
 .actionBarBtn:hover {
-  background: var(--color-neutral-100);
+  background: var(--color-neutral-250);
 }
 
 .addMilestoneBtn {
@@ -263,8 +255,8 @@
   font-size: var(--font-size-sm);
   font-family: var(--font-family);
   font-weight: var(--font-weight-medium);
-  color: var(--color-white);
-  background: var(--color-blue-750);
+  color: var(--color-brand-midnight);
+  background: var(--color-action-gold);
   border: none;
   border-radius: var(--radius-default);
   cursor: pointer;
@@ -285,7 +277,7 @@
 
 .section {
   background: var(--color-white);
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--color-neutral-500);
   border-radius: var(--radius-default);
   overflow: hidden;
 }
@@ -296,8 +288,8 @@
   align-items: center;
   gap: var(--spacing-sm);
   padding: 10px 16px;
-  background: var(--color-neutral-50, #f9fafb);
-  border-bottom: 1px solid #e5e7eb;
+  background: var(--color-neutral-250);
+  border-bottom: 1px solid var(--color-neutral-500);
 }
 
 .sectionToggle {
@@ -312,12 +304,12 @@
   color: var(--color-neutral-500);
   padding: 0;
   flex-shrink: 0;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-subtle);
   transition: background 0.15s;
 }
 
 .sectionToggle:hover {
-  background: var(--color-neutral-100);
+  background: var(--color-neutral-250);
 }
 
 .chevronDown {
@@ -360,7 +352,7 @@
   font-weight: var(--font-weight-regular);
   color: var(--color-neutral-750);
   background: var(--color-white);
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--color-neutral-500);
   border-radius: var(--radius-default);
   cursor: pointer;
   transition: background 0.15s;
@@ -368,7 +360,7 @@
 }
 
 .sectionActionBtn:hover {
-  background: var(--color-neutral-100);
+  background: var(--color-neutral-250);
 }
 
 .sectionIconBtn {
@@ -386,7 +378,7 @@
 }
 
 .sectionIconBtn:hover {
-  background: var(--color-neutral-100);
+  background: var(--color-neutral-250);
   color: var(--color-brand-midnight);
 }
 
@@ -407,7 +399,7 @@
 }
 
 .sectionNavBtn:hover {
-  background: var(--color-neutral-100);
+  background: var(--color-neutral-250);
   color: var(--color-brand-midnight);
 }
 
@@ -417,21 +409,19 @@
   grid-template-columns: 140px 1fr 160px 180px 220px minmax(280px, auto);
   align-items: center;
   padding: 7px 16px;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid var(--color-neutral-250);
   background: var(--color-white);
 }
 
 .milestoneColumnHeaders > span {
   font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
   color: var(--color-neutral-500);
   font-weight: var(--font-weight-medium);
 }
 
 /* Milestone row */
 .milestoneRowWrap {
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid var(--color-neutral-250);
 }
 
 .milestoneRowWrap:last-child {
@@ -447,7 +437,7 @@
 }
 
 .milestoneRow:hover {
-  background: #fafafa;
+  background: var(--color-neutral-250);
 }
 
 /* Column content */
@@ -465,19 +455,19 @@
 }
 
 .statusDot_complete {
-  background: #16a34a;
+  background: var(--color-status-success);
 }
 
 .statusDot_in_progress {
-  background: #2563eb;
+  background: var(--color-blue-active);
 }
 
 .statusDot_not_started {
-  background: #9ca3af;
+  background: var(--color-neutral-500);
 }
 
 .statusDot_at_risk {
-  background: #dc2626;
+  background: var(--color-status-danger);
 }
 
 .milestoneStatusLabel {
@@ -519,7 +509,7 @@
   font-family: var(--font-family);
   color: var(--color-neutral-500);
   background: none;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--color-neutral-500);
   border-radius: var(--radius-pill);
   cursor: pointer;
   white-space: nowrap;
@@ -528,7 +518,7 @@
 }
 
 .showDetailsBtn:hover {
-  background: var(--color-neutral-100);
+  background: var(--color-neutral-250);
   color: var(--color-brand-midnight);
 }
 
@@ -553,19 +543,7 @@
   gap: 8px;
 }
 
-.assigneeAvatar {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--color-brand-sky);
-  color: var(--color-brand-midnight);
-  font-size: 11px;
-  font-weight: var(--font-weight-bold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
+
 
 .assigneeInfo {
   display: flex;
@@ -616,7 +594,7 @@
 .progressBarWrap {
   flex: 1;
   height: 6px;
-  background: #e5e7eb;
+  background: var(--color-neutral-250);
   border-radius: var(--radius-pill);
   overflow: hidden;
 }
@@ -629,11 +607,11 @@
 }
 
 .progressBarFill[data-status="complete"] {
-  background: #16a34a;
+  background: var(--color-status-success);
 }
 
 .progressBarFill[data-status="at-risk"] {
-  background: #dc2626;
+  background: var(--color-status-danger);
 }
 
 .progressPct {
@@ -648,9 +626,8 @@
 .onTimeBadge {
   font-size: 11px;
   font-weight: var(--font-weight-medium);
-  color: #15803d;
-  background: #f0fdf4;
-  border: 1px solid #bbf7d0;
+  color: var(--color-status-success-text);
+  background: var(--color-status-success-bg);
   border-radius: var(--radius-pill);
   padding: 1px 7px;
   white-space: nowrap;
@@ -659,9 +636,8 @@
 .atRiskBadge {
   font-size: 11px;
   font-weight: var(--font-weight-medium);
-  color: #b91c1c;
-  background: #fef2f2;
-  border: 1px solid #fecaca;
+  color: var(--color-status-danger);
+  background: var(--color-status-danger-bg);
   border-radius: var(--radius-pill);
   padding: 1px 7px;
   white-space: nowrap;
@@ -689,7 +665,7 @@
 }
 
 .milestoneActionBtn:hover {
-  background: var(--color-neutral-100);
+  background: var(--color-neutral-250);
   color: var(--color-brand-midnight);
 }
 
@@ -701,8 +677,8 @@
   font-family: var(--font-family);
   font-weight: var(--font-weight-medium);
   color: var(--color-neutral-750);
-  background: var(--color-neutral-100);
-  border: 1px solid #e5e7eb;
+  background: var(--color-neutral-250);
+  border: 1px solid var(--color-neutral-500);
   border-radius: var(--radius-default);
   cursor: pointer;
   white-space: nowrap;

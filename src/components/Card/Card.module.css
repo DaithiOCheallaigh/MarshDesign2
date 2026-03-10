@@ -1,10 +1,13 @@
-/* Card — Marsh Design System */
+/* ==========================================================================
+   Card — Marsh Design System
+   Brand guide: prefer 1px Neutral 500 border over shadows. 8px radius.
+   Shadow only sparingly when elevation needs communicating.
+   ========================================================================== */
 
 .card {
   background-color: var(--color-white);
-  border: 1px solid var(--color-gray-100);
-  border-radius: var(--radius-medium);
-  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-neutral-500);   /* Neutral 500 #b9b6b1 — border over shadow */
+  border-radius: var(--radius-medium);           /* 8px --radius-soft */
   display: flex;
   flex-direction: column;
 }
@@ -18,18 +21,18 @@
   font-family: var(--font-family);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-medium);
-  color: var(--color-black);
+  color: var(--color-neutral-1000);
 }
 
 .body {
   flex: 1;
   font-family: var(--font-family);
   font-size: var(--font-size-base);
-  color: var(--color-black);
+  color: var(--color-neutral-1000);
 }
 
 .footer {
-  border-top: 1px solid var(--color-gray-100);
+  border-top: 1px solid var(--color-neutral-500);
   font-family: var(--font-family);
   font-size: var(--font-size-sm);
 }

@@ -1,10 +1,14 @@
-/* Table — Marsh Design System */
+/* ==========================================================================
+   Table — Marsh Design System
+   Brand guide: sharp corners (--radius-sharp: 0), Neutral 500 borders,
+   bold uppercase headers, Neutral 250 row hover
+   ========================================================================== */
 
 .wrapper {
   width: 100%;
   overflow-x: auto;
-  border-radius: var(--radius-medium);
-  border: 1px solid var(--color-gray-100);
+  border-radius: var(--radius-sharp);           /* 0px — data tables always sharp */
+  border: 1px solid var(--color-neutral-500);   /* Neutral 500 #b9b6b1 */
 }
 
 .table {
@@ -18,15 +22,17 @@
   padding: var(--space-3) var(--space-4);
   text-align: left;
   font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-gray-500);
+  font-weight: var(--font-weight-bold);          /* Bold — strong header hierarchy */
+  color: var(--color-neutral-1000);              /* Neutral 1000 #3d3c37 */
   background-color: var(--color-white);
-  border-bottom: 1px solid var(--color-gray-100);
+  border-bottom: 1px solid var(--color-neutral-500);
   white-space: nowrap;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .tr {
-  border-bottom: 1px solid var(--color-gray-100);
+  border-bottom: 1px solid var(--color-neutral-500);
   transition: background-color var(--transition-fast);
 }
 
@@ -35,11 +41,11 @@
 }
 
 .tr:hover {
-  background-color: rgba(0, 15, 71, 0.04);
+  background-color: var(--color-neutral-250);   /* #f7f3ee warm off-white */
 }
 
 .td {
   padding: var(--space-3) var(--space-4);
-  color: var(--color-black);
+  color: var(--color-neutral-1000);
   vertical-align: middle;
 }

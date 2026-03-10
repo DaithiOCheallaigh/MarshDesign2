@@ -1,10 +1,12 @@
-/* Skeleton — Marsh Design System */
+/* ==========================================================================
+   Skeleton — Marsh Design System
+   Brand guide: no gradients. Opacity-based pulse using Neutral 250 palette.
+   ========================================================================== */
 
 .skeleton {
   display: inline-block;
-  background: linear-gradient(90deg, var(--color-gray-100) 25%, #e8e8e8 50%, var(--color-gray-100) 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.4s ease-in-out infinite;
+  background-color: var(--color-neutral-500);   /* Neutral 500 #b9b6b1 */
+  animation: pulse 1.4s ease-in-out infinite;
 }
 
 .text {
@@ -25,7 +27,8 @@
   border-radius: var(--radius-full);
 }
 
-@keyframes shimmer {
-  0%   { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+/* Opacity pulse between Neutral 500 and Neutral 250 — no gradient, brand palette only */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
 }

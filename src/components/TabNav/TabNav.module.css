@@ -1,10 +1,14 @@
-/* TabNav — Marsh Design System */
+/* ==========================================================================
+   TabNav — Marsh Design System
+   nav border: Neutral 500. Active underline: Midnight Blue.
+   Badge: Neutral 250 bg / Sky Blue when active.
+   ========================================================================== */
 
 .nav {
   display: flex;
   align-items: center;
   gap: var(--space-1);
-  border-bottom: 1px solid var(--color-gray-100);
+  border-bottom: 1px solid var(--color-neutral-500);   /* Neutral 500 #b9b6b1 */
   padding-bottom: 0;
 }
 
@@ -20,7 +24,7 @@
   font-family: var(--font-family);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-regular);
-  color: var(--color-gray-500);
+  color: var(--color-neutral-750);
   cursor: pointer;
   text-decoration: none;
   white-space: nowrap;
@@ -28,12 +32,17 @@
 }
 
 .item:hover {
-  color: var(--color-dark-blue);
+  color: var(--color-brand-midnight);
+}
+
+.item:focus-visible {
+  outline: 2px solid var(--color-blue-active);
+  outline-offset: -2px;
 }
 
 .item.active {
-  color: var(--color-dark-blue);
-  border-bottom-color: var(--color-dark-blue);
+  color: var(--color-brand-midnight);
+  border-bottom-color: var(--color-brand-midnight);
   font-weight: var(--font-weight-medium);
 }
 
@@ -44,14 +53,14 @@
   min-width: 18px;
   height: 18px;
   padding: 0 var(--space-1);
-  background-color: var(--color-gray-100);
-  color: var(--color-gray-500);
+  background-color: var(--color-neutral-250);   /* Neutral 250 — muted badge bg */
+  color: var(--color-neutral-750);              /* Neutral 750 — muted badge text */
   border-radius: var(--radius-full);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
 }
 
 .item.active .badge {
-  background-color: var(--color-blue-tint);
-  color: var(--color-dark-blue);
+  background-color: var(--color-brand-sky);    /* Sky Blue — active badge bg */
+  color: var(--color-brand-midnight);          /* Midnight Blue — active badge text */
 }

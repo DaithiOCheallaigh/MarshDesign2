@@ -1,4 +1,7 @@
-/* Separator — Marsh Design System */
+/* ==========================================================================
+   Separator — Marsh Design System
+   Brand guide: Neutral 500 (#b9b6b1) for all dividing lines / graphic lines
+   ========================================================================== */
 
 .separator {
   border: none;
@@ -10,13 +13,13 @@
   display: block;
   width: 100%;
   height: 1px;
-  background-color: var(--color-gray-100);
+  background-color: var(--color-neutral-500);   /* Neutral 500 #b9b6b1 */
 }
 
 .vertical {
   display: inline-block;
   width: 1px;
   height: 100%;
-  background-color: var(--color-gray-100);
+  background-color: var(--color-neutral-500);   /* Neutral 500 #b9b6b1 */
   align-self: stretch;
 }

@@ -4,16 +4,24 @@
   gap: var(--space-s);
   font-family: var(--font-family);
   font-weight: var(--font-weight-medium);
-  border: none;
+  border: 1px solid transparent;
   border-radius: var(--radius-small);
   cursor: pointer;
-  transition: background var(--transition-fast), box-shadow var(--transition-fast);
+  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
   white-space: nowrap;
 }
 
+.actionButton:focus-visible {
+  outline: 2px solid var(--color-blue-active);
+  outline-offset: 2px;
+}
+
 .actionButton:disabled {
-  opacity: 0.5;
+  background-color: var(--color-neutral-500) !important;
+  color: var(--color-neutral-250) !important;
+  border-color: transparent !important;
   cursor: not-allowed;
+  pointer-events: none;
 }
 
 /* Sizes */
@@ -21,33 +29,37 @@
 .medium { padding: var(--space-s) var(--space-l); font-size: var(--font-size-base); }
 .large  { padding: var(--space-m) var(--space-xl); font-size: var(--font-size-lg); }
 
-/* Variants */
+/* Variants — primary is Gold CTA per Marsh Brand Guide §Color Gold 750 */
 .primary {
-  background: var(--color-dark-blue);
-  color: var(--color-white);
-  box-shadow: var(--shadow-sm);
+  background: var(--color-action-gold);
+  color: var(--color-brand-midnight);
+  border-color: var(--color-action-gold);
 }
 .primary:hover:not(:disabled) {
-  background: #0b1a60;
-  box-shadow: var(--shadow-md);
+  background: var(--color-action-gold-hover);
+  border-color: var(--color-action-gold-hover);
 }
 
+/* Secondary — Midnight Blue bg, White text */
 .secondary {
-  background: var(--color-gray-100);
-  color: var(--color-gray-900);
+  background: var(--color-brand-midnight);
+  color: var(--color-white);
+  border-color: var(--color-brand-midnight);
 }
 .secondary:hover:not(:disabled) {
-  background: var(--color-brand-sky);
-  color: var(--color-brand-midnight);
+  background: #0b1a60;
+  border-color: #0b1a60;
 }
 
+/* Danger — Crimson bg, White text */
 .danger {
-  background: var(--color-danger);
+  background: var(--color-status-danger);
   color: var(--color-white);
-  box-shadow: var(--shadow-sm);
+  border-color: var(--color-status-danger);
 }
 .danger:hover:not(:disabled) {
-  background: var(--color-danger-dark);
+  background: #a82b28;
+  border-color: #a82b28;
 }
 
 .icon {

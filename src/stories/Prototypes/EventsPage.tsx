@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Breadcrumbs } from '../../components/Breadcrumbs'
 import { ActionButton } from '../../components/ActionButton'
 import { Select } from '../../components/Select'
 import { SearchBar } from '../../components/SearchBar'
@@ -439,28 +438,12 @@ export function EventsPage({ onViewMilestones }: EventsPageProps = {}) {
   return (
     <div>
       {showAddEvent && <AddEventDialog onClose={() => setShowAddEvent(false)} />}
-      {/* Breadcrumbs */}
-      <div className={styles.breadcrumbRow}>
-        <Breadcrumbs
-          items={[
-            { label: 'Apps', href: '#' },
-            { label: 'AchieveA', href: '#' },
-            { label: 'Company Home — Events' },
-          ]}
-        />
-      </div>
-
       {/* Page header */}
       <div className={styles.pageHeader}>
         <div className={styles.pageTitleGroup}>
-          <button type="button" className={styles.backBtn} aria-label="Go back">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-          <div className={styles.pageTitleText}>
+          <div>
             <h1>All Events</h1>
-            <p>{EVENTS.length} Events</p>
+            <p className={styles.subtitle}>{EVENTS.length} Events</p>
           </div>
         </div>
         <ActionButton

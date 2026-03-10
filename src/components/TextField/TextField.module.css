@@ -1,5 +1,7 @@
 /* ==========================================================================
    TextField — Marsh Design System
+   Border: 1px Neutral 500. Radius: 4px (default/inputs). Focus: blue-active outline.
+   No box-shadows on focus — outline only per brand guide.
    ========================================================================== */
 
 .wrapper {
@@ -12,7 +14,7 @@
 .label {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
-  color: var(--color-gray-900);
+  color: var(--color-neutral-1000);
 }
 
 .inputContainer {
@@ -25,48 +27,48 @@
   width: 100%;
   padding: var(--space-2) var(--space-3);
   font-size: var(--font-size-base);
-  color: var(--color-black);
+  color: var(--color-neutral-1000);
   background-color: var(--color-white);
-  border: 1px solid var(--color-gray-500);
-  border-radius: var(--radius-medium);
+  border: 1px solid var(--color-neutral-500);    /* Neutral 500 #b9b6b1 — rest state */
+  border-radius: var(--radius-default);          /* 4px — inputs/buttons per brand guide */
   outline: none;
-  transition:
-    border-color var(--transition-fast),
-    box-shadow var(--transition-fast);
+  transition: border-color var(--transition-fast);
 }
 
 .input::placeholder {
-  color: var(--color-gray-500);
+  color: var(--color-neutral-750);
 }
 
 .input:hover:not(:disabled) {
-  border-color: var(--color-blue-gray);
+  border-color: var(--color-blue-active);   /* Blue 750 — hover highlight */
 }
 
 .input:focus {
-  border-color: var(--color-dark-blue);
-  box-shadow: 0 0 0 2px var(--color-blue-tint);
+  border-color: var(--color-blue-active);
+  outline: 2px solid var(--color-blue-active);
+  outline-offset: 2px;
 }
 
 .input:disabled {
-  background-color: var(--color-gray-100);
-  color: var(--color-gray-500);
+  background-color: var(--color-neutral-250);
+  color: var(--color-neutral-750);
   cursor: not-allowed;
 }
 
 /* ---- Error state ---- */
 
 .error {
-  border-color: var(--color-danger);
+  border-color: var(--color-status-danger);
 }
 
 .error:hover:not(:disabled) {
-  border-color: var(--color-danger);
+  border-color: var(--color-status-danger);
 }
 
 .error:focus {
-  border-color: var(--color-danger);
-  box-shadow: 0 0 0 2px var(--color-red-tint);
+  border-color: var(--color-status-danger);
+  outline: 2px solid var(--color-status-danger);
+  outline-offset: 2px;
 }
 
 /* ---- Icon support ---- */
@@ -76,7 +78,7 @@
   left: var(--space-3);
   display: flex;
   align-items: center;
-  color: var(--color-gray-500);
+  color: var(--color-neutral-750);
   pointer-events: none;
 }
 
@@ -88,10 +90,10 @@
 
 .helperText {
   font-size: var(--font-size-xs);
-  color: var(--color-gray-500);
+  color: var(--color-neutral-750);
 }
 
 .errorText {
   font-size: var(--font-size-xs);
-  color: var(--color-danger);
+  color: var(--color-status-danger);
 }

@@ -9,9 +9,17 @@
   flex-shrink: 0;
 }
 
+.iconButton:focus-visible {
+  outline: 2px solid var(--color-blue-active);
+  outline-offset: 2px;
+}
+
 .iconButton:disabled {
-  opacity: 0.5;
+  background-color: var(--color-neutral-500) !important;
+  color: var(--color-neutral-250) !important;
+  border-color: transparent !important;
   cursor: not-allowed;
+  pointer-events: none;
 }
 
 /* Sizes */
@@ -19,41 +27,44 @@
 .medium { width: 36px; height: 36px; }
 .large  { width: 44px; height: 44px; }
 
-/* Variants */
+/* Variants — primary is Gold CTA per Marsh Brand Guide */
 .primary {
-  background: var(--color-dark-blue);
-  color: var(--color-white);
-  border-color: var(--color-dark-blue);
+  background: var(--color-action-gold);
+  color: var(--color-brand-midnight);
+  border-color: var(--color-action-gold);
 }
 .primary:hover:not(:disabled) {
-  background: var(--color-teal);
-  border-color: var(--color-teal);
+  background: var(--color-action-gold-hover);
+  border-color: var(--color-action-gold-hover);
 }
 
+/* Outline — Ghost/outline variant: Midnight Blue border */
 .outline {
   background: var(--color-white);
-  color: var(--color-gray-900);
-  border-color: var(--color-gray-500);
+  color: var(--color-brand-midnight);
+  border-color: var(--color-brand-midnight);
 }
 .outline:hover:not(:disabled) {
-  background: var(--color-gray-100);
-  border-color: var(--color-gray-900);
+  background: var(--color-brand-sky);
+  border-color: var(--color-brand-midnight);
 }
 
+/* Ghost — transparent, no border */
 .ghost {
   background: transparent;
-  color: var(--color-gray-900);
+  color: var(--color-brand-midnight);
   border-color: transparent;
 }
 .ghost:hover:not(:disabled) {
-  background: var(--color-gray-100);
+  background: var(--color-brand-sky);
 }
 
+/* Danger */
 .danger {
   background: var(--color-white);
-  color: var(--color-danger);
-  border-color: var(--color-danger);
+  color: var(--color-status-danger);
+  border-color: var(--color-status-danger);
 }
 .danger:hover:not(:disabled) {
-  background: var(--color-red-tint);
+  background: var(--color-status-danger-bg);
 }

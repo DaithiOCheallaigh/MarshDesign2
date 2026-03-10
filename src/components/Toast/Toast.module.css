@@ -1,4 +1,8 @@
-/* Toast — Marsh Design System */
+/* ==========================================================================
+   Toast — Marsh Design System
+   Default: Midnight Blue bg + white text (brand dark surface).
+   Status variants: exact brand status palette tokens.
+   ========================================================================== */
 
 .toast {
   display: inline-flex;
@@ -34,6 +38,7 @@
   color: inherit;
   opacity: 0.6;
   flex-shrink: 0;
+  border-radius: var(--radius-subtle);
   transition: opacity var(--transition-fast);
 }
 
@@ -41,22 +46,32 @@
   opacity: 1;
 }
 
+.dismiss:focus-visible {
+  outline: 2px solid var(--color-blue-active);
+  outline-offset: 2px;
+  opacity: 1;
+}
+
+/* Default — Midnight Blue bg, White text */
 .default {
-  background-color: var(--color-gray-900);
+  background-color: var(--color-brand-midnight);
   color: var(--color-white);
 }
 
+/* Success — Green 250 bg, dark green text */
 .success {
-  background-color: var(--color-green-tint);
-  color: var(--color-success);
+  background-color: var(--color-status-success-bg);
+  color: var(--color-status-success-text);
 }
 
+/* Danger — Danger bg, Crimson text */
 .danger {
-  background-color: var(--color-red-tint);
-  color: var(--color-danger-dark);
+  background-color: var(--color-status-danger-bg);
+  color: var(--color-status-danger);
 }
 
+/* Warning — Gold 250 bg, Gold 1000 text */
 .warning {
-  background-color: var(--color-orange-tint);
-  color: var(--color-orange);
+  background-color: var(--color-status-warning-bg);
+  color: var(--color-status-warning-text);
 }

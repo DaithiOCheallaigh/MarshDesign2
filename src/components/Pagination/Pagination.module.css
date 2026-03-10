@@ -1,4 +1,8 @@
-/* Pagination — Marsh Design System */
+/* ==========================================================================
+   Pagination — Marsh Design System
+   Active page: Midnight Blue bg. Hover: Neutral 250 bg.
+   Focus ring: 2px solid blue-active on all interactive elements.
+   ========================================================================== */
 
 .nav {
   display: flex;
@@ -20,20 +24,26 @@
   border-radius: var(--radius-small);
   font-family: var(--font-family);
   font-size: var(--font-size-sm);
-  color: var(--color-black);
+  color: var(--color-neutral-1000);
   cursor: pointer;
   transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
 }
 
 .pageBtn:hover,
 .arrow:hover:not(:disabled) {
-  background-color: var(--color-gray-100);
+  background-color: var(--color-neutral-250);   /* Neutral 250 — hover bg */
+}
+
+.pageBtn:focus-visible,
+.arrow:focus-visible {
+  outline: 2px solid var(--color-blue-active);
+  outline-offset: 2px;
 }
 
 .pageBtn.active {
-  background-color: var(--color-dark-blue);
+  background-color: var(--color-brand-midnight);   /* Midnight Blue — active page */
   color: var(--color-white);
-  border-color: var(--color-dark-blue);
+  border-color: var(--color-brand-midnight);
 }
 
 .arrow:disabled {
@@ -48,5 +58,5 @@
   min-width: 32px;
   height: 32px;
   font-size: var(--font-size-sm);
-  color: var(--color-gray-500);
+  color: var(--color-neutral-750);
 }

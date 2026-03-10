@@ -48,7 +48,7 @@ function ClientProfileApp({ defaultPage = 'dashboard' }: { defaultPage?: ActiveP
 }
 
 const meta: Meta<typeof ClientProfileApp> = {
-  title: 'Prototypes/Client Profile',
+  title: 'Prototypes/Milestones',
   component: ClientProfileApp,
   tags: ['autodocs'],
   parameters: {

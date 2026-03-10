@@ -36,12 +36,15 @@
   flex-shrink: 0;
 }
 
+/* Active/checked — Gold per brand guide: interactive/action color */
 .nativeInput:checked ~ .track {
-  background-color: var(--color-dark-blue);
+  background-color: var(--color-action-gold);
 }
 
+/* Focus ring on the track element (proxy for the hidden input) */
 .nativeInput:focus-visible ~ .track {
-  box-shadow: 0 0 0 2px var(--color-blue-tint);
+  outline: 2px solid var(--color-blue-active);
+  outline-offset: 2px;
 }
 
 .thumb {

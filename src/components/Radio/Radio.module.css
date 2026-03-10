@@ -41,25 +41,29 @@
   width: 10px;
   height: 10px;
   border-radius: var(--radius-full);
-  background-color: var(--color-dark-blue);
+  background-color: var(--color-white);  /* White dot on Midnight Blue bg */
   opacity: 0;
   transition: opacity var(--transition-fast);
 }
 
+/* Checked: Midnight Blue bg — authoritative brand color */
 .nativeInput:checked + .radio {
-  background-color: var(--color-blue-tint);
+  background-color: var(--color-brand-midnight);
+  border-color: var(--color-brand-midnight);
 }
 
 .nativeInput:checked + .radio::after {
   opacity: 1;
 }
 
+/* Focus ring: outline not box-shadow */
 .nativeInput:focus-visible + .radio {
-  box-shadow: 0 0 0 2px var(--color-blue-tint);
+  outline: 2px solid var(--color-blue-active);
+  outline-offset: 2px;
 }
 
 .wrapper:hover .radio {
-  border-color: var(--color-blue);
+  border-color: var(--color-blue-active);
 }
 
 .label {
