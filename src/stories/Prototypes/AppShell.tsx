@@ -36,12 +36,21 @@ export function AppShell({ activePage, onNavigate, children }: AppShellProps) {
       <aside className={styles.sidebar}>
         <div className={styles.sidebarAppHeader}>
           <div className={styles.sidebarAppIcon}>
-            <svg width="18" height="18" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <circle cx="14" cy="14" r="13" stroke="var(--color-brand-midnight)" strokeWidth="2" fill="none"/>
-              <path d="M9 14a5 5 0 0 1 9.33-2.5" stroke="var(--color-brand-midnight)" strokeWidth="2" strokeLinecap="round"/>
-              <path d="M19 14a5 5 0 0 1-9.33 2.5" stroke="var(--color-brand-midnight)" strokeWidth="2" strokeLinecap="round"/>
-              <path d="M18 10.5l1.5 1-1.5 1" stroke="var(--color-brand-midnight)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M10 17.5l-1.5-1 1.5-1" stroke="var(--color-brand-midnight)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            {/* LenAI sprite */}
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              {/* Antenna */}
+              <rect x="11" y="0" width="2" height="4" rx="1" fill="white" fillOpacity="0.85"/>
+              <circle cx="12" cy="0.75" r="1.5" fill="white"/>
+              {/* Face */}
+              <rect x="2" y="4" width="20" height="18" rx="5" fill="white" fillOpacity="0.92"/>
+              {/* Left eye */}
+              <circle cx="8.5" cy="12" r="2.5" fill="var(--color-brand-midnight)"/>
+              <circle cx="9.4" cy="10.9" r="0.85" fill="white"/>
+              {/* Right eye */}
+              <circle cx="15.5" cy="12" r="2.5" fill="var(--color-brand-midnight)"/>
+              <circle cx="16.4" cy="10.9" r="0.85" fill="white"/>
+              {/* Smile */}
+              <path d="M8 17.5 Q12 20.5 16 17.5" stroke="var(--color-brand-midnight)" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
             </svg>
           </div>
           <span className={styles.sidebarAppTitle}>Client Profile</span>
