@@ -18,6 +18,11 @@ const preview: Preview = {
         { name: 'dark', value: '#202020' },
       ],
     },
+    options: {
+      storySort: {
+        order: ['Getting Started', 'Sub Atomic', 'Components', 'Prototypes', '*'],
+      },
+    },
   },
 }
 

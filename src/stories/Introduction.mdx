@@ -1,0 +1,227 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title="Getting Started" />
+
+<div style={{
+  background: 'linear-gradient(135deg, #000f47 0%, #0b4bff 100%)',
+  borderRadius: 12,
+  padding: '40px 48px',
+  marginBottom: 40,
+  color: '#fff',
+}}>
+  <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#ceecff', marginBottom: 12 }}>
+    Marsh Design System
+  </div>
+  <h1 style={{ fontSize: 36, fontWeight: 700, margin: '0 0 12px', lineHeight: 1.15, color: '#fff' }}>
+    Component Library
+  </h1>
+  <p style={{ fontSize: 16, lineHeight: 1.6, margin: 0, color: 'rgba(255,255,255,0.8)', maxWidth: 560 }}>
+    A React component library built to the Marsh brand guidelines. Every
+    component maps directly to a Figma frame and is backed by CSS custom
+    properties for consistent theming across all digital products.
+  </p>
+</div>
+
+---
+
+## Overview
+
+The **Marsh Design System** is the single source of truth for UI components
+used across Marsh digital products. It is maintained in this Storybook and
+reflects the official Marsh brand guide published at
+[brand.marsh.com](https://brand.marsh.com).
+
+| Detail | Value |
+|---|---|
+| **Stack** | React 18 · TypeScript · Vite 5 · CSS Modules |
+| **Storybook** | 8.4 |
+| **Node requirement** | ≥ 18 |
+| **Package name** | `marsh-design` (v0.1.0) |
+| **Figma source** | [MarshDesign file](https://www.figma.com/design/Zi7JjuIEiMzZwjbOYNl8Nv/MarshDesign) |
+
+---
+
+## Installation
+
+This library is consumed directly from the repository — it is not yet
+published to npm. Clone the repo and reference components from `src/`.
+
+```bash
+# Clone
+git clone https://github.com/DaithiOCheallaigh/MarshDesign2.git
+cd MarshDesign2
+
+# Install dependencies
+npm install
+
+# Start Storybook (dev server on port 6006)
+npm run storybook
+
+# Build a static Storybook site
+npm run build-storybook
+```
+
+> **Planning to publish to npm?** Update the `name`, `main`, and `exports`
+> fields in `package.json`, run `tsc --emitDeclarationOnly`, and publish
+> with `npm publish`.
+
+---
+
+## Importing Components
+
+All components are exported from `src/components/index.ts`. Import them
+using a relative path or configure a TypeScript path alias.
+
+```tsx
+// Direct import (always works)
+import { ActionButton } from './src/components/ActionButton'
+
+// Via the barrel export
+import { ActionButton, Button, Badge, Input } from './src/components'
+```
+
+Every component ships with a corresponding TypeScript interface — named
+`{ComponentName}Props` — so props are fully type-safe and discoverable in
+your editor.
+
+```tsx
+import type { ActionButtonProps } from './src/components/ActionButton'
+```
+
+---
+
+## Basic Usage
+
+```tsx
+import { ActionButton } from './src/components/ActionButton'
+import { Icon } from './src/components/Icon'
+
+function SaveButton() {
+  return (
+    <ActionButton
+      variant="primary"
+      size="medium"
+      icon={<Icon name="save" size="sm" />}
+      onClick={() => console.log('saved')}
+    >
+      Save Changes
+    </ActionButton>
+  )
+}
+```
+
+`ActionButton` props at a glance:
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `variant` | `'primary' \| 'secondary' \| 'danger'` | `'primary'` | Visual style |
+| `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | Height + padding |
+| `icon` | `ReactNode` | — | Optional leading icon |
+| `loading` | `boolean` | `false` | Shows a spinner and disables |
+| `disabled` | `boolean` | `false` | Native disabled state |
+
+Explore the full props table and live controls for every component on its
+**Docs** tab in the sidebar.
+
+---
+
+## Design Tokens & Theming
+
+All visual constants — colours, spacing, typography, radius, shadow,
+transition — are defined as **CSS custom properties** in:
+
+```
+src/tokens/tokens.css
+```
+
+Import this file once at the root of your app (Storybook already does this
+via `.storybook/preview.ts`):
+
+```ts
+// .storybook/preview.ts  — or your app entry point
+import '../src/tokens/tokens.css'
+import '../src/tokens/reset.css'
+```
+
+Key token groups:
+
+```css
+/* Brand core */
+--color-brand-midnight: #000f47;  /* Primary brand / dark backgrounds */
+--color-brand-sky:      #ceecff;  /* Light brand tint / highlighted elements */
+--color-action-gold:    #ffbf00;  /* CTA / interactive accent */
+--color-blue-active:    #0b4bff;  /* Focus rings / active links */
+
+/* Typography */
+--font-family:          'Noto Sans', sans-serif;
+--font-size-base:       16px;
+--font-weight-regular:  400;
+--font-weight-medium:   500;
+--font-weight-bold:     700;
+
+/* Spacing scale (4px base) */
+--spacing-xs:  4px;
+--spacing-sm:  8px;
+--spacing-md:  16px;
+--spacing-lg:  24px;
+--spacing-xl:  32px;
+
+/* Border radius */
+--radius-small:   4px;
+--radius-medium:  8px;
+--radius-large:   20px;
+--radius-full:    999px;
+```
+
+To override the theme for a product, create a new CSS file that redefines
+any subset of these variables on `:root` and import it after `tokens.css`.
+
+---
+
+## Design Principles
+
+**Atomic design.** Components are organised from smallest (Sub Atomic —
+icons, tokens, logo) through atoms (Button, Badge, Input) to molecules
+(Card, Dialog, Table) and full prototypes. This mirrors the layer structure
+in the Figma file so designers and engineers share a common vocabulary.
+
+**Figma-first.** Every component in this library has a corresponding frame
+in the [Figma source file](https://www.figma.com/design/Zi7JjuIEiMzZwjbOYNl8Nv/MarshDesign).
+Component naming, prop naming, and visual states align with Figma variants.
+The Storybook **Docs** tab serves as the living spec; the Figma file is the
+design source of truth.
+
+**Token-based consistency.** No hardcoded hex values in component CSS —
+every colour, size, and spacing value references a CSS custom property.
+This means any future rebrand only requires updating `tokens.css`.
+
+---
+
+## Feedback & Contributions
+
+The library lives at:
+**[github.com/DaithiOCheallaigh/MarshDesign2](https://github.com/DaithiOCheallaigh/MarshDesign2)**
+
+- **Bug reports & questions** — open a GitHub Issue with a description and,
+  where possible, a link to the relevant Storybook story.
+- **New components** — raise an Issue first to discuss scope and Figma
+  alignment before submitting a Pull Request.
+- **Token / brand changes** — changes to `tokens.css` affect every
+  component; please include before/after screenshots in your PR.
+
+<div style={{
+  marginTop: 40,
+  padding: '20px 24px',
+  background: '#f7f3ee',
+  borderRadius: 8,
+  borderLeft: '4px solid #ffbf00',
+  fontSize: 14,
+  lineHeight: 1.6,
+  color: '#000f47',
+}}>
+  <strong>Live Storybook site</strong><br />
+  The latest build is deployed to GitHub Pages at{' '}
+  <a href="https://daithiocheallaigh.github.io/MarshDesign2/" style={{ color: '#0b4bff' }}>
+    daithiocheallaigh.github.io/MarshDesign2
+  </a>
+</div>
