@@ -20,7 +20,7 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        order: ['Getting Started', 'Sub Atomic', 'Components', 'Prototypes', '*'],
+        order: ['Getting Started', 'Sub Atomic', 'Components', 'Templates', 'Prototypes', '*'],
       },
     },
   },
