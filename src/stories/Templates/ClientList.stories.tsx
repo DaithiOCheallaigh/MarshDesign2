@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
-import { Table, Progress, Pagination, Badge, IconButton, Avatar, Icon } from '../../components'
+import { Table, Progress, IconButton, Icon, Select } from '../../components'
 import type { Column } from '../../components'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -31,7 +31,11 @@ const allClients: Client[] = [
   { id: '8', name: 'Harbour View Properties',      clientNumber: 'CN801726354', country: 'CA', industryPractice: 'Real Estate',        teamSize: 4,  projects: 1, activeProjects: 1, progress: 20 },
 ]
 
-const PAGE_SIZE = 5
+const pageSizeOptions = [
+  { label: '5',  value: '5'  },
+  { label: '10', value: '10' },
+  { label: '20', value: '20' },
+]
 
 // ── Column definitions ────────────────────────────────────────────────────────
 
@@ -41,9 +45,18 @@ const columns: Column<Client>[] = [
     header: 'Client',
     render: (row) => (
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-        <Avatar initials={row.name.charAt(0)} size="small" />
+        {/* Building icon in a tinted box — matches app reference */}
+        <div style={{
+          width: 28, height: 28,
+          borderRadius: 6,
+          background: 'var(--color-blue-250)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          flexShrink: 0,
+        }}>
+          <Icon name="apartment" size="sm" color="var(--color-blue-750)" />
+        </div>
         <div>
-          <div style={{ fontSize: 14, fontWeight: 500, color: 'var(--color-primary-600)' }}>{row.name}</div>
+          <div style={{ fontSize: 14, fontWeight: 500, color: 'var(--color-blue-750)' }}>{row.name}</div>
           <div style={{ fontSize: 12, color: 'var(--color-neutral-500)' }}>{row.clientNumber}</div>
         </div>
       </div>
@@ -53,14 +66,14 @@ const columns: Column<Client>[] = [
     key: 'country',
     header: 'Country',
     render: (row) => (
-      <span style={{ fontSize: 14, color: 'var(--color-neutral-700)' }}>{row.country}</span>
+      <span style={{ fontSize: 14, color: 'var(--color-neutral-750)' }}>{row.country}</span>
     ),
   },
   {
     key: 'industryPractice',
     header: 'Industry Practice',
     render: (row) => (
-      <span style={{ fontSize: 14, color: 'var(--color-primary-600)' }}>{row.industryPractice}</span>
+      <span style={{ fontSize: 14, color: 'var(--color-blue-750)' }}>{row.industryPractice}</span>
     ),
   },
   {
@@ -68,8 +81,8 @@ const columns: Column<Client>[] = [
     header: 'Team Size',
     render: (row) => (
       <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-        <Icon name="users" size="sm" color="var(--color-neutral-400)" />
-        <span style={{ fontSize: 14, color: 'var(--color-neutral-700)' }}>{row.teamSize}</span>
+        <Icon name="group" size="sm" color="var(--color-neutral-500)" />
+        <span style={{ fontSize: 14, color: 'var(--color-neutral-750)' }}>{row.teamSize}</span>
       </div>
     ),
   },
@@ -77,24 +90,24 @@ const columns: Column<Client>[] = [
     key: 'projects',
     header: 'Projects',
     render: (row) => (
-      <span style={{ fontSize: 14, color: 'var(--color-neutral-700)' }}>{row.projects}</span>
+      <span style={{ fontSize: 14, color: 'var(--color-neutral-750)' }}>{row.projects}</span>
     ),
   },
   {
     key: 'activeProjects',
     header: 'Active Projects',
     render: (row) => (
-      <span style={{ fontSize: 14, color: Number(row.activeProjects) > 0 ? 'var(--color-success-600)' : 'var(--color-neutral-500)' }}>
+      <span style={{ fontSize: 14, color: Number(row.activeProjects) > 0 ? 'var(--color-status-success)' : 'var(--color-neutral-500)' }}>
         {row.activeProjects}
       </span>
     ),
   },
   {
     key: 'progress',
-    header: 'Progress',
+    header: 'Progress ↑↓',
     render: (row) => (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 4, minWidth: 120 }}>
-        <span style={{ fontSize: 12, color: Number(row.progress) > 0 ? 'var(--color-success-600)' : 'var(--color-danger-600)', fontWeight: 600 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 4, minWidth: 100 }}>
+        <span style={{ fontSize: 12, color: Number(row.progress) > 0 ? 'var(--color-status-success)' : 'var(--color-status-danger)', fontWeight: 600 }}>
           {row.progress}%
         </span>
         <Progress value={Number(row.progress)} max={100} />
@@ -105,7 +118,13 @@ const columns: Column<Client>[] = [
     key: 'actions',
     header: 'Actions',
     render: () => (
-      <IconButton icon="trash-2" label="Delete client" variant="danger" size="small" />
+      /* Pass <Icon> ReactNode — IconButton.icon is ReactNode, not a string */
+      <IconButton
+        icon={<Icon name="delete" size="sm" />}
+        label="Delete client"
+        variant="danger"
+        size="small"
+      />
     ),
   },
 ]
@@ -113,34 +132,77 @@ const columns: Column<Client>[] = [
 // ── Template component ────────────────────────────────────────────────────────
 
 function ClientListTemplate() {
-  const [page, setPage] = useState(1)
+  const [page, setPage]         = useState(1)
+  const [pageSize, setPageSize] = useState(5)
 
-  const start = (page - 1) * PAGE_SIZE
-  const pageRows = allClients.slice(start, start + PAGE_SIZE)
-  const totalPages = Math.ceil(allClients.length / PAGE_SIZE)
+  const start      = (page - 1) * pageSize
+  const pageRows   = allClients.slice(start, start + pageSize)
+  const totalPages = Math.ceil(allClients.length / pageSize)
+
+  const handlePageSize = (val: string) => {
+    setPageSize(Number(val))
+    setPage(1)
+  }
 
   return (
     <div style={{ padding: 'var(--spacing-lg)' }}>
       <Table columns={columns as Column[]} rows={pageRows as Record<string, unknown>[]} keyField="id" />
 
-      {/* Footer with results info + pagination */}
+      {/* Footer: results-per-page selector + page navigation */}
       <div style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 'var(--spacing-sm) var(--spacing-md)',
-        borderTop: '1px solid var(--color-neutral-200)',
+        borderTop: '1px solid var(--color-neutral-500)',
         marginTop: -1,
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)', fontSize: 13, color: 'var(--color-neutral-600)' }}>
+        {/* Left — results per page Select */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)', fontSize: 13, color: 'var(--color-neutral-750)' }}>
           <span>Results per page:</span>
-          <Badge label={String(PAGE_SIZE)} variant="default" />
+          <div style={{ width: 72 }}>
+            <Select options={pageSizeOptions} value={String(pageSize)} onChange={handlePageSize} />
+          </div>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)', fontSize: 13, color: 'var(--color-neutral-600)' }}>
+
+        {/* Right — record count + first/prev · Page X of Y · next/last */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)', fontSize: 13, color: 'var(--color-neutral-750)' }}>
           <span>
-            {start + 1}–{Math.min(start + PAGE_SIZE, allClients.length)} of {allClients.length}
+            {start + 1}–{Math.min(start + pageSize, allClients.length)} of {allClients.length}
           </span>
-          <Pagination page={page} totalPages={totalPages} onChange={setPage} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <IconButton
+              icon={<Icon name="keyboard-double-arrow-left"  size="sm" />}
+              label="First page"
+              variant="ghost" size="small"
+              disabled={page === 1}
+              onClick={() => setPage(1)}
+            />
+            <IconButton
+              icon={<Icon name="keyboard-arrow-left"   size="sm" />}
+              label="Previous page"
+              variant="ghost" size="small"
+              disabled={page === 1}
+              onClick={() => setPage(p => Math.max(1, p - 1))}
+            />
+            <span style={{ padding: '0 8px', fontSize: 13, color: 'var(--color-neutral-750)', whiteSpace: 'nowrap' }}>
+              Page {page} of {totalPages}
+            </span>
+            <IconButton
+              icon={<Icon name="keyboard-arrow-right"  size="sm" />}
+              label="Next page"
+              variant="ghost" size="small"
+              disabled={page === totalPages}
+              onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+            />
+            <IconButton
+              icon={<Icon name="keyboard-double-arrow-right" size="sm" />}
+              label="Last page"
+              variant="ghost" size="small"
+              disabled={page === totalPages}
+              onClick={() => setPage(totalPages)}
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -166,12 +228,11 @@ A **Client List** template for browsing and managing a paginated directory of cl
 | Component | Role |
 |-----------|------|
 | \`Table\` | Primary data grid; columns use \`render\` functions for rich cell content |
-| \`Avatar\` | Client initial fallback in the name column |
-| \`Icon\` | Team size icon in the team column |
+| \`Icon\` | Building icon for client identity; users icon for team size column |
 | \`Progress\` | Inline progress bar in the progress column |
-| \`Badge\` | Results-per-page indicator in the table footer |
+| \`Select\` | Results-per-page selector in the table footer |
 | \`IconButton (danger)\` | Row-level delete action |
-| \`Pagination\` | Page navigation in the table footer |
+| \`IconButton (ghost)\` | First / Prev / Next / Last pagination controls |
         `,
       },
     },

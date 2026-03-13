@@ -47,8 +47,8 @@ function TemplateInformationTemplate() {
         alignItems: 'center',
         gap: 'var(--spacing-sm)',
         padding: 'var(--spacing-sm) var(--spacing-md)',
-        background: 'var(--color-neutral-50)',
-        border: '1px solid var(--color-neutral-200)',
+        background: 'var(--color-neutral-250)',
+        border: '1px solid var(--color-neutral-500)',
         borderRadius: collapsed ? 'var(--radius-medium)' : 'var(--radius-medium) var(--radius-medium) 0 0',
         cursor: 'pointer',
         userSelect: 'none',
@@ -63,7 +63,7 @@ function TemplateInformationTemplate() {
           color="var(--color-neutral-500)"
         />
         <Icon name="folder" size="sm" color="var(--color-neutral-500)" />
-        <span style={{ fontWeight: 600, fontSize: 15, color: 'var(--color-neutral-900)' }}>
+        <span style={{ fontWeight: 600, fontSize: 15, color: 'var(--color-neutral-1000)' }}>
           Template Information
         </span>
       </div>
@@ -71,7 +71,7 @@ function TemplateInformationTemplate() {
       {/* Form body */}
       {!collapsed && (
         <div style={{
-          border: '1px solid var(--color-neutral-200)',
+          border: '1px solid var(--color-neutral-500)',
           borderTop: 'none',
           borderRadius: '0 0 var(--radius-medium) var(--radius-medium)',
           padding: 'var(--spacing-lg)',
@@ -102,7 +102,7 @@ function TemplateInformationTemplate() {
           {/* Row 2: Business Function + Specify Business Function */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--spacing-xl)', marginBottom: 'var(--spacing-lg)' }}>
             <div>
-              <label style={{ display: 'block', fontSize: 13, fontWeight: 500, color: 'var(--color-neutral-700)', marginBottom: 'var(--spacing-xs)' }}>
+              <label style={{ display: 'block', fontSize: 13, fontWeight: 500, color: 'var(--color-neutral-750)', marginBottom: 'var(--spacing-xs)' }}>
                 Business Function *
               </label>
               <Select

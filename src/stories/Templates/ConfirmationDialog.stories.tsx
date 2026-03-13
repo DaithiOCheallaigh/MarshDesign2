@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
-import { Dialog, Button } from '../../components'
+import { Dialog, Button, Icon } from '../../components'
 
 function StartProjectTemplate() {
   const [open, setOpen] = useState(true)
@@ -20,21 +20,22 @@ function StartProjectTemplate() {
           </div>
         }
       >
-        <p style={{ margin: '0 0 var(--spacing-md)', fontSize: 14, lineHeight: 1.6, color: 'var(--color-neutral-700)' }}>
+        <p style={{ margin: '0 0 var(--spacing-md)', fontSize: 14, lineHeight: 1.6, color: 'var(--color-neutral-750)' }}>
           Are you sure you want to start this project? Once a project is started, the following restrictions apply:
         </p>
-        <ul style={{ margin: 0, paddingLeft: 20, display: 'flex', flexDirection: 'column', gap: 6 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {[
             'No new Milestone Groups can be added',
             'No new Milestones can be added',
             'No new Inputs/Outputs can be added',
             'The start date cannot be edited',
           ].map(item => (
-            <li key={item} style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--color-neutral-700)' }}>
-              {item}
-            </li>
+            <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <Icon name="horizontal-rule" size="sm" color="var(--color-neutral-500)" />
+              <span style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--color-neutral-750)' }}>{item}</span>
+            </div>
           ))}
-        </ul>
+        </div>
       </Dialog>
     </div>
   )

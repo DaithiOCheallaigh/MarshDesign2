@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
-import { Dialog, Button, Input, Select, TextArea } from '../../components'
+import { Dialog, Button, Input, Select, TextArea, Icon } from '../../components'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -69,13 +69,13 @@ function CreateProjectDialogTemplate() {
           </div>
         }
       >
-        <p style={{ margin: '0 0 var(--spacing-md)', fontSize: 13, color: 'var(--color-neutral-600)', lineHeight: 1.5 }}>
+        <p style={{ margin: '0 0 var(--spacing-md)', fontSize: 13, color: 'var(--color-neutral-750)', lineHeight: 1.5 }}>
           Choose a template to get started with pre-configured milestones and best practices
         </p>
 
         {/* Template selector */}
         <div style={{ marginBottom: 'var(--spacing-md)' }}>
-          <p style={{ fontSize: 13, fontWeight: 600, marginBottom: 'var(--spacing-xs)', color: 'var(--color-neutral-700)' }}>
+          <p style={{ fontSize: 13, fontWeight: 600, marginBottom: 'var(--spacing-xs)', color: 'var(--color-neutral-750)' }}>
             Select Project Template
           </p>
           <Select
@@ -88,7 +88,7 @@ function CreateProjectDialogTemplate() {
 
 
         {/* Project details */}
-        <p style={{ fontSize: 13, fontWeight: 600, marginBottom: 'var(--spacing-sm)', color: 'var(--color-neutral-700)' }}>
+        <p style={{ fontSize: 13, fontWeight: 600, marginBottom: 'var(--spacing-sm)', color: 'var(--color-neutral-750)' }}>
           Project Details
         </p>
 
@@ -100,12 +100,22 @@ function CreateProjectDialogTemplate() {
             onChange={e => set('name')(e.target.value)}
           />
 
-          <Input
-            label="Project Assignee (Optional)"
-            placeholder="Use Search or Self to assign"
-            value={form.assignee}
-            onChange={e => set('assignee')(e.target.value)}
-          />
+          <div>
+            <label style={{ display: 'block', fontSize: 13, fontWeight: 500, color: 'var(--color-neutral-750)', marginBottom: 'var(--spacing-xs)' }}>
+              Project Assignee (Optional)
+            </label>
+            <div style={{ display: 'flex', gap: 'var(--spacing-sm)', alignItems: 'center' }}>
+              <div style={{ flex: 1 }}>
+                <Input
+                  placeholder="Use Search or Self to assign"
+                  value={form.assignee}
+                  onChange={e => set('assignee')(e.target.value)}
+                />
+              </div>
+              <Button variant="secondary" size="small" iconLeading={<Icon name="person"  size="sm" />}>Search</Button>
+              <Button variant="secondary" size="small" iconLeading={<Icon name="check" size="sm" />}>Self</Button>
+            </div>
+          </div>
 
           <TextArea
             label="Description"
@@ -146,7 +156,7 @@ function CreateProjectDialogTemplate() {
               onChange={e => set('budget')(e.target.value)}
             />
             <div>
-              <label style={{ display: 'block', fontSize: 13, fontWeight: 500, color: 'var(--color-neutral-700)', marginBottom: 'var(--spacing-xs)' }}>
+              <label style={{ display: 'block', fontSize: 13, fontWeight: 500, color: 'var(--color-neutral-750)', marginBottom: 'var(--spacing-xs)' }}>
                 Priority
               </label>
               <Select

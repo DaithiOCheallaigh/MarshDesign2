@@ -52,31 +52,39 @@ const groups: MilestoneGroup[] = [
   },
 ]
 
-// ── Sub-components ────────────────────────────────────────────────────────────
+// ── Column grid (shared between header and rows) ───────────────────────────────
 
-const statusVariantMap: Record<Milestone['status'], 'info' | 'success' | 'default'> = {
-  Scheduled:  'info',
-  'In Progress': 'warning' as 'info',
-  Complete:   'success',
+const COLS = '100px 1fr 120px 160px 110px auto'
+
+// ── Status badge variant map ──────────────────────────────────────────────────
+
+const statusVariantMap: Record<Milestone['status'], 'info' | 'warning' | 'success' | 'default'> = {
+  Scheduled:     'info',
+  'In Progress': 'warning',
+  Complete:      'success',
 }
+
+// ── MilestoneRow ──────────────────────────────────────────────────────────────
 
 function MilestoneRow({ milestone }: { milestone: Milestone }) {
   return (
     <div style={{
       display: 'grid',
-      gridTemplateColumns: '110px 1fr 130px 160px 100px 140px',
+      gridTemplateColumns: COLS,
       alignItems: 'center',
       padding: '10px var(--spacing-md)',
-      borderBottom: '1px solid var(--color-neutral-100)',
+      borderBottom: '1px solid var(--color-neutral-250)',
       gap: 'var(--spacing-sm)',
     }}>
       {/* Status */}
-      <Badge label={milestone.status} variant={statusVariantMap[milestone.status] ?? 'default'} />
+      <div>
+        <Badge label={milestone.status} variant={statusVariantMap[milestone.status] ?? 'default'} />
+      </div>
 
       {/* Name */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-        <Icon name="circle-dot" size="sm" color="var(--color-neutral-400)" />
-        <span style={{ fontSize: 14, fontWeight: 500, color: 'var(--color-neutral-900)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6, minWidth: 0 }}>
+        <Icon name="radio-button-checked" size="sm" color="var(--color-neutral-500)" />
+        <span style={{ fontSize: 14, fontWeight: 500, color: 'var(--color-neutral-1000)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
           {milestone.name}
         </span>
       </div>
@@ -84,60 +92,75 @@ function MilestoneRow({ milestone }: { milestone: Milestone }) {
       {/* Assignee */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
         <Avatar size="small" initials="?" />
-        <span style={{ fontSize: 13, color: 'var(--color-primary-600)' }}>Unassigned</span>
+        <span style={{ fontSize: 13, color: 'var(--color-blue-750)' }}>Unassigned</span>
       </div>
 
       {/* Dates */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, color: 'var(--color-neutral-700)' }}>
-        <Icon name="calendar" size="sm" color="var(--color-neutral-400)" />
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, color: 'var(--color-neutral-750)' }}>
+        <Icon name="calendar-today" size="sm" color="var(--color-neutral-500)" />
         {milestone.startDate} – {milestone.endDate}
       </div>
 
       {/* Progress */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
         <Progress value={milestone.progress} max={100} />
         <span style={{ fontSize: 12, color: 'var(--color-neutral-500)', whiteSpace: 'nowrap' }}>
           {milestone.progress}%
         </span>
       </div>
 
-      {/* Actions */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-        <IconButton icon="bell" label="Subscribe"   variant="ghost" size="small" />
-        <IconButton icon="copy" label="Duplicate"   variant="ghost" size="small" />
-        <IconButton icon="bookmark" label="Save"    variant="ghost" size="small" />
-        <IconButton icon="list" label="More"        variant="ghost" size="small" />
+      {/* Actions — pass <Icon> as ReactNode to IconButton.icon */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        <IconButton icon={<Icon name="notifications"     size="sm" />} label="Subscribe" variant="ghost" size="small" />
+        <IconButton icon={<Icon name="content-copy"     size="sm" />} label="Duplicate" variant="ghost" size="small" />
+        <IconButton icon={<Icon name="bookmark-border" size="sm" />} label="Save"      variant="ghost" size="small" />
+        <IconButton icon={<Icon name="list"     size="sm" />} label="More"      variant="ghost" size="small" />
         <Button variant="ghost" size="small">Expand</Button>
       </div>
     </div>
   )
 }
 
+// ── MilestoneGroupSection ─────────────────────────────────────────────────────
+
 function MilestoneGroupSection({ group }: { group: MilestoneGroup }) {
   const [collapsed, setCollapsed] = useState(false)
 
   return (
-    <div style={{ border: '1px solid var(--color-neutral-200)', borderRadius: 'var(--radius-medium)', overflow: 'hidden', marginBottom: 'var(--spacing-md)' }}>
+    <div style={{
+      border: '1px solid var(--color-neutral-500)',
+      borderRadius: 'var(--radius-medium)',
+      overflow: 'hidden',
+      marginBottom: 'var(--spacing-md)',
+    }}>
       {/* Group header */}
       <div style={{
         display: 'flex',
         alignItems: 'center',
         padding: 'var(--spacing-sm) var(--spacing-md)',
-        background: 'var(--color-neutral-50)',
-        borderBottom: collapsed ? 'none' : '1px solid var(--color-neutral-200)',
+        background: 'var(--color-neutral-250)',
+        borderBottom: collapsed ? 'none' : '1px solid var(--color-neutral-500)',
       }}>
-        <span style={{ fontWeight: 600, fontSize: 15, color: 'var(--color-neutral-900)' }}>{group.name}</span>
+        <span style={{ fontWeight: 600, fontSize: 15, color: 'var(--color-neutral-1000)' }}>
+          {group.name}
+        </span>
         <span style={{ fontSize: 13, color: 'var(--color-neutral-500)', marginLeft: 8 }}>
           {group.milestones.length} milestone{group.milestones.length !== 1 ? 's' : ''}
         </span>
-        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)' }}>
+
+        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 4 }}>
           <Button variant="ghost" size="small">
-            <Icon name="bell-off" size="sm" color="var(--color-neutral-400)" />
+            <Icon name="notifications-off" size="sm" color="var(--color-neutral-500)" />
             Subscribe to Section
           </Button>
-          <IconButton icon="more-horizontal" label="More options" variant="ghost" size="small" />
           <IconButton
-            icon={collapsed ? 'chevron-down' : 'chevron-up'}
+            icon={<Icon name="more-horiz" size="sm" />}
+            label="More options"
+            variant="ghost"
+            size="small"
+          />
+          <IconButton
+            icon={<Icon name={collapsed ? 'keyboard-arrow-down' : 'keyboard-arrow-up'} size="sm" />}
             label={collapsed ? 'Expand' : 'Collapse'}
             variant="ghost"
             size="small"
@@ -151,10 +174,10 @@ function MilestoneGroupSection({ group }: { group: MilestoneGroup }) {
           {/* Column headers */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: '110px 1fr 130px 160px 100px 140px',
+            gridTemplateColumns: COLS,
             padding: '8px var(--spacing-md)',
-            background: 'var(--color-neutral-50)',
-            borderBottom: '1px solid var(--color-neutral-100)',
+            background: 'var(--color-neutral-250)',
+            borderBottom: '1px solid var(--color-neutral-500)',
             gap: 'var(--spacing-sm)',
           }}>
             {['Status', 'Milestone Name', 'Assignee', 'Start / Finish', 'Progress', 'Actions'].map(col => (
@@ -174,23 +197,25 @@ function MilestoneGroupSection({ group }: { group: MilestoneGroup }) {
   )
 }
 
+// ── Template ──────────────────────────────────────────────────────────────────
+
 function MilestoneListTemplate() {
   return (
     <div style={{ padding: 'var(--spacing-lg)' }}>
       {/* Page header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--spacing-lg)' }}>
-        <div>
-          <Breadcrumbs items={[{ label: 'Test' }, { label: 'Test' }]} />
-        </div>
+        <Breadcrumbs items={[{ label: 'Test' }, { label: 'Test' }]} />
+
         <div style={{ display: 'flex', gap: 'var(--spacing-sm)', alignItems: 'center' }}>
           <Button variant="secondary" size="small">Show Graph</Button>
-          <Button variant="secondary" size="small" iconLeading="share-2">View All I/O</Button>
-          <Button variant="ghost" size="small" iconLeading="download">Export Data</Button>
-          <ActionButton icon={<Icon name="plus" size="sm" />}>Add</ActionButton>
+          <Button variant="secondary" size="small" iconLeading={<Icon name="share"  size="sm" />}>View All I/O</Button>
+          <Button variant="ghost"     size="small" iconLeading={<Icon name="cloud-download" size="sm" />}>Export Data</Button>
+          <ActionButton icon={<Icon name="add" size="sm" />}>Add</ActionButton>
         </div>
       </div>
 
       <Separator />
+
       <div style={{ marginTop: 'var(--spacing-lg)' }}>
         {groups.map(g => (
           <MilestoneGroupSection key={g.id} group={g} />
@@ -220,12 +245,12 @@ A **Milestone List** template for displaying grouped project milestones in a col
 |-----------|------|
 | \`Breadcrumbs\` | Contextual navigation path at the top of the page |
 | \`ActionButton\` | Primary "Add" action with a dropdown indicator for sub-actions |
-| \`Button\` | Secondary and ghost actions (Show Graph, View All I/O, Export Data) |
+| \`Button\` | Secondary and ghost actions (Show Graph, View All I/O, Export Data, Subscribe to Section) |
 | \`Badge\` | Milestone status indicator (Scheduled, In Progress, Complete) |
 | \`Avatar\` | Assignee profile picture or initials fallback |
 | \`Progress\` | Inline progress bar showing milestone completion percentage |
-| \`IconButton\` | Row-level actions (Subscribe, Duplicate, Save, More, Collapse) |
-| \`Icon\` | Decorative icons for milestone type and date fields |
+| \`IconButton\` | Row-level actions (Subscribe, Duplicate, Save, More) and group collapse toggle |
+| \`Icon\` | Decorative icons for milestone type, date fields, and header controls |
 | \`Separator\` | Visual divider below the page header |
         `,
       },
