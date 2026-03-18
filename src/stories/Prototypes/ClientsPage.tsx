@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './ClientsPage.module.css'
 
 // =============================================================================
@@ -88,18 +88,44 @@ interface ClientsPageProps {
 export function ClientsPage({ onViewClient }: ClientsPageProps = {}) {
   const [search, setSearch] = useState('')
   const [perPage, setPerPage] = useState(20)
-  const [rows, setRows] = useState<ClientRow[]>(CLIENTS)
+  const [clients, setClients] = useState<ClientRow[]>(CLIENTS)
+  const [toast, setToast] = useState<string | null>(null)
+  const [showAddClient, setShowAddClient] = useState(false)
+  const [newClient, setNewClient] = useState({ name: '', cn: '', country: '', industryPractice: '' })
 
-  const filtered = rows.filter(c =>
+  useEffect(() => {
+    if (!toast) return
+    const t = setTimeout(() => setToast(null), 2500)
+    return () => clearTimeout(t)
+  }, [toast])
+
+  const filteredClients = clients.filter(c =>
     c.name.toLowerCase().includes(search.toLowerCase())
   )
 
-  const totalPages = Math.max(1, Math.ceil(filtered.length / perPage))
-  const rangeStart = filtered.length === 0 ? 0 : 1
-  const rangeEnd = filtered.length
+  const totalPages = Math.max(1, Math.ceil(filteredClients.length / perPage))
+  const rangeStart = filteredClients.length === 0 ? 0 : 1
+  const rangeEnd = filteredClients.length
 
   function handleDelete(id: string) {
-    setRows(prev => prev.filter(c => c.id !== id))
+    setClients(prev => prev.filter(c => c.id !== id))
+    setToast('Client removed')
+  }
+
+  function handleAddClient() {
+    if (!newClient.name.trim()) return
+    const client: ClientRow = {
+      id: `c-${Date.now()}`,
+      name: newClient.name.trim(),
+      cn: newClient.cn.trim() || `CN${Math.floor(Math.random()*1e9)}`,
+      country: newClient.country.trim() || '—',
+      industryPractice: newClient.industryPractice.trim() || '—',
+      teamSize: 0, projects: 0, activeProjects: 0, progress: 0,
+    }
+    setClients(prev => [client, ...prev])
+    setNewClient({ name: '', cn: '', country: '', industryPractice: '' })
+    setShowAddClient(false)
+    setToast(`"${client.name}" added`)
   }
 
   return (
@@ -107,7 +133,7 @@ export function ClientsPage({ onViewClient }: ClientsPageProps = {}) {
       {/* Page header */}
       <div className={styles.pageHeader}>
         <h1 className={styles.pageTitle}>My Clients</h1>
-        <button className={styles.addBtn}>+ Add Client</button>
+        <button className={styles.addBtn} onClick={() => setShowAddClient(true)}>+ Add Client</button>
       </div>
 
       {/* Search bar */}
@@ -138,14 +164,14 @@ export function ClientsPage({ onViewClient }: ClientsPageProps = {}) {
             </tr>
           </thead>
           <tbody>
-            {filtered.length === 0 ? (
+            {filteredClients.length === 0 ? (
               <tr>
                 <td colSpan={8} style={{ textAlign: 'center', color: '#9ca3af', padding: '32px 0' }}>
                   No clients found.
                 </td>
               </tr>
             ) : (
-              filtered.map(client => {
+              filteredClients.map(client => {
                 const isZero = client.progress === 0
                 return (
                   <tr key={client.id}>
@@ -236,7 +262,7 @@ export function ClientsPage({ onViewClient }: ClientsPageProps = {}) {
           </div>
           <div className={styles.paginationRight}>
             <span>
-              {rangeStart}–{rangeEnd} of {filtered.length}
+              {rangeStart}–{rangeEnd} of {filteredClients.length}
             </span>
             <button className={styles.pageBtn} disabled aria-label="First page">«</button>
             <button className={styles.pageBtn} disabled aria-label="Previous page">‹</button>
@@ -246,6 +272,51 @@ export function ClientsPage({ onViewClient }: ClientsPageProps = {}) {
           </div>
         </div>
       </div>
+
+      {/* Add Client dialog */}
+      {showAddClient && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)', zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ background: 'white', borderRadius: 12, padding: 28, width: 480, boxShadow: '0 8px 32px rgba(0,0,0,0.18)', position: 'relative' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
+              <h2 style={{ fontSize: 18, fontWeight: 600, margin: 0, color: '#111827' }}>Add Client</h2>
+              <button onClick={() => setShowAddClient(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 20, color: '#6b7280', lineHeight: 1 }}>×</button>
+            </div>
+            {[
+              { label: 'Client Name *', key: 'name', placeholder: 'Full client name' },
+              { label: 'CN Number *', key: 'cn', placeholder: 'CN...' },
+              { label: 'Country', key: 'country', placeholder: 'e.g. AU' },
+              { label: 'Industry Practice', key: 'industryPractice', placeholder: 'e.g. Forestry & Wood Products' },
+            ].map(f => (
+              <div key={f.key} style={{ marginBottom: 14 }}>
+                <label style={{ fontSize: 12, fontWeight: 500, color: '#374151', display: 'block', marginBottom: 4 }}>{f.label}</label>
+                <input
+                  type="text"
+                  placeholder={f.placeholder}
+                  value={newClient[f.key as keyof typeof newClient]}
+                  onChange={e => setNewClient(prev => ({ ...prev, [f.key]: e.target.value }))}
+                  style={{ width: '100%', border: '1px solid #e5e7eb', borderRadius: 6, padding: '8px 10px', fontSize: 13, boxSizing: 'border-box', fontFamily: 'inherit' }}
+                />
+              </div>
+            ))}
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 20 }}>
+              <button onClick={() => setShowAddClient(false)} style={{ background: 'white', border: '1px solid #e5e7eb', borderRadius: 6, padding: '8px 16px', fontSize: 13, cursor: 'pointer' }}>Cancel</button>
+              <button onClick={handleAddClient} disabled={!newClient.name.trim()} style={{ background: '#002C77', color: 'white', border: 'none', borderRadius: 6, padding: '8px 16px', fontSize: 13, cursor: newClient.name.trim() ? 'pointer' : 'not-allowed', opacity: newClient.name.trim() ? 1 : 0.6 }}>Add Client</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Toast */}
+      {toast && (
+        <div style={{
+          position: 'fixed', bottom: 24, right: 24, background: '#002C77', color: 'white',
+          padding: '10px 18px', borderRadius: 8, fontSize: 14, boxShadow: '0 4px 12px rgba(0,0,0,0.18)',
+          zIndex: 100, display: 'flex', alignItems: 'center', gap: 8,
+        }}>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="white" fillOpacity="0.2" stroke="white" strokeWidth="1.2"/><path d="M5 8l2 2 4-4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          {toast}
+        </div>
+      )}
     </div>
   )
 }

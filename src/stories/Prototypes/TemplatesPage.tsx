@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import styles from './TemplatesPage.module.css'
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -155,9 +156,11 @@ function getTotalDays(template: TemplateCardData): number {
 interface TemplateCardProps {
   template: TemplateCardData
   onView?: (template: TemplateCardData) => void
+  onCopy?: (template: TemplateCardData) => void
+  onDelete?: (id: string) => void
 }
 
-function TemplateCard({ template, onView }: TemplateCardProps) {
+function TemplateCard({ template, onView, onCopy, onDelete }: TemplateCardProps) {
   const totalGroups = getTotalGroups(template)
   const totalMilestones = getTotalMilestones(template)
   const totalDays = getTotalDays(template)
@@ -199,10 +202,10 @@ function TemplateCard({ template, onView }: TemplateCardProps) {
       <div className={styles.cardFooter}>
         <span className={styles.cardUpdated}>Updated: {template.updatedDate}</span>
         <div className={styles.cardActions}>
-          <button className={styles.cardIconBtn} title="Copy template" aria-label="Copy template">
+          <button className={styles.cardIconBtn} title="Copy template" aria-label="Copy template" onClick={() => onCopy?.(template)}>
             <CopyIcon />
           </button>
-          <button className={styles.cardIconBtn} title="Delete template" aria-label="Delete template">
+          <button className={styles.cardIconBtn} title="Delete template" aria-label="Delete template" style={{ color: '#9ca3af' }} onClick={() => onDelete?.(template.id)}>
             <DeleteIcon />
           </button>
           <button
@@ -225,6 +228,42 @@ interface TemplatesPageProps {
 }
 
 export function TemplatesPage({ onViewTemplate, onCreateTemplate }: TemplatesPageProps = {}) {
+  const [templates, setTemplates] = useState<TemplateCardData[]>(TEMPLATES)
+  const [toast, setToast] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!toast) return
+    const t = setTimeout(() => setToast(null), 2500)
+    return () => clearTimeout(t)
+  }, [toast])
+
+  function handleCopy(t: TemplateCardData) {
+    const copy: TemplateCardData = {
+      ...t,
+      id: `copy-${Date.now()}`,
+      name: `${t.name} (Copy)`,
+      updatedDate: new Date().toISOString().slice(0, 10),
+      milestoneGroups: t.milestoneGroups.map(g => ({
+        ...g,
+        id: `${g.id}-c`,
+        milestones: g.milestones.map(m => ({ ...m, id: `${m.id}-c` })),
+      })),
+    }
+    setTemplates(prev => {
+      const idx = prev.findIndex(x => x.id === t.id)
+      const next = [...prev]
+      next.splice(idx + 1, 0, copy)
+      return next
+    })
+    setToast(`"${t.name}" duplicated`)
+  }
+
+  function handleDelete(id: string) {
+    const t = templates.find(x => x.id === id)
+    setTemplates(prev => prev.filter(x => x.id !== id))
+    setToast(t ? `"${t.name}" deleted` : 'Template deleted')
+  }
+
   return (
     <div>
       <div className={styles.pageHeader}>
@@ -240,14 +279,27 @@ export function TemplatesPage({ onViewTemplate, onCreateTemplate }: TemplatesPag
       </div>
 
       <div className={styles.grid}>
-        {TEMPLATES.map((template) => (
+        {templates.map((template) => (
           <TemplateCard
             key={template.id}
             template={template}
             onView={onViewTemplate}
+            onCopy={handleCopy}
+            onDelete={handleDelete}
           />
         ))}
       </div>
+
+      {toast && (
+        <div style={{
+          position: 'fixed', bottom: 24, right: 24, background: '#002C77', color: 'white',
+          padding: '10px 18px', borderRadius: 8, fontSize: 14, boxShadow: '0 4px 12px rgba(0,0,0,0.18)',
+          zIndex: 100, display: 'flex', alignItems: 'center', gap: 8,
+        }}>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="white" fillOpacity="0.2" stroke="white" strokeWidth="1.2"/><path d="M5 8l2 2 4-4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          {toast}
+        </div>
+      )}
     </div>
   )
 }

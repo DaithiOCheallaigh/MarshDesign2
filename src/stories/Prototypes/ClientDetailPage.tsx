@@ -6,9 +6,10 @@ import styles from './ClientDetailPage.module.css'
 interface ClientDetailPageProps {
   client: ClientRow
   onBack: () => void
+  onViewProject?: (project: ProjectRow) => void
 }
 
-interface ProjectRow {
+export interface ProjectRow {
   id: string
   status: 'Scheduled' | 'In Progress' | 'Completed' | 'Blocked'
   name: string
@@ -107,8 +108,10 @@ function ClientIconBox() {
   )
 }
 
-export function ClientDetailPage({ client, onBack }: ClientDetailPageProps) {
+export function ClientDetailPage({ client, onBack, onViewProject }: ClientDetailPageProps) {
   const [search, setSearch] = useState('')
+  const [showAddProject, setShowAddProject] = useState(false)
+  const [newProject, setNewProject] = useState({ name: '', description: '', priority: 'High' as 'High' | 'Medium' | 'Low' })
 
   const filteredProjects = PROJECTS.filter(
     (p) =>
@@ -118,6 +121,47 @@ export function ClientDetailPage({ client, onBack }: ClientDetailPageProps) {
 
   return (
     <div>
+      {showAddProject && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)', zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ background: 'white', borderRadius: 12, padding: 28, width: 480, boxShadow: '0 8px 32px rgba(0,0,0,0.18)', position: 'relative' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
+              <h2 style={{ fontSize: 18, fontWeight: 600, margin: 0, color: '#111827' }}>Add New Project</h2>
+              <button onClick={() => setShowAddProject(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 20, color: '#6b7280', lineHeight: 1 }}>×</button>
+            </div>
+            <div style={{ marginBottom: 14 }}>
+              <label style={{ fontSize: 12, fontWeight: 500, color: '#374151', display: 'block', marginBottom: 4 }}>Project Name *</label>
+              <input type="text" placeholder="Project name" value={newProject.name} onChange={e => setNewProject(p => ({ ...p, name: e.target.value }))} style={{ width: '100%', border: '1px solid #e5e7eb', borderRadius: 6, padding: '8px 10px', fontSize: 13, boxSizing: 'border-box', fontFamily: 'inherit' }} />
+            </div>
+            <div style={{ marginBottom: 14 }}>
+              <label style={{ fontSize: 12, fontWeight: 500, color: '#374151', display: 'block', marginBottom: 4 }}>Description</label>
+              <textarea placeholder="Brief description" value={newProject.description} onChange={e => setNewProject(p => ({ ...p, description: e.target.value }))} rows={3} style={{ width: '100%', border: '1px solid #e5e7eb', borderRadius: 6, padding: '8px 10px', fontSize: 13, boxSizing: 'border-box', fontFamily: 'inherit', resize: 'vertical' }} />
+            </div>
+            <div style={{ marginBottom: 14 }}>
+              <label style={{ fontSize: 12, fontWeight: 500, color: '#374151', display: 'block', marginBottom: 4 }}>Priority</label>
+              <select value={newProject.priority} onChange={e => setNewProject(p => ({ ...p, priority: e.target.value as 'High' | 'Medium' | 'Low' }))} style={{ width: '100%', border: '1px solid #e5e7eb', borderRadius: 6, padding: '8px 10px', fontSize: 13, background: 'white', fontFamily: 'inherit' }}>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+              </select>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 20 }}>
+              <button onClick={() => setShowAddProject(false)} style={{ background: 'white', border: '1px solid #e5e7eb', borderRadius: 6, padding: '8px 16px', fontSize: 13, cursor: 'pointer' }}>Cancel</button>
+              <button
+                onClick={() => {
+                  if (!newProject.name.trim()) return
+                  setShowAddProject(false)
+                  setNewProject({ name: '', description: '', priority: 'High' })
+                }}
+                disabled={!newProject.name.trim()}
+                style={{ background: '#002C77', color: 'white', border: 'none', borderRadius: 6, padding: '8px 16px', fontSize: 13, cursor: newProject.name.trim() ? 'pointer' : 'not-allowed', opacity: newProject.name.trim() ? 1 : 0.6 }}
+              >
+                Create Project
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Back link */}
       <button
         onClick={onBack}
@@ -158,7 +202,7 @@ export function ClientDetailPage({ client, onBack }: ClientDetailPageProps) {
             <span className={styles.clientMeta}>Address: Wetherill Park, New South Wales, AU</span>
           </div>
         </div>
-        <button className={styles.addProjectBtn}>+ Add New Project</button>
+        <button className={styles.addProjectBtn} onClick={() => setShowAddProject(true)}>+ Add New Project</button>
       </div>
 
       {/* 2. KPI Stats Row */}
@@ -332,7 +376,11 @@ export function ClientDetailPage({ client, onBack }: ClientDetailPageProps) {
 
                 {/* Actions */}
                 <td>
-                  <button className={styles.arrowBtn} title="View project">
+                  <button
+                    className={styles.arrowBtn}
+                    title="View project"
+                    onClick={() => onViewProject?.(project)}
+                  >
                     <ChevronRightIcon />
                   </button>
                 </td>

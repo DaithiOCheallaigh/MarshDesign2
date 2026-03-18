@@ -11,6 +11,7 @@ const ZOOM_LEVELS = [50, 75, 100, 125, 150]
 
 export function DependencyGraphOverlay({ template, onClose }: DependencyGraphOverlayProps) {
   const [zoomIndex, setZoomIndex] = useState<number>(2) // default 100%
+  const [showSettings, setShowSettings] = useState(false)
 
   const zoom = ZOOM_LEVELS[zoomIndex]
 
@@ -20,10 +21,6 @@ export function DependencyGraphOverlay({ template, onClose }: DependencyGraphOve
 
   function zoomIn() {
     setZoomIndex((i) => Math.min(ZOOM_LEVELS.length - 1, i + 1))
-  }
-
-  function resetZoom() {
-    setZoomIndex(2)
   }
 
   // Collect all milestones from all groups
@@ -63,10 +60,10 @@ export function DependencyGraphOverlay({ template, onClose }: DependencyGraphOve
               +
             </button>
           </div>
-          <button className={styles.headerBtn} onClick={resetZoom} title="Fit to view">
+          <button className={styles.headerBtn} onClick={() => setZoomIndex(1)} title="Fit to view">
             Fit
           </button>
-          <button className={styles.headerBtn} onClick={resetZoom} title="Reset zoom">
+          <button className={styles.headerBtn} onClick={() => setZoomIndex(2)} title="Reset zoom">
             Reset
           </button>
           {/* Close */}
@@ -99,8 +96,13 @@ export function DependencyGraphOverlay({ template, onClose }: DependencyGraphOve
           </div>
         </div>
 
-        {/* Settings/gear placeholder */}
-        <button className={styles.settingsBtn} title="Settings">
+        {/* Settings/gear button with popover */}
+        <button
+          className={styles.settingsBtn}
+          onClick={() => setShowSettings((v) => !v)}
+          title="Display settings"
+          style={{ position: 'relative' }}
+        >
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="8" cy="8" r="2.5" stroke="#6b7280" strokeWidth="1.5" />
             <path
@@ -110,6 +112,17 @@ export function DependencyGraphOverlay({ template, onClose }: DependencyGraphOve
               strokeLinecap="round"
             />
           </svg>
+          {showSettings && (
+            <div style={{
+              position: 'absolute', top: '100%', right: 0, marginTop: 8,
+              background: 'white', border: '1px solid #e5e7eb', borderRadius: 8,
+              padding: '12px 16px', width: 200, boxShadow: '0 4px 12px rgba(0,0,0,0.12)',
+              zIndex: 20, textAlign: 'left',
+            }}>
+              <p style={{ fontSize: 13, fontWeight: 600, color: '#374151', margin: '0 0 6px' }}>Display settings</p>
+              <p style={{ fontSize: 12, color: '#9ca3af', margin: 0 }}>Layout options coming soon.</p>
+            </div>
+          )}
         </button>
 
         {/* Nodes grid */}

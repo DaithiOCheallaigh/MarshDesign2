@@ -2,7 +2,7 @@ import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { AppShell, type ActivePage } from './AppShell'
 import { ClientsPage, type ClientRow } from './ClientsPage'
-import { ClientDetailPage } from './ClientDetailPage'
+import { ClientDetailPage, type ProjectRow } from './ClientDetailPage'
 import { TemplatesPage, type TemplateCardData } from './TemplatesPage'
 import { TemplateDetailPage } from './TemplateDetailPage'
 import { CreateTemplatePage } from './CreateTemplatePage'
@@ -86,6 +86,7 @@ function ClientProfileApp({
     defaultView === 'templateDetail' ? DEFAULT_TEMPLATE : null,
   )
   const [showGraph, setShowGraph] = useState(defaultShowGraph)
+  const [selectedProject, setSelectedProject] = useState<ProjectRow | null>(null)
 
   // Sidebar only knows about top-level pages
   const activeSidebarPage: ActivePage =
@@ -95,16 +96,45 @@ function ClientProfileApp({
 
   function handleSidebarNavigate(page: ActivePage) {
     setShowGraph(false)
+    setSelectedProject(null)
     setView(page)
   }
 
   function renderPage() {
     // Client detail drill-in
     if (view === 'clientDetail' && selectedClient) {
+      if (selectedProject) {
+        // Show a simple project milestones view inline
+        return (
+          <div>
+            <div style={{ padding: '12px 0 16px', borderBottom: '1px solid #e5e7eb', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
+              <button
+                onClick={() => setSelectedProject(null)}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#6b7280', fontSize: 13, padding: 0, display: 'flex', alignItems: 'center', gap: 4 }}
+              >
+                ← Back to {selectedClient.name}
+              </button>
+            </div>
+            <div style={{ padding: '0' }}>
+              <h2 style={{ fontSize: 18, fontWeight: 600, color: '#1d4ed8', marginBottom: 4 }}>{selectedProject.name}</h2>
+              <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 24 }}>
+                <span style={{ background: '#f3f4f6', color: '#374151', borderRadius: 4, padding: '2px 8px', fontSize: 12, marginRight: 8 }}>{selectedProject.status}</span>
+                {selectedProject.priority} Priority · {selectedProject.startDate} – {selectedProject.endDate}
+              </p>
+              <div style={{ background: 'white', border: '1px solid #e5e7eb', borderRadius: 8, padding: 24, textAlign: 'center', color: '#9ca3af' }}>
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style={{ marginBottom: 12 }}><rect x="6" y="8" width="28" height="26" rx="3" stroke="#d1d5db" strokeWidth="2"/><path d="M13 16h14M13 22h10M13 28h6" stroke="#d1d5db" strokeWidth="2" strokeLinecap="round"/></svg>
+                <p style={{ fontSize: 14, margin: 0 }}>Milestone detail view coming soon</p>
+                <p style={{ fontSize: 12, marginTop: 4 }}>0 / {selectedProject.milestonesTotal} milestones complete</p>
+              </div>
+            </div>
+          </div>
+        )
+      }
       return (
         <ClientDetailPage
           client={selectedClient}
           onBack={() => setView('clients')}
+          onViewProject={(p) => setSelectedProject(p)}
         />
       )
     }
@@ -208,7 +238,7 @@ export const ClientDetail: Story = {
     docs: {
       description: {
         story:
-          'Client Detail — header card with KPI stats row and Project Portfolio table for Tesrol Australia Pty Ltd.',
+          'Client Detail — header card with KPI stats row and Project Portfolio table for Tesrol Australia Pty Ltd. Click the → arrow on a project row to drill into the project milestones view.',
       },
     },
   },
