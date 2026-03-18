@@ -60,7 +60,7 @@ export function AppShell({ activePage, onNavigate, children }: AppShellProps) {
               <span>Help Guide</span>
             </button>
             <button type="button" className={`${styles.sidebarFooterLink} ${styles.sidebarFooterLinkSignOut}`}>
-              <Icon name="logout" size={18} color="currentColor" />
+              <Icon name="power-settings-new" size={18} color="currentColor" />
               <span>Sign Out</span>
             </button>
           </div>
