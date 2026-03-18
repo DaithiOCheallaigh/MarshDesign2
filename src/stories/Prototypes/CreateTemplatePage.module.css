@@ -1,0 +1,491 @@
+.page {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 0;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.breadcrumbBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  color: #6b7280;
+  padding: 0;
+}
+
+.breadcrumbBtn:hover {
+  color: #374151;
+}
+
+.pageTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1d4ed8;
+  margin: 0;
+}
+
+.headerRight {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.showGraphBtn {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #374151;
+  font-family: inherit;
+}
+
+.showGraphBtn:hover {
+  background: #f9fafb;
+}
+
+.saveBtn {
+  background: #002C77;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: inherit;
+}
+
+.saveBtn:hover {
+  background: #001f54;
+}
+
+.panels {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  margin-top: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  min-height: 500px;
+}
+
+/* LEFT PANEL */
+
+.leftPanel {
+  width: 270px;
+  flex-shrink: 0;
+  border-right: 1px solid #e5e7eb;
+  overflow-y: auto;
+  background: white;
+}
+
+.leftPanelHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.leftTemplateName {
+  font-size: 12px;
+  font-weight: 500;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #111827;
+}
+
+.leftTemplateNameEmpty {
+  color: #9ca3af;
+}
+
+.addGroupBtn {
+  border: 1px solid #002C77;
+  color: #002C77;
+  background: white;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.addGroupBtn:hover {
+  background: #eff6ff;
+}
+
+.emptyGroups {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px;
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+.groupList {
+  padding: 8px 0;
+}
+
+.groupRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.groupRow:hover {
+  background: #f9fafb;
+}
+
+.groupRowActive {
+  background: #eff6ff;
+}
+
+.groupChevron {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9ca3af;
+  padding: 2px;
+  display: flex;
+  flex-shrink: 0;
+}
+
+.groupName {
+  font-size: 13px;
+  font-weight: 600;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #111827;
+}
+
+.groupBadge {
+  min-width: 18px;
+  height: 18px;
+  background: #002C77;
+  color: white;
+  border-radius: 50%;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+.removeGroupBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9ca3af;
+  opacity: 0;
+  padding: 2px;
+  display: flex;
+  flex-shrink: 0;
+}
+
+.groupRow:hover .removeGroupBtn {
+  opacity: 1;
+}
+
+.milestoneRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px 4px 32px;
+}
+
+.milestoneBullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid #9ca3af;
+  flex-shrink: 0;
+}
+
+.milestoneName {
+  font-size: 12px;
+  color: #374151;
+  flex: 1;
+}
+
+.milestoneDays {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.addMilestoneBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #2563eb;
+  font-size: 12px;
+  padding: 4px 12px 4px 32px;
+  display: block;
+  text-align: left;
+  width: 100%;
+  font-family: inherit;
+}
+
+.addMilestoneBtn:hover {
+  color: #1d4ed8;
+}
+
+/* RIGHT PANEL */
+
+.rightPanel {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  background: white;
+}
+
+.statsBar {
+  display: flex;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.statItem {
+  flex: 1;
+  text-align: center;
+  padding: 12px 8px;
+}
+
+.statValue {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2563eb;
+  display: block;
+}
+
+.statLabel {
+  font-size: 11px;
+  color: #9ca3af;
+  display: block;
+  margin-top: 2px;
+}
+
+.statDivider {
+  width: 1px;
+  background: #e5e7eb;
+  margin: 10px 0;
+}
+
+.section {
+  margin-bottom: 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #f9fafb;
+  cursor: pointer;
+  border-bottom: 1px solid #e5e7eb;
+  user-select: none;
+}
+
+.sectionTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.sectionBody {
+  padding: 16px;
+}
+
+.fieldGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.fieldFull {
+  grid-column: 1 / -1;
+}
+
+.fieldLabel {
+  font-size: 12px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.fieldInput {
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-family: inherit;
+  box-sizing: border-box;
+  color: #111827;
+}
+
+.fieldInput:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.fieldInput[readonly] {
+  background: #f9fafb;
+  color: #6b7280;
+  cursor: default;
+}
+
+.fieldSelect {
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-family: inherit;
+  box-sizing: border-box;
+  background: white;
+  cursor: pointer;
+  color: #111827;
+}
+
+.fieldSelect:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.fieldTextarea {
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-family: inherit;
+  box-sizing: border-box;
+  resize: vertical;
+  min-height: 80px;
+  color: #111827;
+}
+
+.fieldTextarea:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.charCount {
+  font-size: 11px;
+  color: #9ca3af;
+  text-align: right;
+  margin-top: 4px;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 60px 24px;
+  color: #9ca3af;
+  text-align: center;
+}
+
+.emptyStateIcon {
+  color: #d1d5db;
+}
+
+.emptyStateText {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.createGroupBtn {
+  background: #002C77;
+  color: white;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.createGroupBtn:hover {
+  background: #001f54;
+}
+
+/* MILESTONE GROUP SECTION */
+
+.milestoneGroupSection {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.milestoneGroupHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.milestoneGroupTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.addMilestoneSectionBtn {
+  background: white;
+  border: 1px solid #e5e7eb;
+  color: #374151;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.addMilestoneSectionBtn:hover {
+  background: #f9fafb;
+}
+
+.milestoneGroupBody {
+  padding: 16px;
+}

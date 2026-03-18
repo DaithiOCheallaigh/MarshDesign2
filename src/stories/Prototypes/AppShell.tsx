@@ -3,7 +3,7 @@ import { SearchBar } from '../../components/SearchBar'
 import { Icon } from '../../components/Icon'
 import styles from './AppShell.module.css'
 
-export type ActivePage = 'dashboard' | 'events' | 'clients' | 'team' | 'templates' | 'admin'
+export type ActivePage = 'clients' | 'templates'
 
 interface NavItem {
   id: ActivePage
@@ -12,12 +12,8 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { id: 'dashboard', label: 'Dashboard', icon: 'dashboard' },
-  { id: 'events', label: 'Events', icon: 'event' },
-  { id: 'clients', label: 'Clients', icon: 'contacts' },
-  { id: 'team', label: 'Team', icon: 'group' },
+  { id: 'clients', label: 'My Clients', icon: 'contacts' },
   { id: 'templates', label: 'Templates', icon: 'article' },
-  { id: 'admin', label: 'Admin', icon: 'admin-panel-settings' },
 ]
 
 export interface AppShellProps {
@@ -35,17 +31,10 @@ export function AppShell({ activePage, onNavigate, children }: AppShellProps) {
       {/* Sidebar — full height */}
       <aside className={styles.sidebar}>
         <div className={styles.sidebarAppHeader}>
-          <div className={styles.sidebarAppIcon}>
-            <svg width="18" height="18" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <circle cx="14" cy="14" r="13" stroke="var(--color-brand-midnight)" strokeWidth="2" fill="none"/>
-              <path d="M9 14a5 5 0 0 1 9.33-2.5" stroke="var(--color-brand-midnight)" strokeWidth="2" strokeLinecap="round"/>
-              <path d="M19 14a5 5 0 0 1-9.33 2.5" stroke="var(--color-brand-midnight)" strokeWidth="2" strokeLinecap="round"/>
-              <path d="M18 10.5l1.5 1-1.5 1" stroke="var(--color-brand-midnight)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M10 17.5l-1.5-1 1.5-1" stroke="var(--color-brand-midnight)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-          <span className={styles.sidebarAppTitle}>Client Profile</span>
+          <div className={styles.sidebarBrandMarsh}>MARSH</div>
+          <div className={styles.sidebarBrandSub}>MILESTONE TRACKER</div>
         </div>
+
         <nav className={styles.sidebarNav}>
           {NAV_ITEMS.map((item) => {
             const isActive = item.id === activePage
@@ -58,33 +47,27 @@ export function AppShell({ activePage, onNavigate, children }: AppShellProps) {
               >
                 <Icon name={item.icon} size={20} color="currentColor" />
                 <span>{item.label}</span>
-                {item.id === 'admin' && <span className={styles.navBadge}>Admin</span>}
               </button>
             )
           })}
+
+          {/* Push bottom links to bottom */}
+          <div style={{ flex: 1 }} />
+          <div className={styles.sidebarDivider} />
+          <div className={styles.sidebarBottomLinks}>
+            <button type="button" className={styles.sidebarFooterLink}>
+              <Icon name="help-outline" size={18} color="currentColor" />
+              <span>Help Guide</span>
+            </button>
+            <button type="button" className={`${styles.sidebarFooterLink} ${styles.sidebarFooterLinkSignOut}`}>
+              <Icon name="logout" size={18} color="currentColor" />
+              <span>Sign Out</span>
+            </button>
+          </div>
         </nav>
 
-        <div className={styles.sidebarBottom}>
-          <div className={styles.sidebarDivider} />
-          <a
-            href="#"
-            className={styles.sidebarBottomLink}
-            onClick={(e) => { e.preventDefault(); onNavigate?.('dashboard') }}
-          >
-            <Icon name="home" size={18} color="currentColor" />
-            Back to Home
-          </a>
-          <a
-            href="#"
-            className={styles.sidebarBottomLink}
-            onClick={(e) => { e.preventDefault(); mainRef.current?.scrollTo({ top: 0, behavior: 'smooth' }) }}
-          >
-            <Icon name="keyboard-double-arrow-up" size={18} color="currentColor" />
-            Back to Top
-          </a>
-          <div className={styles.sidebarLogo}>
-            <img src="assets/marsh-logo-new-white.png" alt="Marsh" className={styles.sidebarLogoImg} />
-          </div>
+        <div className={styles.sidebarLogo}>
+          <img src="assets/marsh-logo-new-white.png" alt="Marsh" className={styles.sidebarLogoImg} />
         </div>
       </aside>
 
@@ -94,16 +77,17 @@ export function AppShell({ activePage, onNavigate, children }: AppShellProps) {
           <div className={styles.headerStart} />
           <div className={styles.headerSearch}>
             <SearchBar
-              placeholder="Search by Client or CN Number..."
+              placeholder="Search milestones, projects, or team members..."
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
             />
           </div>
           <div className={styles.headerRight}>
-            <span className={styles.headerGreeting}>Good Morning, example</span>
-            <span className={styles.headerAvatar}>
-              <Icon name="account-circle" size={28} />
-            </span>
+            <div className={styles.headerUserInfo}>
+              <span className={styles.headerUserName}>Kelly, Dave</span>
+              <span className={styles.headerUserEmail}>dave.kelly@mmc.com</span>
+            </div>
+            <div className={styles.headerAvatar}>KD</div>
           </div>
         </header>
 

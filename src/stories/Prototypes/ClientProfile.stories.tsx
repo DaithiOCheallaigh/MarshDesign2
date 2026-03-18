@@ -1,51 +1,172 @@
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { AppShell, type ActivePage } from './AppShell'
-import { DashboardPage } from './DashboardPage'
-import { EventsPage, type EventRow } from './EventsPage'
-import { ClientsPage } from './ClientsPage'
-import { TeamPage } from './TeamPage'
-import { AdminPage } from './AdminPage'
-import { MilestonesPage } from './MilestonesPage'
+import { ClientsPage, type ClientRow } from './ClientsPage'
+import { ClientDetailPage } from './ClientDetailPage'
+import { TemplatesPage, type TemplateCardData } from './TemplatesPage'
+import { TemplateDetailPage } from './TemplateDetailPage'
+import { CreateTemplatePage } from './CreateTemplatePage'
+import { DependencyGraphOverlay } from './DependencyGraphOverlay'
 
-// Wrapper component to handle navigation state
-function ClientProfileApp({ defaultPage = 'dashboard' }: { defaultPage?: ActivePage }) {
-  const [activePage, setActivePage] = useState<ActivePage>(defaultPage)
-  const [selectedEvent, setSelectedEvent] = useState<EventRow | null>(null)
+// ---------------------------------------------------------------------------
+// Default data for drill-in stories
+// ---------------------------------------------------------------------------
 
-  function handleNavigate(page: ActivePage) {
-    setSelectedEvent(null)
-    setActivePage(page)
+const DEFAULT_CLIENT: ClientRow = {
+  id: '1',
+  name: 'Tesrol Australia Pty Ltd',
+  cn: 'CN114935407',
+  country: 'AU',
+  industryPractice: 'Forestry & Integrated Wood Products',
+  teamSize: 0,
+  projects: 1,
+  activeProjects: 0,
+  progress: 0,
+}
+
+const DEFAULT_TEMPLATE: TemplateCardData = {
+  id: '1',
+  name: 'Babcock International Group PLC',
+  business: 'Marsh Risk',
+  businessFunction: 'Risk Management',
+  description:
+    'End-to-end risk management framework for Babcock International covering all business units.',
+  updatedDate: '2025-11-01',
+  milestoneGroups: [
+    {
+      id: 'g1',
+      name: 'Service Delivery',
+      milestones: [
+        { id: 'm1', name: 'Policy Documentation Issued', days: 30 },
+        { id: 'm2', name: 'Global Register of Insurance', days: 60 },
+        { id: 'm3', name: 'Statutory Certificates - TWMIC Letters', days: 5 },
+        { id: 'm4', name: 'Invoice Issuance', days: 30 },
+        { id: 'm5', name: 'Acknowledgement of Correspondence/Phone Calls', days: 1 },
+        { id: 'm6', name: 'Meeting Minutes', days: 5 },
+        { id: 'm7', name: 'WIP Calls', days: 5 },
+      ],
+    },
+    { id: 'g2', name: 'Renewal', milestones: [] },
+    { id: 'g3', name: 'Risk Management - Tech Solutions', milestones: [] },
+    { id: 'g4', name: 'Claims Management', milestones: [] },
+    { id: 'g5', name: 'Governance & Control / Strategy', milestones: [] },
+    { id: 'g6', name: 'Transition', milestones: [] },
+  ],
+}
+
+// ---------------------------------------------------------------------------
+// View state type
+// ---------------------------------------------------------------------------
+
+type ViewName =
+  | 'clients'
+  | 'clientDetail'
+  | 'templates'
+  | 'templateDetail'
+  | 'createTemplate'
+
+// ---------------------------------------------------------------------------
+// Wrapper — manages all navigation state
+// ---------------------------------------------------------------------------
+
+interface ClientProfileAppProps {
+  defaultView?: ViewName
+  defaultShowGraph?: boolean
+}
+
+function ClientProfileApp({
+  defaultView = 'clients',
+  defaultShowGraph = false,
+}: ClientProfileAppProps) {
+  const [view, setView] = useState<ViewName>(defaultView)
+  const [selectedClient, setSelectedClient] = useState<ClientRow | null>(
+    defaultView === 'clientDetail' ? DEFAULT_CLIENT : null,
+  )
+  const [selectedTemplate, setSelectedTemplate] = useState<TemplateCardData | null>(
+    defaultView === 'templateDetail' ? DEFAULT_TEMPLATE : null,
+  )
+  const [showGraph, setShowGraph] = useState(defaultShowGraph)
+
+  // Sidebar only knows about top-level pages
+  const activeSidebarPage: ActivePage =
+    view === 'templates' || view === 'templateDetail' || view === 'createTemplate'
+      ? 'templates'
+      : 'clients'
+
+  function handleSidebarNavigate(page: ActivePage) {
+    setShowGraph(false)
+    setView(page)
   }
 
   function renderPage() {
-    if (activePage === 'events' && selectedEvent) {
-      return <MilestonesPage event={selectedEvent} onBack={() => setSelectedEvent(null)} />
+    // Client detail drill-in
+    if (view === 'clientDetail' && selectedClient) {
+      return (
+        <ClientDetailPage
+          client={selectedClient}
+          onBack={() => setView('clients')}
+        />
+      )
     }
-    switch (activePage) {
-      case 'dashboard':
-        return <DashboardPage onNavigate={handleNavigate} />
-      case 'events':
-        return <EventsPage onViewMilestones={setSelectedEvent} />
-      case 'clients':
-        return <ClientsPage defaultTab="my-clients" />
-      case 'templates':
-        return <ClientsPage defaultTab="templates" />
-      case 'team':
-        return <TeamPage />
-      case 'admin':
-        return <AdminPage />
-      default:
-        return <DashboardPage />
+
+    // My Clients list
+    if (view === 'clients' || view === 'clientDetail') {
+      return (
+        <ClientsPage
+          onViewClient={(c) => {
+            setSelectedClient(c)
+            setView('clientDetail')
+          }}
+        />
+      )
     }
+
+    // Create template
+    if (view === 'createTemplate') {
+      return <CreateTemplatePage onBack={() => setView('templates')} />
+    }
+
+    // Template detail drill-in
+    if (view === 'templateDetail' && selectedTemplate) {
+      return (
+        <TemplateDetailPage
+          template={selectedTemplate}
+          onBack={() => setView('templates')}
+          onShowGraph={() => setShowGraph(true)}
+        />
+      )
+    }
+
+    // Templates list (also fallback for templateDetail with no template)
+    return (
+      <TemplatesPage
+        onViewTemplate={(t) => {
+          setSelectedTemplate(t)
+          setView('templateDetail')
+        }}
+        onCreateTemplate={() => setView('createTemplate')}
+      />
+    )
   }
 
   return (
-    <AppShell activePage={activePage} onNavigate={handleNavigate}>
-      {renderPage()}
-    </AppShell>
+    <>
+      <AppShell activePage={activeSidebarPage} onNavigate={handleSidebarNavigate}>
+        {renderPage()}
+      </AppShell>
+      {showGraph && selectedTemplate && (
+        <DependencyGraphOverlay
+          template={selectedTemplate}
+          onClose={() => setShowGraph(false)}
+        />
+      )}
+    </>
   )
 }
+
+// ---------------------------------------------------------------------------
+// Storybook meta
+// ---------------------------------------------------------------------------
 
 const meta: Meta<typeof ClientProfileApp> = {
   title: 'Prototypes/Milestones',
@@ -56,7 +177,7 @@ const meta: Meta<typeof ClientProfileApp> = {
     docs: {
       description: {
         component:
-          'Full-page prototype of the Marsh Client Profile application. Use the sidebar to navigate between all views.',
+          'Full-page prototype of the Marsh Milestone Tracker. Use the sidebar to navigate between My Clients and Templates. Click client names or template "Open" buttons to drill into detail views.',
       },
     },
   },
@@ -65,79 +186,77 @@ const meta: Meta<typeof ClientProfileApp> = {
 export default meta
 type Story = StoryObj<typeof ClientProfileApp>
 
-export const Dashboard: Story = {
-  args: {
-    defaultPage: 'dashboard',
-  },
+// ---------------------------------------------------------------------------
+// Stories
+// ---------------------------------------------------------------------------
+
+export const MyClients: Story = {
+  args: { defaultView: 'clients' },
   parameters: {
     docs: {
       description: {
-        story: 'Admin dashboard — KPI metrics, event status/activity charts, priority breakdown, on-time rate gauges, recent events, and top clients.',
+        story:
+          'My Clients — searchable client list with CN numbers, progress bars, and delete actions. Click a client name to drill into the Client Detail view.',
       },
     },
   },
 }
 
-export const Events: Story = {
-  args: {
-    defaultPage: 'events',
-  },
+export const ClientDetail: Story = {
+  args: { defaultView: 'clientDetail' },
   parameters: {
     docs: {
       description: {
-        story: 'All Events view — sortable table with priority and status badges, filter controls, pagination, and interactive "Add New Event" dialog with 2-step template selection flow.',
-      },
-    },
-  },
-}
-
-export const Clients: Story = {
-  args: {
-    defaultPage: 'clients',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Clients view — tabbed table listing clients with project counts and last-updated dates.',
+        story:
+          'Client Detail — header card with KPI stats row and Project Portfolio table for Tesrol Australia Pty Ltd.',
       },
     },
   },
 }
 
 export const Templates: Story = {
-  args: {
-    defaultPage: 'templates',
-  },
+  args: { defaultView: 'templates' },
   parameters: {
     docs: {
       description: {
-        story: 'Templates view — card grid of 6 industry templates with colored left borders, milestone counts, and "Use Template" CTA.',
+        story:
+          'Business Process Templates — card grid showing group/milestone/duration stats. Click "Open" to view a template detail, or "+ New Template" to start a blank template.',
       },
     },
   },
 }
 
-export const Team: Story = {
-  args: {
-    defaultPage: 'team',
-  },
+export const TemplateDetail: Story = {
+  args: { defaultView: 'templateDetail' },
   parameters: {
     docs: {
       description: {
-        story: 'Team Members view — card grid showing 5 team members with role badges, role dropdowns, and joined dates.',
+        story:
+          'Template Detail — two-panel view with a group tree sidebar on the left and template information + milestone group editor on the right. Click "Show Graph" to launch the dependency graph overlay.',
       },
     },
   },
 }
 
-export const Admin: Story = {
-  args: {
-    defaultPage: 'admin',
-  },
+export const CreateTemplate: Story = {
+  args: { defaultView: 'createTemplate' },
   parameters: {
     docs: {
       description: {
-        story: 'Admin Dashboard — system stats (users, clients, events, active rate) plus user management table with role dropdowns.',
+        story:
+          'Create Template — blank two-panel creation flow. Add groups via the left panel, fill in template metadata on the right. Groups and milestones are added interactively.',
+      },
+    },
+  },
+}
+
+export const DependencyGraph: Story = {
+  args: { defaultView: 'templateDetail', defaultShowGraph: true },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Dependency Graph — full-viewport overlay showing all milestone nodes for Babcock International Group PLC. Supports zoom in/out and close.',
       },
     },
   },

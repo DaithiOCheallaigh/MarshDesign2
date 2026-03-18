@@ -1,0 +1,338 @@
+/* ─── Client Header Card ─────────────────────────────────────────────────── */
+
+.clientHeader {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.clientHeaderLeft {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.clientIconBox {
+  width: 48px;
+  height: 48px;
+  background: #002c77;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: white;
+}
+
+.clientInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.clientName {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.clientMeta {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.addProjectBtn {
+  background: #002c77;
+  color: white;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+}
+
+.addProjectBtn:hover {
+  background: #001f5a;
+}
+
+/* ─── KPI Stats Row ──────────────────────────────────────────────────────── */
+
+.kpiRow {
+  display: flex;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.kpiTile {
+  flex: 1;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.kpiDivider {
+  width: 1px;
+  background: #e5e7eb;
+  margin: 12px 0;
+}
+
+.kpiValueRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.kpiIcon {
+  color: #9ca3af;
+}
+
+.kpiValue {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.kpiLabel {
+  font-size: 12px;
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+/* ─── Project Portfolio Header ───────────────────────────────────────────── */
+
+.portfolioHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.portfolioTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.portfolioControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.portfolioSearch {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+  width: 180px;
+  outline: none;
+  color: #111827;
+}
+
+.portfolioSearch:focus {
+  border-color: #002c77;
+  box-shadow: 0 0 0 2px rgba(0, 44, 119, 0.1);
+}
+
+.portfolioSelect {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+  background: white;
+  cursor: pointer;
+  color: #374151;
+  outline: none;
+}
+
+.portfolioSelect:focus {
+  border-color: #002c77;
+}
+
+/* ─── Table Card ─────────────────────────────────────────────────────────── */
+
+.tableCard {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table td {
+  padding: 10px 12px;
+  font-size: 13px;
+  border-bottom: 1px solid #f3f4f6;
+  vertical-align: middle;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table tbody tr:hover td {
+  background: #fafafa;
+}
+
+/* ─── Status Badges ──────────────────────────────────────────────────────── */
+
+.statusBadge {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.statusScheduled {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.statusInProgress {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.statusCompleted {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.statusBlocked {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* ─── Project Name ───────────────────────────────────────────────────────── */
+
+.projectName {
+  font-weight: 500;
+  font-size: 14px;
+  color: #111827;
+}
+
+.projectDesc {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 2px;
+}
+
+/* ─── Assignee Avatar ────────────────────────────────────────────────────── */
+
+.assigneeAvatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #002c77;
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Priority Badges ────────────────────────────────────────────────────── */
+
+.priorityBadge {
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 500;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.priorityHigh {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.priorityMedium {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.priorityLow {
+  background: #d1fae5;
+  color: #059669;
+}
+
+/* ─── Progress ───────────────────────────────────────────────────────────── */
+
+.progressText {
+  font-size: 13px;
+  font-weight: 600;
+  color: #dc2626;
+}
+
+.progressBar {
+  height: 4px;
+  background: #e5e7eb;
+  border-radius: 2px;
+  margin-top: 3px;
+  min-width: 60px;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 2px;
+  background: #dc2626;
+}
+
+/* ─── Budget ─────────────────────────────────────────────────────────────── */
+
+.naText {
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+/* ─── Actions ────────────────────────────────────────────────────────────── */
+
+.arrowBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #2563eb;
+  font-size: 18px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+
+.arrowBtn:hover {
+  background: #eff6ff;
+}

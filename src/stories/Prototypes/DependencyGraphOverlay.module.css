@@ -1,0 +1,233 @@
+/* ── Overlay ── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: white;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 60px;
+  border-bottom: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.headerTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.headerSub {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Zoom controls ── */
+.zoomGroup {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 2px;
+}
+
+.zoomBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #374151;
+}
+
+.zoomBtn:hover:not(:disabled) {
+  background: #f3f4f6;
+}
+
+.zoomBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.zoomLabel {
+  font-size: 13px;
+  color: #374151;
+  min-width: 40px;
+  text-align: center;
+}
+
+/* ── Header buttons ── */
+.headerBtn {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #374151;
+}
+
+.headerBtn:hover {
+  background: #f9fafb;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #6b7280;
+  padding: 4px 8px;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+.closeBtn:hover {
+  background: #f3f4f6;
+}
+
+/* ── Canvas area ── */
+.canvasArea {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: #f9fafb;
+}
+
+/* ── Legend ── */
+.legend {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+}
+
+.legendTitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.legendRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+  font-size: 12px;
+  color: #374151;
+}
+
+.legendRow:last-child {
+  margin-bottom: 0;
+}
+
+.legendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Settings button ── */
+.settingsBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 6px;
+  cursor: pointer;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.settingsBtn:hover {
+  background: #f3f4f6;
+}
+
+/* ── Nodes grid ── */
+.nodesGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 60px 16px 16px 200px;
+  align-items: flex-start;
+  align-content: flex-start;
+  height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* ── Node card ── */
+.node {
+  background: white;
+  border: 2px solid #a78bfa;
+  border-radius: 8px;
+  width: 170px;
+  padding: 10px 12px;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.nodeName {
+  font-size: 12px;
+  font-weight: 600;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nodeGroup {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Bottom strip ── */
+.bottomStrip {
+  padding: 8px 16px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 12px;
+  color: #9ca3af;
+  flex-shrink: 0;
+}
