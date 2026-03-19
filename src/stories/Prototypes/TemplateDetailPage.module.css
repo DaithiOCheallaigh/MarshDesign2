@@ -33,14 +33,14 @@
 }
 
 .breadcrumbBtn:hover {
-  color: #002c77;
+  color: var(--color-brand-midnight);
   text-decoration: underline;
 }
 
 .templateTitle {
   font-size: 18px;
   font-weight: 600;
-  color: #1d4ed8;
+  color: var(--color-blue-750);
   line-height: 1.2;
 }
 
@@ -68,7 +68,7 @@
 }
 
 .editBtn {
-  background: #002c77;
+  background: var(--color-brand-midnight);
   color: white;
   border: none;
   border-radius: 6px;
@@ -124,8 +124,8 @@
 
 .addGroupBtn {
   background: white;
-  border: 1px solid #002c77;
-  color: #002c77;
+  border: 1px solid var(--color-brand-midnight);
+  color: var(--color-brand-midnight);
   font-size: 11px;
   padding: 3px 8px;
   border-radius: 4px;
@@ -157,7 +157,7 @@
 
 .groupRowActive {
   background: #eff6ff;
-  border-left: 3px solid #2563eb;
+  border-left: 3px solid var(--color-blue-750);
   padding-left: 9px;
 }
 
@@ -186,7 +186,7 @@
 .groupBadge {
   min-width: 18px;
   height: 18px;
-  background: #002c77;
+  background: var(--color-brand-midnight);
   color: white;
   border-radius: 50%;
   font-size: 10px;
@@ -254,7 +254,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: #2563eb;
+  color: var(--color-blue-750);
   font-size: 12px;
   padding: 4px 12px 4px 32px;
   display: block;
@@ -292,7 +292,7 @@
 .statValue {
   font-size: 20px;
   font-weight: 700;
-  color: #2563eb;
+  color: var(--color-blue-750);
   display: block;
 }
 
@@ -374,7 +374,7 @@
 }
 
 .fieldInput:focus {
-  border-color: #2563eb;
+  border-color: var(--color-blue-750);
   box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
 }
 
@@ -399,7 +399,7 @@
 }
 
 .fieldTextarea:focus {
-  border-color: #2563eb;
+  border-color: var(--color-blue-750);
   box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
 }
 

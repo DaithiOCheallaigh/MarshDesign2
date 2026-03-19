@@ -3,7 +3,7 @@ import { SearchBar } from '../../components/SearchBar'
 import { Icon } from '../../components/Icon'
 import styles from './AppShell.module.css'
 
-export type ActivePage = 'clients' | 'templates'
+export type ActivePage = 'dashboard' | 'clients' | 'templates'
 
 interface NavItem {
   id: ActivePage
@@ -12,6 +12,7 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
+  { id: 'dashboard', label: 'Dashboard', icon: 'dashboard' },
   { id: 'clients', label: 'My Clients', icon: 'contacts' },
   { id: 'templates', label: 'Templates', icon: 'article' },
 ]
@@ -30,9 +31,8 @@ export function AppShell({ activePage, onNavigate, children }: AppShellProps) {
     <div className={styles.app}>
       {/* Sidebar — full height */}
       <aside className={styles.sidebar}>
-        <div className={styles.sidebarAppHeader}>
-          <div className={styles.sidebarBrandMarsh}>MARSH</div>
-          <div className={styles.sidebarBrandSub}>MILESTONE TRACKER</div>
+        <div className={styles.sidebarLogoTop}>
+          <img src="assets/marsh-logo-new-white.png" alt="Marsh" className={styles.sidebarLogoImg} />
         </div>
 
         <nav className={styles.sidebarNav}>
@@ -66,9 +66,6 @@ export function AppShell({ activePage, onNavigate, children }: AppShellProps) {
           </div>
         </nav>
 
-        <div className={styles.sidebarLogo}>
-          <img src="assets/marsh-logo-new-white.png" alt="Marsh" className={styles.sidebarLogoImg} />
-        </div>
       </aside>
 
       {/* Right panel: header + main */}

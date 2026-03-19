@@ -83,15 +83,15 @@ export function DependencyGraphOverlay({ template, onClose }: DependencyGraphOve
             Not Started
           </div>
           <div className={styles.legendRow}>
-            <span className={styles.legendDot} style={{ background: '#2563eb' }} />
+            <span className={styles.legendDot} style={{ background: '#0b4bff' }} />
             In Progress
           </div>
           <div className={styles.legendRow}>
-            <span className={styles.legendDot} style={{ background: '#059669' }} />
+            <span className={styles.legendDot} style={{ background: '#14853d' }} />
             Completed
           </div>
           <div className={styles.legendRow}>
-            <span className={styles.legendDot} style={{ background: '#dc2626' }} />
+            <span className={styles.legendDot} style={{ background: '#c53532' }} />
             Blocked
           </div>
         </div>

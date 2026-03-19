@@ -27,16 +27,44 @@ export interface ProjectRow {
 const PROJECTS: ProjectRow[] = [
   {
     id: '1',
-    status: 'Scheduled',
-    name: 'Babcock International Group PLC',
-    description: '7 groups · Updated 01/11/2025',
+    status: 'In Progress',
+    name: 'FY2026 Risk Programme — Babcock International',
+    description: '4 groups · 18 milestones · Updated 15/01/2026',
     assignee: 'KD',
     priority: 'High',
     startDate: '01/01/2026',
-    endDate: '01/06/2026',
+    endDate: '30/06/2026',
+    milestonesComplete: 4,
+    milestonesTotal: 18,
+    progress: 22,
+    budget: null,
+  },
+  {
+    id: '2',
+    status: 'Scheduled',
+    name: 'FY2026 Renewal — Aviation & Marine',
+    description: '2 groups · 8 milestones · Starts 01/03/2026',
+    assignee: 'AT',
+    priority: 'Medium',
+    startDate: '01/03/2026',
+    endDate: '31/05/2026',
     milestonesComplete: 0,
-    milestonesTotal: 2,
+    milestonesTotal: 8,
     progress: 0,
+    budget: null,
+  },
+  {
+    id: '3',
+    status: 'Completed',
+    name: 'FY2025 Annual Review & Close',
+    description: '3 groups · 12 milestones · Closed 31/12/2025',
+    assignee: 'SM',
+    priority: 'Low',
+    startDate: '01/10/2025',
+    endDate: '31/12/2025',
+    milestonesComplete: 12,
+    milestonesTotal: 12,
+    progress: 100,
     budget: null,
   },
 ]
@@ -153,7 +181,7 @@ export function ClientDetailPage({ client, onBack, onViewProject }: ClientDetail
                   setNewProject({ name: '', description: '', priority: 'High' })
                 }}
                 disabled={!newProject.name.trim()}
-                style={{ background: '#002C77', color: 'white', border: 'none', borderRadius: 6, padding: '8px 16px', fontSize: 13, cursor: newProject.name.trim() ? 'pointer' : 'not-allowed', opacity: newProject.name.trim() ? 1 : 0.6 }}
+                style={{ background: '#000f47', color: 'white', border: 'none', borderRadius: 6, padding: '8px 16px', fontSize: 13, cursor: newProject.name.trim() ? 'pointer' : 'not-allowed', opacity: newProject.name.trim() ? 1 : 0.6 }}
               >
                 Create Project
               </button>
@@ -172,7 +200,7 @@ export function ClientDetailPage({ client, onBack, onViewProject }: ClientDetail
           display: 'flex',
           alignItems: 'center',
           gap: 6,
-          color: '#2563eb',
+          color: '#0b4bff',
           fontSize: 13,
           fontWeight: 500,
           marginBottom: 16,
@@ -210,7 +238,7 @@ export function ClientDetailPage({ client, onBack, onViewProject }: ClientDetail
         <div className={styles.kpiTile}>
           <div className={styles.kpiValueRow}>
             <Icon name="folder" size={18} className={styles.kpiIcon} />
-            <span className={styles.kpiValue}>{client.projects}</span>
+            <span className={styles.kpiValue}>{PROJECTS.length}</span>
           </div>
           <span className={styles.kpiLabel}>Total Projects</span>
         </div>
@@ -220,7 +248,7 @@ export function ClientDetailPage({ client, onBack, onViewProject }: ClientDetail
         <div className={styles.kpiTile}>
           <div className={styles.kpiValueRow}>
             <Icon name="bolt" size={18} className={styles.kpiIcon} />
-            <span className={styles.kpiValue}>{client.activeProjects}</span>
+            <span className={styles.kpiValue}>{PROJECTS.filter(p => p.status === 'In Progress').length}</span>
           </div>
           <span className={styles.kpiLabel}>Active Projects</span>
         </div>
@@ -230,7 +258,7 @@ export function ClientDetailPage({ client, onBack, onViewProject }: ClientDetail
         <div className={styles.kpiTile}>
           <div className={styles.kpiValueRow}>
             <Icon name="flag" size={18} className={styles.kpiIcon} />
-            <span className={styles.kpiValue}>2</span>
+            <span className={styles.kpiValue}>38</span>
           </div>
           <span className={styles.kpiLabel}>Total Milestones</span>
         </div>
@@ -239,8 +267,8 @@ export function ClientDetailPage({ client, onBack, onViewProject }: ClientDetail
 
         <div className={styles.kpiTile}>
           <div className={styles.kpiValueRow}>
-            <Icon name="check-circle" size={18} className={styles.kpiIcon} />
-            <span className={styles.kpiValue}>0%</span>
+            <Icon name="check-circle-outline" size={18} className={styles.kpiIcon} />
+            <span className={styles.kpiValue}>42%</span>
             <InfoIcon />
           </div>
           <span className={styles.kpiLabel}>Completion Rate</span>
@@ -251,7 +279,7 @@ export function ClientDetailPage({ client, onBack, onViewProject }: ClientDetail
         <div className={styles.kpiTile}>
           <div className={styles.kpiValueRow}>
             <Icon name="group" size={18} className={styles.kpiIcon} />
-            <span className={styles.kpiValue}>0 members</span>
+            <span className={styles.kpiValue}>4 members</span>
             <InfoIcon />
           </div>
           <span className={styles.kpiLabel}>Team Size</span>
@@ -350,7 +378,7 @@ export function ClientDetailPage({ client, onBack, onViewProject }: ClientDetail
                 <td>
                   <div
                     className={styles.progressText}
-                    style={{ color: project.progress === 0 ? '#dc2626' : '#059669' }}
+                    style={{ color: project.progress === 0 ? '#c53532' : '#14853d' }}
                   >
                     {project.progress}%
                   </div>
@@ -359,7 +387,7 @@ export function ClientDetailPage({ client, onBack, onViewProject }: ClientDetail
                       className={styles.progressFill}
                       style={{
                         width: `${project.progress}%`,
-                        background: project.progress === 0 ? '#dc2626' : '#059669',
+                        background: project.progress === 0 ? '#c53532' : '#14853d',
                       }}
                     />
                   </div>

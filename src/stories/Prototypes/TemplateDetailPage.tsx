@@ -489,7 +489,7 @@ export function TemplateDetailPage({ template, onBack, onShowGraph }: TemplateDe
             position: 'fixed',
             bottom: 24,
             right: 24,
-            background: '#002C77',
+            background: '#000f47',
             color: 'white',
             padding: '10px 18px',
             borderRadius: 8,

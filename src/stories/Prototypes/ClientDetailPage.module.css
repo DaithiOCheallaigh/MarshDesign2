@@ -21,7 +21,7 @@
 .clientIconBox {
   width: 48px;
   height: 48px;
-  background: #002c77;
+  background: var(--color-brand-midnight);
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -48,7 +48,7 @@
 }
 
 .addProjectBtn {
-  background: #002c77;
+  background: var(--color-brand-midnight);
   color: white;
   border: none;
   padding: 9px 18px;
@@ -144,7 +144,7 @@
 }
 
 .portfolioSearch:focus {
-  border-color: #002c77;
+  border-color: var(--color-brand-midnight);
   box-shadow: 0 0 0 2px rgba(0, 44, 119, 0.1);
 }
 
@@ -160,7 +160,7 @@
 }
 
 .portfolioSelect:focus {
-  border-color: #002c77;
+  border-color: var(--color-brand-midnight);
 }
 
 /* ─── Table Card ─────────────────────────────────────────────────────────── */
@@ -253,7 +253,7 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: #002c77;
+  background: var(--color-brand-midnight);
   color: white;
   font-size: 10px;
   font-weight: 600;

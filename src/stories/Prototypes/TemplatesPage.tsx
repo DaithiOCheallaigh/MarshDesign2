@@ -292,7 +292,7 @@ export function TemplatesPage({ onViewTemplate, onCreateTemplate }: TemplatesPag
 
       {toast && (
         <div style={{
-          position: 'fixed', bottom: 24, right: 24, background: '#002C77', color: 'white',
+          position: 'fixed', bottom: 24, right: 24, background: '#000f47', color: 'white',
           padding: '10px 18px', borderRadius: 8, fontSize: 14, boxShadow: '0 4px 12px rgba(0,0,0,0.18)',
           zIndex: 100, display: 'flex', alignItems: 'center', gap: 8,
         }}>

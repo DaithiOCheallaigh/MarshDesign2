@@ -63,7 +63,7 @@
 }
 
 .saveBtn {
-  background: #002C77;
+  background: var(--color-brand-midnight);
   color: white;
   border: none;
   border-radius: 6px;
@@ -123,8 +123,8 @@
 }
 
 .addGroupBtn {
-  border: 1px solid #002C77;
-  color: #002C77;
+  border: 1px solid var(--color-brand-midnight);
+  color: var(--color-brand-midnight);
   background: white;
   font-size: 11px;
   padding: 3px 8px;
@@ -190,7 +190,7 @@
 .groupBadge {
   min-width: 18px;
   height: 18px;
-  background: #002C77;
+  background: var(--color-brand-midnight);
   color: white;
   border-radius: 50%;
   font-size: 10px;
@@ -434,7 +434,7 @@
 }
 
 .createGroupBtn {
-  background: #002C77;
+  background: var(--color-brand-midnight);
   color: white;
   border: none;
   padding: 9px 18px;

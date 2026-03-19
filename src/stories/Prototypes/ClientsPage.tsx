@@ -24,14 +24,58 @@ export interface ClientRow {
 const CLIENTS: ClientRow[] = [
   {
     id: '1',
+    name: 'Babcock International Group PLC',
+    cn: 'CN108741293',
+    country: 'GB',
+    industryPractice: 'Aerospace & Defence',
+    teamSize: 4,
+    projects: 3,
+    activeProjects: 2,
+    progress: 38,
+  },
+  {
+    id: '2',
+    name: 'Imperial Brands PLC',
+    cn: 'CN209384710',
+    country: 'GB',
+    industryPractice: 'Consumer Goods & Retail',
+    teamSize: 3,
+    projects: 2,
+    activeProjects: 1,
+    progress: 72,
+  },
+  {
+    id: '3',
+    name: 'National Australia Bank Ltd',
+    cn: 'CN315920847',
+    country: 'AU',
+    industryPractice: 'Financial Institutions',
+    teamSize: 6,
+    projects: 4,
+    activeProjects: 3,
+    progress: 55,
+  },
+  {
+    id: '4',
+    name: 'Wesfarmers Ltd',
+    cn: 'CN421083956',
+    country: 'AU',
+    industryPractice: 'Industrials & Manufacturing',
+    teamSize: 5,
+    projects: 3,
+    activeProjects: 2,
+    progress: 91,
+  },
+  {
+    id: '5',
     name: 'Tesrol Australia Pty Ltd',
     cn: 'CN114935407',
     country: 'AU',
     industryPractice: 'Forestry & Integrated Wood Products',
-    teamSize: 0,
+    teamSize: 2,
     projects: 1,
-    activeProjects: 0,
-    progress: 0,
+    activeProjects: 1,
+    progress: 24,
   },
 ]
 
@@ -300,7 +344,7 @@ export function ClientsPage({ onViewClient }: ClientsPageProps = {}) {
             ))}
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 20 }}>
               <button onClick={() => setShowAddClient(false)} style={{ background: 'white', border: '1px solid #e5e7eb', borderRadius: 6, padding: '8px 16px', fontSize: 13, cursor: 'pointer' }}>Cancel</button>
-              <button onClick={handleAddClient} disabled={!newClient.name.trim()} style={{ background: '#002C77', color: 'white', border: 'none', borderRadius: 6, padding: '8px 16px', fontSize: 13, cursor: newClient.name.trim() ? 'pointer' : 'not-allowed', opacity: newClient.name.trim() ? 1 : 0.6 }}>Add Client</button>
+              <button onClick={handleAddClient} disabled={!newClient.name.trim()} style={{ background: '#000f47', color: 'white', border: 'none', borderRadius: 6, padding: '8px 16px', fontSize: 13, cursor: newClient.name.trim() ? 'pointer' : 'not-allowed', opacity: newClient.name.trim() ? 1 : 0.6 }}>Add Client</button>
             </div>
           </div>
         </div>
@@ -309,7 +353,7 @@ export function ClientsPage({ onViewClient }: ClientsPageProps = {}) {
       {/* Toast */}
       {toast && (
         <div style={{
-          position: 'fixed', bottom: 24, right: 24, background: '#002C77', color: 'white',
+          position: 'fixed', bottom: 24, right: 24, background: '#000f47', color: 'white',
           padding: '10px 18px', borderRadius: 8, fontSize: 14, boxShadow: '0 4px 12px rgba(0,0,0,0.18)',
           zIndex: 100, display: 'flex', alignItems: 'center', gap: 8,
         }}>

@@ -7,6 +7,8 @@ import { TemplatesPage, type TemplateCardData } from './TemplatesPage'
 import { TemplateDetailPage } from './TemplateDetailPage'
 import { CreateTemplatePage } from './CreateTemplatePage'
 import { DependencyGraphOverlay } from './DependencyGraphOverlay'
+import { ProjectDetailPage } from './ProjectDetailPage'
+import { DashboardPage } from './DashboardPage'
 
 // ---------------------------------------------------------------------------
 // Default data for drill-in stories
@@ -59,6 +61,7 @@ const DEFAULT_TEMPLATE: TemplateCardData = {
 // ---------------------------------------------------------------------------
 
 type ViewName =
+  | 'dashboard'
   | 'clients'
   | 'clientDetail'
   | 'templates'
@@ -73,6 +76,7 @@ interface ClientProfileAppProps {
   defaultView?: ViewName
   defaultShowGraph?: boolean
 }
+
 
 function ClientProfileApp({
   defaultView = 'clients',
@@ -92,7 +96,9 @@ function ClientProfileApp({
   const activeSidebarPage: ActivePage =
     view === 'templates' || view === 'templateDetail' || view === 'createTemplate'
       ? 'templates'
-      : 'clients'
+      : view === 'dashboard'
+        ? 'dashboard'
+        : 'clients'
 
   function handleSidebarNavigate(page: ActivePage) {
     setShowGraph(false)
@@ -101,33 +107,24 @@ function ClientProfileApp({
   }
 
   function renderPage() {
+    // Dashboard
+    if (view === 'dashboard') {
+      return (
+        <DashboardPage
+          onNavigate={(page) => setView(page === 'clients' ? 'clients' : 'clients')}
+        />
+      )
+    }
+
     // Client detail drill-in
     if (view === 'clientDetail' && selectedClient) {
       if (selectedProject) {
-        // Show a simple project milestones view inline
         return (
-          <div>
-            <div style={{ padding: '12px 0 16px', borderBottom: '1px solid #e5e7eb', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
-              <button
-                onClick={() => setSelectedProject(null)}
-                style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#6b7280', fontSize: 13, padding: 0, display: 'flex', alignItems: 'center', gap: 4 }}
-              >
-                ← Back to {selectedClient.name}
-              </button>
-            </div>
-            <div style={{ padding: '0' }}>
-              <h2 style={{ fontSize: 18, fontWeight: 600, color: '#1d4ed8', marginBottom: 4 }}>{selectedProject.name}</h2>
-              <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 24 }}>
-                <span style={{ background: '#f3f4f6', color: '#374151', borderRadius: 4, padding: '2px 8px', fontSize: 12, marginRight: 8 }}>{selectedProject.status}</span>
-                {selectedProject.priority} Priority · {selectedProject.startDate} – {selectedProject.endDate}
-              </p>
-              <div style={{ background: 'white', border: '1px solid #e5e7eb', borderRadius: 8, padding: 24, textAlign: 'center', color: '#9ca3af' }}>
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style={{ marginBottom: 12 }}><rect x="6" y="8" width="28" height="26" rx="3" stroke="#d1d5db" strokeWidth="2"/><path d="M13 16h14M13 22h10M13 28h6" stroke="#d1d5db" strokeWidth="2" strokeLinecap="round"/></svg>
-                <p style={{ fontSize: 14, margin: 0 }}>Milestone detail view coming soon</p>
-                <p style={{ fontSize: 12, marginTop: 4 }}>0 / {selectedProject.milestonesTotal} milestones complete</p>
-              </div>
-            </div>
-          </div>
+          <ProjectDetailPage
+            client={selectedClient}
+            project={selectedProject}
+            onBack={() => setSelectedProject(null)}
+          />
         )
       }
       return (
@@ -219,6 +216,18 @@ type Story = StoryObj<typeof ClientProfileApp>
 // ---------------------------------------------------------------------------
 // Stories
 // ---------------------------------------------------------------------------
+
+export const Dashboard: Story = {
+  args: { defaultView: 'dashboard' },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Dashboard — overview of active clients, milestone completion rates, event activity charts, and top clients by project count.',
+      },
+    },
+  },
+}
 
 export const MyClients: Story = {
   args: { defaultView: 'clients' },
